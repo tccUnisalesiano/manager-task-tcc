@@ -103,7 +103,7 @@ class Funcionario implements \JsonSerializable
             "emailFuncionario" => $this->getEmailFuncionario(),
             "senha" => $this->getSenha(),
             "cargaHorariaSemanal" => $this->getCargaHorariaSemanal(),
-            "imagemPerfil" => $this->getImagemPerfil()
+           // "imagemPerfil" => $this->getImagemPerfil()
         ];
     }
 }

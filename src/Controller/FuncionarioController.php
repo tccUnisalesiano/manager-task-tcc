@@ -66,7 +66,10 @@ class FuncionarioController extends AbstractController
      */
     public function buscarUm(int $id): Response
     {
-        $functionary = $this->buscaFuncionario($id);
+        $return = $this
+            ->entityManager
+            ->getRepository(Funcionario::class);
+        $functionary = $return->find($id);
         $return = is_null($functionary) ? Response::HTTP_NO_CONTENT : 200;
 
         return new JsonResponse($functionary, $return);
@@ -108,17 +111,18 @@ class FuncionarioController extends AbstractController
         return new Response('', Response::HTTP_NO_CONTENT);
     }
 
-    /**
-     * @param int $id
-     * @return object|null
-     */
-    public function buscaFuncionario(int $id )
-    {
-        $return = $this
-            ->entityManager
-            ->getRepository(Funcionario::class);
-        $functionaryList = $return->find($id);
-
-        return new JsonResponse($functionaryList);
-    }
+    //method don`t used in project manager task
+//    /**
+//     * @param int $id
+//     * @return object|null
+//     */
+//    public function buscaFuncionario(int $id )
+//    {
+//        $return = $this
+//            ->entityManager
+//            ->getRepository(Funcionario::class);
+//        $functionaryList = $return->find($id);
+//
+//        return new JsonResponse($functionaryList);
+//    }
 }
