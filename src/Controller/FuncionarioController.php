@@ -36,8 +36,18 @@ class FuncionarioController extends AbstractController
         $this->funcionarioFactory = $funcionarioFactory;
     }
 
+    // rotas para as páginas
     /**
-     *@Route ("/funcionario", methods={"POST"})
+     * @Route("/", name="index")
+     */
+    public function index()
+    {
+        return $this->render('index.html.twig');
+    }
+
+    //rotas de cadastro
+    /**
+     *@Route ("/cadastrar/funcionario", name="cadastroFuncionario", methods={"POST"})
      */
     public function novo(Request $request): Response
     {
@@ -47,18 +57,25 @@ class FuncionarioController extends AbstractController
         $this->entityManager->persist($functionary);
         $this->entityManager->flush();
 
-        return new JsonResponse($functionary);
+        //return new JsonResponse($functionary);
+        return $this ->render('view/admin/cadastrarFuncionario.html.twig', [
+            'funcionario' => $functionary
+        ]);
     }
 
     /**
-     * @Route("/funcionario", methods={"GET"})
+     * @Route("/funcionario", name="funcionario", methods={"GET"})
      */
     public function buscarTodos(ManagerRegistry $doctrine): Response
     {
+
         $return = $doctrine->getRepository(Funcionario::class);
         $functionaryList = $return->findAll();
 
-        return new JsonResponse($functionaryList);
+       // return new JsonResponse($functionaryList);
+        return $this->render('view/admin/funcionario.html.twig', [
+            'funcionario' =>$functionaryList
+        ]);
     }
 
     /**
@@ -73,6 +90,7 @@ class FuncionarioController extends AbstractController
         $return = is_null($functionary) ? Response::HTTP_NO_CONTENT : 200;
 
         return new JsonResponse($functionary, $return);
+
     }
 
     /**
