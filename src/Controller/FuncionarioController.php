@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Funcionario;
 use App\Helper\FuncionariosFactory;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -78,10 +81,12 @@ class FuncionarioController extends AbstractController
     /**
      * @Route("/funcionario/{id}", methods={"PUT"})
      */
-    public function update(int $id, Request $request): Response
+    public function atualiza(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $return = $request->getContent();
         $functionarySend = $this->funcionarioFactory->criarFuncionario($return);
+
+        //print_r($id);
 
         $functionary = $this->buscaFuncionario($id);
         if (is_null($functionary)) {
@@ -89,24 +94,31 @@ class FuncionarioController extends AbstractController
         }
 
         $functionary->nomeFuncionario = $functionarySend->nomeFuncionario;
-        $functionary->senha = $functionarySend->senha;
         $functionary->emailFuncionario = $functionarySend->emailFuncionario;
+        $functionary->senha = $functionarySend->senha;
         $functionary->cargaHorariaSemanal = $functionarySend->cargaHorariaSemanal;
         //$functionary->imagemPerfil = $functionarySend->imagemPerfil;
 
-        $this->entityManager->flush();
+        $entityManager->flush();
 
         return new JsonResponse($functionary);
     }
 
     /**
      * @Route("/funcionario/{id}", methods={"DELETE"})
+     * @param int $id
+     * @param EntityManager $entityManager
+     * @return Response
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    public function remove(int $id): Response
+    public function delete(int $id, EntityManagerInterface $entityManager): Response
     {
+        // print_r($id);
+
         $functionary = $this->buscaFuncionario($id);
-        $this->entityManager->remove($functionary);
-        $this->entityManager->flush();
+        $entityManager->remove($functionary);
+        $entityManager->flush();
 
         return new Response('', Response::HTTP_NO_CONTENT);
     }
@@ -115,13 +127,11 @@ class FuncionarioController extends AbstractController
      * @param int $id
      * @return object|null
      */
-    public function buscaFuncionario(int $id ): object|null
+    public function buscaFuncionario(int $id): ?object
     {
         $return = $this
             ->entityManager
             ->getRepository(Funcionario::class);
-        $functionaryList = $return->find($id);
-
-        return new JsonResponse($functionaryList);
+        return $return->find($id);
     }
 }

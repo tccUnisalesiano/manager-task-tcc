@@ -12,8 +12,8 @@ class FuncionariosFactory
 
         $funcionario = new Funcionario();
         $funcionario->nomeFuncionario = $dadoEmJson->nomeFuncionario;
-        $funcionario->senha = $dadoEmJson->senha;
         $funcionario->emailFuncionario = $dadoEmJson->emailFuncionario;
+        $funcionario->senha = $dadoEmJson->senha;
         $funcionario->cargaHorariaSemanal = $dadoEmJson->cargaHorariaSemanal;
        // $funcionario->imagemPerfil = $dadoEmJson->imagemPerfil;
 
