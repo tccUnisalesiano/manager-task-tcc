@@ -23,7 +23,6 @@ class FuncionarioType extends AbstractType{
             ->add('cargaHorariaSemanal', NumberType::class,
             ['label' => 'Carga Horaria Semanal: '])
             ->add('senha', PasswordType::class,
-            ['label' => 'Senha:'])
-            ->add('Salvar', SubmitType::class);
+            ['label' => 'Senha:']);
     }
 }

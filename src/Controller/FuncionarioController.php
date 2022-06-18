@@ -48,22 +48,30 @@ class FuncionarioController extends AbstractController
 
     //rotas de cadastro
     /**
-     *@Route ("/cadastrar/funcionario", name="cadastroFuncionario", methods={"POST|GET"})
+     *@Route ("/funcionario/cadastrar", name="cadastroFuncionario", methods={"POST|GET"})
      */
-    public function novo(Request $request): Response
+    public function novo(Request $request, EntityManagerInterface $em): Response
     {
         $return = $request->getContent();
         $functionary = $this->funcionarioFactory->criarFuncionario($return);
 
-        $this->entityManager->persist($functionary);
-        $this->entityManager->flush();
+        //$this->entityManager->persist($functionary);
+        //$this->entityManager->flush();
 
-        $form = $this->createForm(FuncionarioType::class);
-        $functionary['form'] = $form;
+        //formulario de cadastro
+        $form = $this->createForm(FuncionarioType::class, $functionary);
 
-        //return new JsonResponse($functionary);
-        return $this ->render('view/admin/cadastrarFuncionario.html.twig', [
-            'funcionario' => $functionary
+        //cadastrar funcionario novo
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $functionary = $form->getData();
+            $em->persist($functionary);
+            $em->flush();
+            return $this->redirectToRoute('funcionario');
+
+        }
+        return $this ->renderForm('view/admin/cadastrarFuncionario.html.twig', [
+            'funcionario' => $form
         ]);
     }
 
