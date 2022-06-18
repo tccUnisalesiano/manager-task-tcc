@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use API\Form\FuncionarioType;
 use App\Entity\Funcionario;
 use App\Helper\FuncionariosFactory;
 use Doctrine\ORM\EntityManagerInterface;
@@ -47,7 +48,7 @@ class FuncionarioController extends AbstractController
 
     //rotas de cadastro
     /**
-     *@Route ("/cadastrar/funcionario", name="cadastroFuncionario", methods={"POST"})
+     *@Route ("/cadastrar/funcionario", name="cadastroFuncionario", methods={"POST|GET"})
      */
     public function novo(Request $request): Response
     {
@@ -56,6 +57,9 @@ class FuncionarioController extends AbstractController
 
         $this->entityManager->persist($functionary);
         $this->entityManager->flush();
+
+        $form = $this->createForm(FuncionarioType::class);
+        $functionary['form'] = $form;
 
         //return new JsonResponse($functionary);
         return $this ->render('view/admin/cadastrarFuncionario.html.twig', [
