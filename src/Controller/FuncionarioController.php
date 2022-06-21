@@ -9,17 +9,12 @@ use App\Repository\FuncionarioRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FuncionarioController extends AbstractController
 {
-    /**
-     *@var EntityManagerInterface
-     */
-    private EntityManagerInterface $entityManager;
 
     /**
      *@var FuncionariosFactory
@@ -28,13 +23,11 @@ class FuncionarioController extends AbstractController
 
     /**
      * @param FuncionariosFactory $funcionarioFactory
-     * @param EntityManagerInterface $entityManager
+     *
      */
     public function __construct(
-        EntityManagerInterface $entityManager,
         FuncionariosFactory $funcionarioFactory
     ){
-        $this->entityManager = $entityManager;
         $this->funcionarioFactory = $funcionarioFactory;
     }
 
@@ -88,28 +81,12 @@ class FuncionarioController extends AbstractController
         ]);
     }
 
-
-        /**
-     * @Route("/funcionario/{id}", methods={"GET"})
-     */
-        /*
-    public function buscarUm(int $id): Response
-    {
-        $return = $this
-            ->entityManager
-            ->getRepository(Funcionario::class);
-        $functionary = $return->find($id);
-        $return = is_null($functionary) ? Response::HTTP_NO_CONTENT : 200;
-
-        return new JsonResponse($functionary, $return);
-
-    }*/
-
     /**
-     * @Route("/funcionario/{id}", name="editarFuncionario")
+     * @Route("/funcionario/editar/{id}", name="editarFuncionario")
      */
     public function update(int $id, Request $request, EntityManagerInterface $em, FuncionarioRepository $funcionarioRepository): Response
     {
+
         $functionary = $funcionarioRepository->find($id);
         $form = $this->createForm(FuncionarioType::class, $functionary);
         $form->handleRequest($request);
@@ -119,6 +96,7 @@ class FuncionarioController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('funcionario');
 
+
         }
         return $this ->renderForm('view/admin/cadastrarFuncionario.html.twig', [
             'funcionario' => $form
@@ -126,28 +104,15 @@ class FuncionarioController extends AbstractController
     }
 
     /**
-     * @Route("/funcionario/{id}", methods={"DELETE"})
+     * @Route("/funcionario/excluir/{id}", name="deleteFuncionario")
      */
-    public function remove(int $id): Response
+    public function remove(int $id, EntityManagerInterface $em, FuncionarioRepository $funcionarioRepository): Response
     {
-        $functionary = $this->buscaFuncionario($id);
-        $this->entityManager->remove($functionary);
-        $this->entityManager->flush();
 
-        return new Response('', Response::HTTP_NO_CONTENT);
-    }
+        $funcionario = $funcionarioRepository->find($id);
+        $em->remove($funcionario);
+        $em->flush();
 
-    /**
-     * @param int $id
-     * @return object|null
-     */
-    public function buscaFuncionario(int $id ): object|null
-    {
-        $return = $this
-            ->entityManager
-            ->getRepository(Funcionario::class);
-        $functionaryList = $return->find($id);
-
-        return new JsonResponse($functionaryList);
+        return $this->redirectToRoute('funcionario');
     }
 }
