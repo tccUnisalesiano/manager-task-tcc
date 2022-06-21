@@ -10,6 +10,7 @@
             <th scope="col">Nome</th>
             <th scope="col">E-mail</th>
             <th scope="col">Carga Horaria</th>
+            <th scope="col">Ações</th>
         </tr>
         </thead>
         {% for funcionario in funcionario %}
@@ -19,6 +20,10 @@
             <td>{{ funcionario.nomeFuncionario }}</td>
             <td>{{ funcionario.emailFuncionario }}</td>
             <td>{{ funcionario.cargaHorariaSemanal}}</td>
+            <td>
+                <a href="{{ path('editarFuncionario', {id: funcionario.id}) }}">Editar</a>
+                <a href="#">Excluir</a>
+            </td>
         </tr>
         </tbody>
         {% endfor %}
