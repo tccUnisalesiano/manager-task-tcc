@@ -2,25 +2,25 @@
 
 namespace App\Controller;
 
+use API\Form\FuncionarioType;
 use App\Entity\Funcionario;
 use App\Helper\FuncionariosFactory;
+<<<<<<< HEAD
 use Doctrine\ORM\EntityManager;
+=======
+use App\Repository\FuncionarioRepository;
+>>>>>>> a5999729b4306280b15b3321ec878988fd0a2577
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FuncionarioController extends AbstractController
 {
-    /**
-     *@var EntityManagerInterface
-     */
-    private EntityManagerInterface $entityManager;
 
     /**
      *@var FuncionariosFactory
@@ -29,55 +29,80 @@ class FuncionarioController extends AbstractController
 
     /**
      * @param FuncionariosFactory $funcionarioFactory
-     * @param EntityManagerInterface $entityManager
+     *
      */
     public function __construct(
-        EntityManagerInterface $entityManager,
         FuncionariosFactory $funcionarioFactory
     ){
-        $this->entityManager = $entityManager;
         $this->funcionarioFactory = $funcionarioFactory;
     }
 
+    // rotas para as páginas
     /**
-     *@Route ("/funcionario", methods={"POST"})
+     * @Route("/", name="index")
      */
-    public function novo(Request $request): Response
+    public function index()
+    {
+        return $this->render('index.html.twig');
+    }
+
+    //rotas de cadastro
+    /**
+     *@Route ("/funcionario/cadastrar", name="cadastroFuncionario", methods={"POST|GET"})
+     */
+    public function novo(Request $request, EntityManagerInterface $em): Response
     {
         $return = $request->getContent();
         $functionary = $this->funcionarioFactory->criarFuncionario($return);
 
-        $this->entityManager->persist($functionary);
-        $this->entityManager->flush();
+        //formulario de cadastro
+        $form = $this->createForm(FuncionarioType::class, $functionary);
 
-        return new JsonResponse($functionary);
+        //cadastrar funcionario novo
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $functionary = $form->getData();
+            $em->persist($functionary);
+            $em->flush();
+            return $this->redirectToRoute('funcionario');
+        }
+
+        return $this ->renderForm('view/admin/cadastrarFuncionario.html.twig', [
+            'funcionario' => $form
+        ]);
     }
 
     /**
-     * @Route("/funcionario", methods={"GET"})
+     * @Route("/funcionario", name="funcionario", methods={"GET"})
      */
     public function buscarTodos(ManagerRegistry $doctrine): Response
     {
+
         $return = $doctrine->getRepository(Funcionario::class);
         $functionaryList = $return->findAll();
 
-        return new JsonResponse($functionaryList);
+       // return new JsonResponse($functionaryList);
+        return $this->render('view/admin/funcionario.html.twig', [
+            'funcionario' =>$functionaryList
+        ]);
     }
 
     /**
-     * @Route("/funcionario/{id}", methods={"GET"})
+     * @Route("/funcionario/editar/{id}", name="editarFuncionario")
      */
-    public function buscarUm(int $id): Response
+    public function update(int $id, Request $request, EntityManagerInterface $em, FuncionarioRepository $funcionarioRepository): Response
     {
-        $return = $this
-            ->entityManager
-            ->getRepository(Funcionario::class);
-        $functionary = $return->find($id);
-        $return = is_null($functionary) ? Response::HTTP_NO_CONTENT : 200;
 
-        return new JsonResponse($functionary, $return);
-    }
+        $functionary = $funcionarioRepository->find($id);
+        $form = $this->createForm(FuncionarioType::class, $functionary);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            //$functionary = $form->getData();
+            $em->persist($functionary);
+            $em->flush();
+            return $this->redirectToRoute('funcionario');
 
+<<<<<<< HEAD
     /**
      * @Route("/funcionario/{id}", methods={"PUT"})
      */
@@ -119,10 +144,26 @@ class FuncionarioController extends AbstractController
         $functionary = $this->buscaFuncionario($id);
         $entityManager->remove($functionary);
         $entityManager->flush();
+=======
 
-        return new Response('', Response::HTTP_NO_CONTENT);
+        }
+        return $this ->renderForm('view/admin/cadastrarFuncionario.html.twig', [
+            'funcionario' => $form
+        ]);
     }
 
+    /**
+     * @Route("/funcionario/excluir/{id}", name="deleteFuncionario")
+     */
+    public function remove(int $id, EntityManagerInterface $em, FuncionarioRepository $funcionarioRepository): Response
+    {
+>>>>>>> a5999729b4306280b15b3321ec878988fd0a2577
+
+        $funcionario = $funcionarioRepository->find($id);
+        $em->remove($funcionario);
+        $em->flush();
+
+<<<<<<< HEAD
     /**
      * @param int $id
      * @return object|null
@@ -133,5 +174,8 @@ class FuncionarioController extends AbstractController
             ->entityManager
             ->getRepository(Funcionario::class);
         return $return->find($id);
+=======
+        return $this->redirectToRoute('funcionario');
+>>>>>>> a5999729b4306280b15b3321ec878988fd0a2577
     }
 }

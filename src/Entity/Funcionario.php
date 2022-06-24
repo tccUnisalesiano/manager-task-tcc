@@ -15,7 +15,7 @@ class Funcionario implements \JsonSerializable
     #[ORM\Column(type: 'integer')]
     public ?int $id;
 
-    #[ORM\Column(type: 'string', length: 100)]
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
     public ?string $nomeFuncionario;
 
     #[ORM\Column(type: 'string', length: 50, nullable: true)]

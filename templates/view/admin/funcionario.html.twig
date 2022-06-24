@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+        <h1>FUNCIONARIO</h1>
+    <button type="button" class="btn btn-primary" href="{{ path('cadastroFuncionario') }}"> + Adicionar Funcionario </button>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Carga Horaria</th>
+            <th scope="col">Ações</th>
+        </tr>
+        </thead>
+        {% for funcionario in funcionario %}
+        <tbody>
+        <tr>
+            <th scope="row">{{ funcionario.id }}</th>
+            <td>{{ funcionario.nomeFuncionario }}</td>
+            <td>{{ funcionario.emailFuncionario }}</td>
+            <td>{{ funcionario.cargaHorariaSemanal}}</td>
+            <td>
+                <a href="{{ path('editarFuncionario', {id: funcionario.id}) }}">Editar</a>
+                <a href="{{ path('deleteFuncionario', {id: funcionario.id}) }}">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}
