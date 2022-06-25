@@ -1,46 +1,109 @@
 {% extends "base.html.twig" %}
-
 {% block body %}
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <!--<img src="logo.png" alt="">-->
+                </span>
 
-    {# TODO css separado#}
-    <nav class="navbar navbar-expand-lg" style="background-color: #BC4DF0">
-        <div class="container-fluid" style="background-color: #BC4DF0">
+                <div class="text logo-text">
+                    <span class="name">Codinglab</span>
+                </div>
+            </div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ path('index') }}" style="color: white">Inicio</a>
-                    </li>
-                    <li class="nav-item dropdown" >
-                        <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Administrador
+            <i class="fa-solid fa-angle-right toggle"></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+
+                <li class="search-box">
+                    <i class="fa-solid fa-magnifying-glass icon" ></i>
+                    <input type="text" placeholder="Buscar...">
+                </li>
+
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="{{ path('index') }}">
+                            <i class="fa-solid fa-house icon"></i></i>
+                            <span class="text nav-text">Home</span>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background-color: #BC4DF0">
-                            <li><a class="dropdown-item" style="color: white" href="#">Manutenção</a></li>
-                            <li><a class="dropdown-item" style="color: white" href="{{ path('funcionario') }}">Funcionário</a></li>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="fa-solid fa-gear icon"></i>
+                            <span class="text nav-text">Administrador<i class="fa-solid fa-angle-down"></i></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#">Manutenção</a></li>
+                            <li><a href="#">Funcionario</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Projetos
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="fa-solid fa-paper-plane icon"></i>
+                            <span class="text nav-text">Projetos<i class="fa-solid fa-angle-down"></i></span>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background-color: #BC4DF0">
-                            <li><a class="dropdown-item" href="#" style="color: white">Projeto</a></li>
-                            <li><a class="dropdown-item" href="#" style="color: white">Tarefa</a></li>
-                        </ul>
                     </li>
-                    <li class="nav-item" >
-                        <a class="nav-link" href="#" style="color: white">Cliente</a>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="fa-solid fa-users icon"></i>
+                            <span class="text nav-text">Clientes</span>
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: white">Sprint</a>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="fa-solid fa-list-check icon"></i>
+                            <span class="text nav-text">Sprint</span>
+                        </a>
                     </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="fa-solid fa-comment icon"></i>
+                            <span class="text nav-text">Chat</span>
+                        </a>
+                    </li>
+
                 </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="#">
+                        <i class="fa-solid fa-right-from-bracket icon"></i>
+                        <span class="text nav-text">Sair</span>
+                    </a>
+                </li>
             </div>
         </div>
     </nav>
 
+    <script>
+        const body = document.querySelector('body'),
+            sidebar = body.querySelector('nav'),
+            toggle = body.querySelector(".toggle"),
+            searchBtn = body.querySelector(".search-box"),
+            links = body.querySelector(".menu-links")
+            modeSwitch = body.querySelector(".toggle-switch"),
+            modeText = body.querySelector(".mode-text");
+
+        toggle.addEventListener("click" , () =>{
+            sidebar.classList.toggle("close");
+        })
+
+        searchBtn.addEventListener("click" , () =>{
+            sidebar.classList.remove("close");
+        });
+
+        links.addEventListener("click" , () =>{
+            sidebar.classList.remove("close");
+        });
+
+    </script>
 {% endblock %}
