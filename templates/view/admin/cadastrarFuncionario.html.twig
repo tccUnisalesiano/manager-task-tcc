@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     {% include 'include/admin_navbar.html.twig' %}
-    <h1>CADASTRAR FUNCIONARIO</h1>
-    {{ form_start(funcionario) }}
-        {{ form_widget(funcionario) }}
+    <section class="home">
+        <h1>CADASTRAR FUNCIONARIO</h1>
+        {{ form_start(funcionario) }}
+            {{ form_widget(funcionario) }}
 
-        <button type="submit">Salvar</button>
-    {{ form_end(funcionario) }}
+            <button type="submit">Salvar</button>
+        {{ form_end(funcionario) }}
+    </section>
 {% endblock %}
