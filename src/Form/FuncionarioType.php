@@ -17,12 +17,12 @@ class FuncionarioType extends AbstractType{
     {
         $builder
             ->add('nomeFuncionario', TextType::class,
-            ['label' => 'Nome:'])
+                ['label' => 'Nome:'])
             ->add('emailFuncionario', EmailType::class,
-            ['label' => 'E-mail:'])
+                ['label' => 'E-mail:'])
             ->add('cargaHorariaSemanal', NumberType::class,
-            ['label' => 'Carga Horaria Semanal: '])
+                ['label' => 'Carga Horaria Semanal: '])
             ->add('senha', PasswordType::class,
-            ['label' => 'Senha:']);
+                ['label' => 'Senha:']);
     }
 }
