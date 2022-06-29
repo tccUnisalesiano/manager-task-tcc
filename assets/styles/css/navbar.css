@@ -33,26 +33,7 @@
     width: 78px;
 }
 
-.sidebar header .image{
-    min-width: 60px;
-    border-radius: 6px;
-}
-
-.sidebar .text{
-    color: var(--text-color);
-    transition: all 0.5s ease;
-}
-
-.sidebar .text{
-    font-size: 17px;
-    font-weight: 500;
-    opacity: 1;
-}
-.sidebar.close .text{
-    opacity: 0;
-}
-/* =========================== */
-
+/*=========== Hearder sidebar ========*/
 .sidebar header{
     position: relative;
 }
@@ -75,17 +56,62 @@ header .image-text .name {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: black;
+    margin: 10px;
 }
 
 .sidebar header .image img{
-    width: 40px;
-    border-radius: 6px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: black;
+}
+.sidebar header .logo-text a{
+    color: var(--text-color);
+    text-decoration: none;
+}
 
+.sidebar header .logo-text a:hover{
+    color: var(--primary-color);
 }
 
 
-/*============ teste ============*/
+.sidebar li.search-box{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.sidebar li.search-box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: 500;
+    transition: all 0.5s ease;
+}
+
+
+/* =========================== */
+.sidebar .text{
+    color: var(--text-color);
+    transition: all 0.5s ease;
+}
+
+.sidebar .text{
+    font-size: 17px;
+    font-weight: 500;
+    opacity: 1;
+}
+.sidebar.close .text,
+.sidebar.close input{
+    opacity: 0;
+}
+
 
 .sidebar header .toggle{
     position: absolute;
@@ -137,7 +163,8 @@ body.dark .sidebar header .toggle{
     align-items: center;
     justify-content: space-between;
 }
-.sidebar.close .nav-links li .iocn-link{
+.sidebar.close .nav-links li .iocn-link,
+.sidebar.close input{
     display: block
 }
 .sidebar .nav-links li i{
@@ -172,7 +199,8 @@ body.dark .sidebar header .toggle{
     color: var(--text-color);
     transition: all 0.4s ease;
 }
-.sidebar.close .nav-links li a .link_name{
+.sidebar.close .nav-links li a .link_name,
+.sidebar.close input{
     opacity: 0;
     pointer-events: none;
 }
@@ -264,6 +292,7 @@ body.dark .sidebar header .toggle{
 .sidebar.close .footer_sidebar:hover
 {
     background-color: var(--primary-color);
+    cursor: pointer;
 }
 
 .sidebar.close .footer_sidebar{
@@ -285,7 +314,7 @@ body.dark .sidebar header .toggle{
 }
 
 .home{
-    padding: 1.5rem;
+    padding: 0;
     position: absolute;
     top: 0;
     left: 250px;
@@ -293,12 +322,6 @@ body.dark .sidebar header .toggle{
     width: calc(100% - 250px);
     background-color: var(--body-color);
     transition: all 0.5s ease;
-}
-.home .text{
-    font-size: 30px;
-    font-weight: 500;
-    color: var(--text-color);
-    padding: 12px 60px;
 }
 
 .sidebar.close ~ .home{
