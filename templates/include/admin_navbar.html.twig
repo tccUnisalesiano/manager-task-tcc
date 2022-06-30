@@ -1,46 +1,122 @@
 {% extends "base.html.twig" %}
-
 {% block body %}
+    <div class="sidebar close">
+        <header>
 
-    {# TODO css separado#}
-    <nav class="navbar navbar-expand-lg" style="background-color: #BC4DF0">
-        <div class="container-fluid" style="background-color: #BC4DF0">
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ path('index') }}" style="color: white">Inicio</a>
-                    </li>
-                    <li class="nav-item dropdown" >
-                        <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Administrador
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background-color: #BC4DF0">
-                            <li><a class="dropdown-item" style="color: white" href="#">Manutenção</a></li>
-                            <li><a class="dropdown-item" style="color: white" href="{{ path('funcionario') }}">Funcionário</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Projetos
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background-color: #BC4DF0">
-                            <li><a class="dropdown-item" href="#" style="color: white">Projeto</a></li>
-                            <li><a class="dropdown-item" href="#" style="color: white">Tarefa</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item" >
-                        <a class="nav-link" href="#" style="color: white">Cliente</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: white">Sprint</a>
-                    </li>
-                </ul>
+            <div class="image-text">
+                <span class="image">
+                    <img src="{{ asset('styles/img/no-image.png') }}" alt="">
+                </span>
+                <div class="text logo-text">
+                    <a href="#">
+                        <span class="name">Laleska Rodrigues</span>
+                    </a>
+                </div>
             </div>
-        </div>
-    </nav>
 
+            <i class="fa-solid fa-angle-right toggle"></i>
+        </header>
+        <ul class="nav-links">
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="link_name">Home</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="{{ path('index') }}">Home</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class="fa-solid fa-gears"></i>
+                        <span class="link_name">Administrador</span>
+                    </a>
+                    <i class="fa-solid fa-angle-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Administrador</a></li>
+                    <li><a href="#">Manutenção</a></li>
+                    <li><a href="{{ path('funcionario') }}">Funcionário</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span class="link_name">Projetos</span>
+                    </a>
+                    <i class="fa-solid fa-angle-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Projetos</a></li>
+                    <li><a href="#">Projeto</a></li>
+                    <li><a href="#">Tarefa</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-users"></i>
+                    <span class="link_name">Clientes</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Clientes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span class="link_name">Sprint</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Sprint</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-comments"></i>
+                    <span class="link_name">Chat</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Chat</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <div class="footer_sidebar">
+                    <a>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="text">Sair</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e)=>{
+                let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
+
+        const body = document.querySelector('body'),
+            sidebar = body.querySelector('.sidebar'),
+            toggle = body.querySelector(".toggle"),
+            searchBtn = body.querySelector(".search-box"),
+            modeSwitch = body.querySelector(".toggle-switch"),
+            modeText = body.querySelector(".mode-text");
+
+
+        toggle.addEventListener("click" , () =>{
+            sidebar.classList.toggle("close");
+        })
+
+        searchBtn.addEventListener("click" , () =>{
+            sidebar.classList.remove("close");
+        })
+    </script>
 {% endblock %}
