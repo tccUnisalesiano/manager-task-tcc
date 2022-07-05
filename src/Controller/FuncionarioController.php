@@ -54,6 +54,7 @@ class FuncionarioController extends AbstractController
 
         //cadastrar funcionario novo
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()){
             $functionary = $form->getData();
             $em->persist($functionary);
@@ -90,6 +91,7 @@ class FuncionarioController extends AbstractController
         $functionary = $funcionarioRepository->find($id);
         $form = $this->createForm(FuncionarioType::class, $functionary);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()){
             //$functionary = $form->getData();
             $em->persist($functionary);
@@ -101,6 +103,8 @@ class FuncionarioController extends AbstractController
         return $this ->renderForm('view/admin/cadastrarFuncionario.html.twig', [
             'funcionario' => $form
         ]);
+
+
     }
 
     /**

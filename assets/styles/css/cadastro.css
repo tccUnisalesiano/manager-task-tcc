@@ -1,0 +1,71 @@
+.form_cadastro{
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.form_cadastro .row_cadastro{
+    display: flex;
+    width: 100%;
+}
+
+.form_cadastro .row_cadastro .column{
+    width: 50%;
+    padding: 1rem;
+}
+
+.form_cadastro .row_cadastro .column input{
+    display: flex;
+    min-width: 20rem;
+    border: 2px solid var(--secondary-color);
+    height: 2rem;
+    background-color: transparent;
+}
+
+.form_cadastro .row_cadastro .column input:focus{
+    box-shadow: none;
+    outline: none;
+}
+
+
+/*============ footer =============*/
+.form_cadastro .footer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+
+
+.form_cadastro .footer button.cancel,
+.form_cadastro .footer button.salvar{
+    border:none;
+    letter-spacing: 1px;
+    font-weight: 500;
+    float: right;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.form_cadastro .footer button.salvar{
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.form_cadastro .footer button.cancel{
+    border: 1px solid var(--secondary-color);
+    background-color: transparent;
+    color: black;
+}
+
+
+
+/*================== resposividade ==================*/
+@media (max-width: 1000px) {
+    .form_cadastro .row_cadastro{
+        display: table;
+        width: 100%;
+    }
+
+}
+

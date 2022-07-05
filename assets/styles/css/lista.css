@@ -66,9 +66,9 @@ header .search-bar input:focus{
     outline: none;
 }
 
-button:active{
+.content_add  button:active{
     background-color: var(--primary-color);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .content_add{

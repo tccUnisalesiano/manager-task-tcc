@@ -9,6 +9,7 @@
 import './styles/app.css';
 import './styles/css/navbar.css';
 import './styles/css/lista.css';
+import './styles/css/cadastro.css';
 
 // start the Stimulus application
 
