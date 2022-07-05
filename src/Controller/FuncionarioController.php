@@ -55,6 +55,11 @@ class FuncionarioController extends AbstractController
         //cadastrar funcionario novo
         $form->handleRequest($request);
 
+        //para o botão cancelar
+        if($request->get('cancel') == 'Cancel')
+            return $this->redirectToRoute('funcionario');
+
+        //para salvar
         if ($form->isSubmitted() && $form->isValid()){
             $functionary = $form->getData();
             $em->persist($functionary);
