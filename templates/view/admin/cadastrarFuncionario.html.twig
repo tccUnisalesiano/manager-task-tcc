@@ -1,10 +1,39 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     {% include 'include/admin_navbar.html.twig' %}
-    <h1>CADASTRAR FUNCIONARIO</h1>
-    {{ form_start(funcionario) }}
-        {{ form_widget(funcionario) }}
+    <section class="home">
+        <h1>CADASTRAR FUNCIONARIO</h1>
+        {% block form %}
+        {% endblock %}
+        <div class="form_cadastro">
+            {{form_start(funcionario) }}
 
-        <button type="submit">Salvar</button>
-    {{ form_end(funcionario) }}
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(funcionario.nomeFuncionario) }}
+                </div>
+                <div class="column">
+                    {{ form_row(funcionario.emailFuncionario) }}
+                </div>
+            </div>
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(funcionario.cargaHorariaSemanal) }}
+                </div>
+                <div class="column">
+                    {{ form_row(funcionario.senha) }}
+                </div>
+            </div>
+            <div class="row_cadastro">
+                <div class="column">
+                    {# TODO radio button para adm ou não #}
+                </div>
+            </div>
+            <div class="footer">
+                <button class="cancel" name="cancel" type="submit" value="Cancel" formnovalidate>Cancelar</button>
+                <button class="salvar" type="submit">Salvar</button>
+            </div>
+            {{ form_end(funcionario) }}
+        </div>
+    </section>
 {% endblock %}
