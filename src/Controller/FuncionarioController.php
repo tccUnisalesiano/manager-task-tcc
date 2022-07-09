@@ -31,6 +31,15 @@ class FuncionarioController extends AbstractController
         $this->funcionarioFactory = $funcionarioFactory;
     }
 
+    // ========== login =============
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login()
+    {
+        return $this->render('login.html.twig');
+    }
+
     // rotas para as páginas
     /**
      * @Route("/", name="index")
@@ -97,6 +106,11 @@ class FuncionarioController extends AbstractController
         $form = $this->createForm(FuncionarioType::class, $functionary);
         $form->handleRequest($request);
 
+        //para o botão cancelar
+        if($request->get('cancel') == 'Cancel')
+            return $this->redirectToRoute('funcionario');
+
+        // salvar
         if ($form->isSubmitted() && $form->isValid()){
             //$functionary = $form->getData();
             $em->persist($functionary);

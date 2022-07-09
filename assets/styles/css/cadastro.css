@@ -44,6 +44,7 @@
     float: right;
     padding: 0.5rem 1rem;
     margin: 0.5rem 1rem 0.5rem 0;
+    border-radius: 5px;
 }
 
 .form_cadastro .footer button.salvar{
@@ -56,12 +57,20 @@
 .form_cadastro .footer button.salvar:hover{
     background-color: var(--primary-color);
     font-weight: 500;
+    cursor: pointer;
 }
 
 .form_cadastro .footer button.cancel{
     border: 1px solid var(--secondary-color);
     background-color: transparent;
-    color: black;
+    color: var(--secondary-color);
+}
+.form_cadastro .footer button.cancel:active,
+.form_cadastro .footer button.cancel:hover{
+    cursor: pointer;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+
 }
 
 
@@ -73,5 +82,11 @@
         width: 100%;
     }
 
+}
+
+.form_cadastro .footer button,
+.form_cadastro .row_cadastro .column input{
+    border-radius: 5px;
+    box-shadow: 2px 3px #c4c4c4;
 }
 
