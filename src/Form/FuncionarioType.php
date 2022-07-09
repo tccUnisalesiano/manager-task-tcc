@@ -16,6 +16,7 @@ class FuncionarioType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+<<<<<<< HEAD
             ->add('nomeFuncionario', TextType::class,
                 ['label' => 'Nome:'])
             ->add('emailFuncionario', EmailType::class,
@@ -24,5 +25,11 @@ class FuncionarioType extends AbstractType{
                 ['label' => 'Carga Horaria Semanal: '])
             ->add('senha', PasswordType::class,
                 ['label' => 'Senha:']);
+=======
+            ->add('nomeFuncionario', TextType::class, ['label' => "Nome Funcionário: "])
+            ->add('emailFuncionario', EmailType::class, ['label' => "E-mail Funcionário: "])
+            ->add('cargaHorariaSemanal', NumberType::class, ['label' => "Carga Horária Semanal: "])
+            ->add('senha', PasswordType::class, ['label' => "Senha: "]);
+>>>>>>> d1873a0752e9b837942f31366f12340fa4266e96
     }
 }

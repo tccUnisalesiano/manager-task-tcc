@@ -50,6 +50,7 @@ header .image-text .name {
     margin-top: 2px;
     font-size: 18px;
     font-weight: 600;
+    opacity: 1;
 }
 
 .sidebar header .image{
@@ -110,6 +111,11 @@ header .image-text .name {
 .sidebar.close .text,
 .sidebar.close input{
     opacity: 0;
+}
+
+.sidebar.close .image-text a{
+    opacity: 0;
+    pointer-events: none;
 }
 
 
