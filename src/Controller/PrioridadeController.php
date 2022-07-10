@@ -29,12 +29,12 @@ class PrioridadeController extends AbstractController
         $this->prioridadeFactory = $prioridadeFactory;
     }
 
-    /**
-     * @Route("/", name="index")
-     */
+//    /**
+//     * @Route("/", name="index")
+//     */
     public function index()
     {
-        return $this->render('index');
+        return $this->render('');
     }
 
     /**

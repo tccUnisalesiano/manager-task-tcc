@@ -32,13 +32,13 @@ class SituacaoController extends AbstractController
         $this->situacaoFactory = $situacaoFactory;
     }
 
-    /**
-     * @Route("/", name="index")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
+//    /**
+//     * @Route("/", name="index")
+//     * @return \Symfony\Component\HttpFoundation\Response
+//     */
     public function index()
     {
-        return $this->render('index');
+        return $this->render('');
     }
 
     // verificar como ira ficar as routes com fk, provavelmente nao será necessario a route para table dependente

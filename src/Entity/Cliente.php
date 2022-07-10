@@ -27,7 +27,7 @@ class Cliente implements \JsonSerializable
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     public string $tipoCliente;
 
-    #[ORM\Column(type: 'varchar', length: 100, nullable: true)]
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
     public string $emailCliente;
 
     #[ORM\Column(type: 'integer', length: 14, nullable: true)]

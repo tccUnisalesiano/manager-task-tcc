@@ -32,12 +32,12 @@ class ClienteController extends AbstractController
         $this->clienteFactory = $clienteFactory;
     }
 
-    /**
-     * @Route("/", name="index")
-     */
+//    /**
+//     * @Route("/", name="index")
+//     */
     public function index()
     {
-        return $this->render('index');
+        return $this->render('');
     }
 
     //ajustar rota durante o desenvolvimento do front
