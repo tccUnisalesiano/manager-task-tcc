@@ -1,6 +1,73 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     {% include 'include/admin_navbar.html.twig' %}
+<<<<<<< HEAD
+    <style>
+        form.funcionario {
+            /* Apenas para centralizar o form na página */
+            margin: 0 auto;
+            width: 400px;
+            /* Para ver as bordas do formulário */
+            padding: 1em;
+            border: 1px solid #CCC;
+            border-radius: 1em;
+        }
+        .funcionario{
+            padding-left: 150px;
+            padding-top: 50px;
+        }
+    </style>
+
+    <form method="post" name="cadastroFuncionario" action="{{ path('cadastroFuncionario') }}" enctype='multipart/form-data' class="funcionario" >
+            <div class="crud">
+                <h1>CADASTRAR FUNCIONARIO</h1>
+                <div class="row">
+                    <input type="hidden" name="id" value="">
+
+                    <div class="col-4">
+                        <label for="nomeFuncionario">Nome Completo</label>
+                        <input class="form-control" type="text" name="nomeFuncionario" title="nomeFuncionario" required value="">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="emailFuncionario">eMail</label>
+                        <input class="form-control" type="email" name="emailFuncionario" title="emailFuncionario" required value="">
+                    </div>
+
+                    <div class="col-lg-4">
+                        <label for="cargaHorariaSemanal">Carga Horaria Semanal</label>
+                        <input class="form-control" type="number" name="cargaHorariaSemanal" title="cargaHorariaSemanal" required value="">
+                    </div>
+
+                    <div class="col-lg-4">
+                        <label for="senha">Senha</label>
+                        <input class="form-control" type="text" name="senha" title="senha" required value="">
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" onclick="Testesalvar()">Salvar</button>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        function Testesalvar(){
+            $.ajax({
+                type: "POST",
+                url:'cadastrar',
+                dataType: 'json',
+                success: function (xhr){
+                    console.log('SUCCESS: ', xhr);
+                }, complete:function(xhr){
+                    console.log('COMPLETE: ', xhr);
+                }
+            });
+        }
+    </script>
+
+
+{% endblock %}
+
+=======
     <section class="home">
         <h1>CADASTRAR FUNCIONARIO</h1>
         {% block form %}
@@ -37,3 +104,4 @@
         </div>
     </section>
 {% endblock %}
+>>>>>>> d1873a0752e9b837942f31366f12340fa4266e96

@@ -81,7 +81,7 @@ class FuncionarioController extends AbstractController
         $return = $doctrine->getRepository(Funcionario::class);
         $functionaryList = $return->findAll();
 
-       // return new JsonResponse($functionaryList);
+        // return new JsonResponse($functionaryList);
         return $this->render('view/admin/funcionario.html.twig', [
             'funcionario' =>$functionaryList
         ]);
