@@ -30,7 +30,7 @@ class Cliente implements \JsonSerializable
     #[ORM\Column(type: 'varchar', length: 100, nullable: true)]
     public string $emailCliente;
 
-    #[ORM\Column(type: 'int', length: 14, nullable: true)]
+    #[ORM\Column(type: 'integer', length: 14, nullable: true)]
     public int $celularCliente;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
