@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Classe responsável por gerenciar os metodos de cliente
+ * @author Guilherme Correia
+ */
 class ClienteController extends AbstractController
 {
     /**
@@ -86,7 +90,7 @@ class ClienteController extends AbstractController
     }
 
     /**
-     * @Route("/cliente/editar{id}", name=""editarCliente)
+     * @Route("/cliente/editar{id}", name="editarCliente")
      * @param int $id
      * @param Request $request
      * @param EntityManagerInterface $em

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ClienteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * Classe responsável por gerenciar o cliente
@@ -131,7 +132,8 @@ class Cliente implements \JsonSerializable
         $this->cpf_cnpj = $cpf_cnpj;
     }
 
-    public function jsonSerialize()
+    #[ArrayShape(["Id" => "int", "nomeCliente" => "string", "tipoCliente" => "string", "emailCliente" => "string", "celularCliente" => "int", "cpf_cnpj" => "string"])]
+    public function jsonSerialize(): array
     {
         return [
           "Id" => $this->getId(),
