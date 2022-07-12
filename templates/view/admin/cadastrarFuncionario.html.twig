@@ -36,4 +36,18 @@
             {{ form_end(funcionario) }}
         </div>
     </section>
+    <script>
+        function Testesalvar(){
+            $.ajax({
+                type: "POST",
+                url:'cadastrar',
+                dataType: 'json',
+                success: function (xhr){
+                    console.log('SUCCESS: ', xhr);
+                }, complete:function(xhr){
+                    console.log('COMPLETE: ', xhr);
+                }
+            });
+        }
+    </script>
 {% endblock %}

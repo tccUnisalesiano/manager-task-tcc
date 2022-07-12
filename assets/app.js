@@ -6,10 +6,10 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
-import './styles/css/navbar.css';
-import './styles/css/lista.css';
-import './styles/css/cadastro.css';
+import '../public/styles/app.css';
+import '../public/styles/css/navbar.css';
+import '../public/styles/css/lista.css';
+import '../public/styles/css/cadastro.css';
 
 // start the Stimulus application
 
