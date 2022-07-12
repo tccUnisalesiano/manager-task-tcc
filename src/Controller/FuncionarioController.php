@@ -31,15 +31,6 @@ class FuncionarioController extends AbstractController
         $this->funcionarioFactory = $funcionarioFactory;
     }
 
-    // ========== login =============
-    /**
-     * @Route("/login", name="login")
-     */
-    public function login()
-    {
-        return $this->render('login.html.twig');
-    }
-
     // rotas para as páginas
     /**
      * @Route("/", name="index")

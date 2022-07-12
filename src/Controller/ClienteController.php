@@ -32,13 +32,6 @@ class ClienteController extends AbstractController
         $this->clienteFactory = $clienteFactory;
     }
 
-//    /**
-//     * @Route("/", name="index")
-//     */
-    public function index()
-    {
-        return $this->render('');
-    }
 
     //ajustar rota durante o desenvolvimento do front
     /**
@@ -50,7 +43,7 @@ class ClienteController extends AbstractController
         $cliente = $this->clienteFactory->criarCliente($return);
 
         // form
-        $form = $this->createForm(ClienteFactory::class, $cliente);
+        $form = $this->createForm(ClienteType::class, $cliente);
 
         //cadastrar novo
         $form->handleRequest($request);
@@ -65,13 +58,12 @@ class ClienteController extends AbstractController
             $cliente = $form->getData();
             $em->persist($cliente);
             $em->flush();
-
             return $this->redirectToRoute('cliente');   //implementar route
         }
 
-        return $this->redirectToRoute('view/admin/cadastrarCliente', [
+        return $this->renderForm('view/user/cadastrarCliente.html.twig', [
             'cliente' => $form
-        ]);   //implementar route
+        ]);
     }
 
     /**
@@ -84,7 +76,7 @@ class ClienteController extends AbstractController
         $return = $doctrine->getRepository(Cliente::class);
         $clienteList = $return->findAll();
 
-        return $this->render('view/', [
+        return $this->render('view/user/cliente.html.twig', [
             'cliente' => $clienteList
         ]);  //implementar rota
     }
@@ -110,7 +102,7 @@ class ClienteController extends AbstractController
             return $this->redirectToRoute('cliente');
         }
 
-        return $this->renderForm('view/', [
+        return $this->renderForm('view/user/cadastrarCliente.html.twig', [
             'cliente' => $form
         ]);  //implementar route
     }

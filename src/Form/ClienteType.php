@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,14 +20,21 @@ class ClienteType extends AbstractType
         $builder
             ->add('nomeCliente', TextType::class,
                 ['label' => "Nome Completo: "])
-            ->add('tipoCliente', TextType::class,
-                ['label' => "Tipo de Cliente: "])
+            ->add('cpf_cnpj', TextType::class,
+                ['label' => "CPF/CNPJ "])
             ->add('emailCliente', EmailType::class,
                 ['label' => "E-mail: "])
             ->add('celularCliente', NumberType::class,
                 ['label' => "Nº Celular: "])
-            ->add('cpf_cnpj', NumberType::class,
-                ['label' => "CPF/CNPJ: "]);
+            ->add('tipoCliente', ChoiceType::class,
+                ['label' => "Tipo Cliente: ",
+                    'choices' => [
+                        'Pessoa Física' => 'Pessoa Física',
+                        'Pessoa Jurídica' => 'Pessoa Jurídica',
+                    ],
+                ]);
+
+
     }
 
 }

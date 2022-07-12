@@ -30,6 +30,9 @@ class Funcionario implements \JsonSerializable
     #[ORM\Column(type: 'float', nullable: true)]
     public ?float $cargaHorariaSemanal;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    public ?bool $isAdmin;
+
     #[ORM\Column(type: 'blob', nullable: true)]
     public $imagemPerfil;
 
@@ -86,6 +89,19 @@ class Funcionario implements \JsonSerializable
         return $this;
     }
 
+
+    public function getIsAdmin(): ?bool
+    {
+        return $this-> isAdmin;
+    }
+
+    public function setIsAdmin(bool $isAdmin): self
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
     public function getImagemPerfil()
     {
         return $this->imagemPerfil;
@@ -106,6 +122,7 @@ class Funcionario implements \JsonSerializable
             "emailFuncionario" => $this->getEmailFuncionario(),
             "senha" => $this->getSenha(),
             "cargaHorariaSemanal" => $this->getCargaHorariaSemanal(),
+            "isAdmin" => $this->getIsAdmin(),
             // "imagemPerfil" => $this->getImagemPerfil()
         ];
     }

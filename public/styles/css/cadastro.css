@@ -13,7 +13,8 @@
     padding: 1rem;
 }
 
-.form_cadastro .row_cadastro .column input{
+.form_cadastro .row_cadastro .column input,
+.form_cadastro .row_cadastro .column select{
     display: flex;
     min-width: 20rem;
     border: 2px solid var(--secondary-color);
@@ -85,7 +86,8 @@
 }
 
 .form_cadastro .footer button,
-.form_cadastro .row_cadastro .column input{
+.form_cadastro .row_cadastro .column input,
+.form_cadastro .row_cadastro .column select{
     border-radius: 5px;
     box-shadow: 2px 3px #c4c4c4;
 }
