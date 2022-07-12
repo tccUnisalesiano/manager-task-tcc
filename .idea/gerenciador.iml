@@ -4,10 +4,6 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="App\Tests\" />
-<<<<<<< HEAD
-=======
-      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
->>>>>>> 2335cd77e856cb3f88f8a81ad1cc3038c9d6cdc3
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
