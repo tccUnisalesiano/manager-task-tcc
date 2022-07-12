@@ -3,6 +3,7 @@ namespace API\Form;
 
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -22,6 +23,13 @@ class FuncionarioType extends AbstractType{
                 ['label' => "E-mail Funcionário: "])
             ->add('cargaHorariaSemanal', NumberType::class,
                 ['label' => "Carga Horária Semanal: "])
+            ->add('isAdmin', ChoiceType::class,
+                ['label' => "Administrador: ",
+                    'choices' =>[
+                        'Não' => False,
+                        'Sim' => True,
+                    ],
+                ])
             ->add('senha', TextType::class,
                 ['label' => "Senha: "]);
     }

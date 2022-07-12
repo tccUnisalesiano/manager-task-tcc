@@ -22,7 +22,8 @@
     background-color: transparent;
 }
 
-.form_cadastro .row_cadastro .column input:focus{
+.form_cadastro .row_cadastro .column input:focus,
+.form_cadastro .row_cadastro .column select{
     box-shadow: none;
     outline: none;
 }
