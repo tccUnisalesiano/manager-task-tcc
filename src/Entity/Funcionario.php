@@ -6,7 +6,10 @@ use App\Repository\FuncionarioRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 
-
+/**
+ * Classe responsável por gerenciar o funcionario
+ * @author Guilherme Correia
+ */
 #[ORM\Entity(repositoryClass: FuncionarioRepository::class)]
 class Funcionario implements \JsonSerializable
 {
@@ -103,7 +106,7 @@ class Funcionario implements \JsonSerializable
             "emailFuncionario" => $this->getEmailFuncionario(),
             "senha" => $this->getSenha(),
             "cargaHorariaSemanal" => $this->getCargaHorariaSemanal(),
-           // "imagemPerfil" => $this->getImagemPerfil()
+            // "imagemPerfil" => $this->getImagemPerfil()
         ];
     }
 }
