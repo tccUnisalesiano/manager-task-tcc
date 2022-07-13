@@ -11,6 +11,7 @@ import '../public/styles/app.css';
 import '../public/styles/css/navbar.css';
 import '../public/styles/css/lista.css';
 import '../public/styles/css/cadastro.css';
+import '../public/styles/css/detalhes.css';
 
 
 

@@ -61,7 +61,7 @@ class ClienteController extends AbstractController
             return $this->redirectToRoute('cliente');   //implementar route
         }
 
-        return $this->renderForm('view/user/cadastrarCliente.html.twig', [
+        return $this->renderForm('view/user/clienteCadastrar.html.twig', [
             'cliente' => $form
         ]);
     }
@@ -82,7 +82,7 @@ class ClienteController extends AbstractController
     }
 
     /**
-     * @Route("/cliente/editar{id}", name="editarCliente")
+     * @Route("/cliente/editar/{id}", name="editarCliente")
      * @param int $id
      * @param Request $request
      * @param EntityManagerInterface $em
@@ -102,7 +102,7 @@ class ClienteController extends AbstractController
             return $this->redirectToRoute('cliente');
         }
 
-        return $this->renderForm('view/user/cadastrarCliente.html.twig', [
+        return $this->renderForm('view/user/clienteCadastrar.html.twig', [
             'cliente' => $form
         ]);  //implementar route
     }
@@ -117,6 +117,26 @@ class ClienteController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('cliente');
+    }
+
+
+
+
+    /**
+     * @Route("/cliente/{id}", name="detalheCliente")
+     * @param int $id
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param ClienteRepository $clienteRepository
+     * @return Response
+     */
+    public function visualizar(int $id, Request $request, EntityManagerInterface $em, ClienteRepository $clienteRepository): Response
+    {
+        $cliente = $clienteRepository->find($id);
+
+        return $this->render('view/user/clienteDetalhes.html.twig', [
+            'cliente' => $cliente
+        ]);
     }
 
 }

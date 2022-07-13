@@ -111,6 +111,10 @@ header .search-bar input:focus{
     font-size: 0.9rem;
     min-width: 300px;
 }
+.content-table a{
+    text-decoration: none;
+    color: var(--text-color);
+}
 
 .content-table thead tr{
     background-color: var(--secondary-color);

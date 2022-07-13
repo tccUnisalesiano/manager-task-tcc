@@ -30,16 +30,18 @@
                 {% for cliente in cliente %}
                     <tbody>
                     <tr>
-                        <td>{{ cliente.id }}</td>
-                        <td>{{ cliente.nomeCliente }}</td>
-                        <td>{{ cliente.emailCliente }}</td>
-                        <td>{{ cliente.tipoCliente }}</td>
-                        <td>{{ cliente.celularCliente }}</td>
-                        <td>{{ cliente.cpf_cnpj }}</td>
+                        <td><a href="{{ path('detalheCliente', {id: cliente.id}) }}">{{ cliente.id }}</a></td>
+                        <td><a href="{{ path('detalheCliente', {id: cliente.id}) }}">{{ cliente.nomeCliente }}</a></td>
+                        <td><a href="{{ path('detalheCliente', {id: cliente.id}) }}">{{ cliente.emailCliente }}</a></td>
+                        <td><a href="{{ path('detalheCliente', {id: cliente.id}) }}">{{ cliente.tipoCliente }}</a></td>
+                        <td><a href="{{ path('detalheCliente', {id: cliente.id}) }}">{{ cliente.celularCliente }}</td>
+                        <td><a href="{{ path('detalheCliente', {id: cliente.id}) }}">{{ cliente.cpf_cnpj }}</a></td>
+
                         <td class="acoes">
                             <a href="{{ path('editarCliente', {id: cliente.id}) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>
                             <a href="{{ path('deleteCliente', {id: cliente.id}) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
                         </td>
+
                     </tr>
                     </tbody>
                 {% endfor %}
