@@ -14,10 +14,10 @@ class SituacaoFactory
     {
         $dados = json_decode($json);
 
-        @$Situacao = new Situacao();
+        @$situacao = new Situacao();
 
-        @$Situacao->descricao = $dados->descricao;
+        @$situacao->descricao = $dados->descricao;
 
-        return $Situacao;
+        return $situacao;
     }
 }

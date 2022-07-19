@@ -22,10 +22,10 @@ class Prioridade implements \JsonSerializable
     public int $id;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
-    public string $nomePrioridade;
+    public ?string $nomePrioridade;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
-    public string $cor;
+    public ?string $cor;
 
     /**
      * @return int
@@ -60,23 +60,23 @@ class Prioridade implements \JsonSerializable
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getCor(): int
+    public function getCor(): string
     {
         return $this->cor;
     }
 
     /**
-     * @param int $cor
+     * @param string $cor
      */
-    public function setCor(int $cor): void
+    public function setCor(string $cor): void
     {
         $this->cor = $cor;
     }
 
 
-    #[ArrayShape(["Id" => "int", "nomePrioridade" => "string", "cor" => "int"])]
+    #[ArrayShape(["Id" => "int", "nomePrioridade" => "string", "cor" => "string"])]
     public function jsonSerialize(): array
     {
         return[

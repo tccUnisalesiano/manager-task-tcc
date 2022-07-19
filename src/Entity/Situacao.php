@@ -20,10 +20,10 @@ class Situacao implements \JsonSerializable
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    public int $id;
+    public ?int $id;
 
     #[ORM\Column(type: 'string', length: 200, nullable: true)]
-    public string $descricao;
+    public ?string $descricao;
 
     /**
      * @param int $id
@@ -62,7 +62,7 @@ class Situacao implements \JsonSerializable
     {
         return [
             "Id" => $this->getId(),
-            "descricao" => $this->getDescricao()
+            "descricao" => $this->getDescricao(),
         ];
     }
 }

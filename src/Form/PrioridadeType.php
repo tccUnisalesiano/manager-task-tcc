@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -17,7 +18,7 @@ class PrioridadeType extends AbstractType
         $builder
             ->add('nomePrioridade', TextType::class,
             ['label' => "Prioridade: "])
-            ->add('cor', TextType::class,
+            ->add('cor', ColorType::class,
             ['label' => "Grau de Prioridade: "]);
     }
 }

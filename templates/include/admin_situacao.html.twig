@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="content_add">
+    <a class="botao_adicionar" href="{{ path('cadastroSituacao') }}"><button>+ Adicionar Situação</button></a>
+</div>
+<div class="content-body">
+    <table class="content-table">
+        Situação
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        {% for situacao in situacao %}
+            <tbody>
+            <tr>
+                <td>{{ situacao.descricao }}</td>
+                <td class="acoes">
+                    <a href="{{ path('editarSituacao', {id: situacao.id }) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>
+                    <a href="{{ path('deleteSituacao', {id: situacao.id }) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
+                </td>
+            </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

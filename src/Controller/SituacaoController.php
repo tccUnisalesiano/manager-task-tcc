@@ -32,14 +32,6 @@ class SituacaoController extends AbstractController
         $this->situacaoFactory = $situacaoFactory;
     }
 
-//    /**
-//     * @Route("/", name="index")
-//     * @return \Symfony\Component\HttpFoundation\Response
-//     */
-    public function index()
-    {
-        return $this->render('');
-    }
 
     // verificar como ira ficar as routes com fk, provavelmente nao será necessario a route para table dependente
 
@@ -55,13 +47,13 @@ class SituacaoController extends AbstractController
         $situacao = $this->situacaoFactory->criarSituacao($return);
 
         //form
-        $form = $this->createForm(SituacaoFactory::class, $situacao);
+        $form = $this->createForm(SituacaoType::class, $situacao);
 
         //cadastrar novo
         $form->handleRequest($request);
 
         if ($request->get('cancel') == 'Cancel')
-            return $this->redirectToRoute(''); //add route
+            return $this->redirectToRoute('manutencao'); //add route
 
         if ($form->isSubmitted() && $form->isValid())
         {
@@ -69,17 +61,17 @@ class SituacaoController extends AbstractController
             $em->persist($situacao);
             $em->flush();
 
-            return $this->redirectToRoute('');  // add route
+            return $this->redirectToRoute('manutencao');  // add route
         }
 
-        return $this->redirectToRoute('', [
+        return $this->renderForm('view/admin/cadastrarSituacao.html.twig', [
             'situacao' => $form
         ]);  // add route
     }
 
     //add route
     /**
-     * @Route("/situacao", name="situacao", methods={"GET"})
+     * @Route("/situacao", name="pageSituacao", methods={"GET"})
      * @param ManagerRegistry $doctrine
      * @return Response
      */
@@ -88,7 +80,7 @@ class SituacaoController extends AbstractController
         $return = $doctrine->getRepository(Situacao::class);
         $situacaoList = $return->findAll();
 
-        return $this->render('', [
+        return $this->render('include/admin_situacao.html.twig', [
             'situacao' => $situacaoList
         ]); // add rota
     }
@@ -107,26 +99,34 @@ class SituacaoController extends AbstractController
         $form = $this->createForm(SituacaoType::class, $situacao);
         $form->handleRequest($request);
 
+        //para o botão cancelar
+        if($request->get('cancel') == 'Cancel')
+            return $this->redirectToRoute('manutencao');
+
         if ($form->isSubmitted() && $form->isValid())
         {
             $em->persist($situacao);
             $em->flush();
 
-            return $this->redirectToRoute('');
+            return $this->redirectToRoute('manutencao');
         }
 
-        return $this->renderForm('',[
+        return $this->renderForm('view/admin/cadastrarSituacao.html.twig',[
             'situacao' => $form
         ]); // add route
     }
 
+
+    /**
+     * @Route ("/situacao/excluir/{id}", name="deleteSituacao")
+     */
     public function remove(int $id, EntityManagerInterface $em, SituacaoRepository $situacaoRepository): Response
     {
         $situacao = $situacaoRepository->find($id);
         $em->remove($situacao);
         $em->flush();
 
-        return $this->redirectToRoute('');  // add route
+        return $this->redirectToRoute('manutencao');  // add route
     }
 
 }

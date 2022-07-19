@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        <h1>CADASTRAR SITUAÇÃO</h1>
+        <div class="form_cadastro">
+            {{form_start(situacao) }}
+
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(situacao.descricao) }}
+                </div>
+            </div>
+            <div class="footer">
+                <button class="cancel" name="cancel" type="submit" value="Cancel" formnovalidate>Cancelar</button>
+                <button class="salvar" type="submit">Salvar</button>
+            </div>
+            {{ form_end(situacao) }}
+        </div>
+    </section>
+{% endblock %}
+
+

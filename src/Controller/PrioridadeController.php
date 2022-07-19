@@ -29,16 +29,19 @@ class PrioridadeController extends AbstractController
         $this->prioridadeFactory = $prioridadeFactory;
     }
 
-//    /**
-//     * @Route("/", name="index")
-//     */
-    public function index()
-    {
-        return $this->render('');
-    }
 
     /**
-     * @Route("/prioridade/cadastrar", name="cadastrarPrioridade", methods={"POST|GET"})
+     * @Route("/alterarItens", name="manutencao", methods={"GET"})
+     */
+    public function manutencaoItens()
+    {
+        return $this->render('view/admin/manutencao.html.twig');
+    }
+
+
+
+    /**
+     * @Route("/prioridade/cadastrar", name="cadastroPrioridade", methods={"POST|GET"})
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
@@ -49,14 +52,14 @@ class PrioridadeController extends AbstractController
         $prioridade = $this->prioridadeFactory->criarPrioridade($return);
 
         // form
-        $form = $this->createForm(PrioridadeFactory::class, $prioridade);
+        $form = $this->createForm(PrioridadeType::class, $prioridade);
 
         //cadastrar novo
         $form->handleRequest($request);
 
         //btn cancelar
         if ($request->get('cancel') == 'Cancel')
-            return $this->redirectToRoute('prioridade');    //implementar route
+            return $this->redirectToRoute('manutencao');    //implementar route
 
         //salvar
         if ($form->isSubmitted() && $form->isValid())
@@ -65,16 +68,16 @@ class PrioridadeController extends AbstractController
             $em->persist($prioridade);
             $em->flush();
 
-            return $this->redirectToRoute('prioridade');   //implementar route
+            return $this->redirectToRoute('manutencao');   //implementar route
         }
 
-        return $this->redirectToRoute('view/admin/cadastrarPrioridade', [
+        return $this->renderForm('view/admin/cadastrarPrioridade.html.twig', [
             'prioridade' => $form
         ]);   //implementar route
     }
 
     /**
-     * @Route("/prioridade", name="prioridade", methods={"GET"})
+     * @Route("/prioridade", name="pagePrioridade", methods={"GET"})
      * @param ManagerRegistry $doctrine
      * @return Response
      */
@@ -83,7 +86,7 @@ class PrioridadeController extends AbstractController
         $return = $doctrine->getRepository(Prioridade::class);
         $prioridadeList = $return->findAll();
 
-        return $this->render('view/', [
+        return $this->render('include/admin_prioridade.html.twig', [
             'prioridade' => $prioridadeList
         ]);  //implementar rota
     }
@@ -106,10 +109,10 @@ class PrioridadeController extends AbstractController
         {
             $em->persist($prioridade);
             $em->flush();
-            return $this->redirectToRoute('prioridade');
+            return $this->redirectToRoute('manutencao');
         }
 
-        return $this->renderForm('view/', [
+        return $this->renderForm('view/admin/cadastrarPrioridade.html.twig', [
             'prioridade' => $form
         ]);  //implementar route
     }
@@ -123,6 +126,6 @@ class PrioridadeController extends AbstractController
         $em->remove($prioridade);
         $em->flush();
 
-        return $this->redirectToRoute('prioridade');
+        return $this->redirectToRoute('manutencao');
     }
 }

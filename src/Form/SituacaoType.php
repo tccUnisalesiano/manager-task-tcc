@@ -16,7 +16,7 @@ class SituacaoType extends AbstractType
     {
         $builder
             ->add('descricao', TextType::class,
-            ['label' => "Qual a situação"]);
+            ['label' => "Situação: "]);
     }
 
 }
