@@ -1,0 +1,131 @@
+.include_manutencao{
+    border-bottom: 1px solid var(--primary-color);
+}
+
+/*=============== ocultar e mostrar conteúdo ===========*/
+.dropDownForm{
+    width: 100%;
+}
+
+.btnDropDownForm{
+    margin: 0.5rem 1.5rem;
+    width: 8rem;
+    font-weight: 400;
+    display: block;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    padding: 0.2rem;
+    color: var(--primary-color)
+}
+
+.btnDropDownForm i{
+    padding: 0.2rem;
+    transform: translateY(10%) rotate(140deg);
+}
+
+/*=============== cabeçalho ==============*/
+
+.content_manutencao  button:active,
+.content_manutencao  button:hover{
+    background-color: var(--primary-color);
+    font-weight: 500;
+}
+
+.content_manutencao{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem;
+    margin: 0 1.5rem;
+}
+
+.content_manutencao p{
+    line-height: 40px;
+    font-size: 14px;
+}
+
+.content_manutencao button {
+    right: 0;
+    float: right;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: var(--secondary-color);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 5px;
+    box-shadow: 2px 3px #c4c4c4;
+}
+
+
+/*========== Tabela =============*/
+
+.include_manutencao .content-body{
+    padding: 0 1.5rem;
+}
+
+.include_manutencao .content-table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    font-size: 0.9rem;
+    min-width: 300px;
+}
+.include_manutencao .content-table a{
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.include_manutencao .content-table .td_color{
+    width: 2rem;
+}
+
+.include_manutencao .content-table thead tr{
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.include_manutencao .content-table th,
+.include_manutencao .content-table td{
+    padding: 12px 15px;
+}
+
+.include_manutencao .content-table tbody tr{
+    border-bottom: 1px solid var(--text-color);
+    color: var(--text-color);
+}
+
+/*degrade de linhas*/
+.include_manutencao .content-table tbody:nth-child(odd) {
+    background-color: var(--sidebar-color);
+}
+
+/*Barra colorida ao final da tabela*/
+.include_manutencao .content-table tbody:last-of-type{
+    border-bottom:  2px solid var(--secondary-color);
+}
+
+.include_manutencao .content-table tbody .acoes{
+    max-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.include_manutencao .content-table tbody .acoes a{
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.include_manutencao .content-table tbody .acoes a:hover .edit{
+    color: green;
+}
+.include_manutencao .content-table tbody .acoes a:hover .delete{
+    color: red;
+}
+
+

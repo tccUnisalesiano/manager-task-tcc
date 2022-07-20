@@ -1,30 +1,38 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="content_add">
-    <a class="botao_adicionar" href="{{ path('cadastroPrioridade') }}"><button>+ Adicionar Prioridade</button></a>
-</div>
-<div class="content-body">
-    <table class="content-table">
-        Prioridade
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Cor</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        {% for prioridade in prioridade %}
-            <tbody>
-            <tr>
-                <td>{{ prioridade.nomePrioridade }}</td>
-                <td style="background-color: {{  prioridade.cor }}"></td>
-                <td class="acoes">
-                    <a href="{{ path('editarPrioridade', {id: prioridade.id }) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>
-                    <a href="{{ path('deletePrioridade', {id: prioridade.id }) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
-                </td>
-            </tr>
-            </tbody>
-        {% endfor %}
-    </table>
-</div>
+    <div class="include_manutencao">
+        <h4 class="btnDropDownForm">Prioridade<i class="fa-solid fa-caret-down setaDropDown"></i></h4>
+        <div class="dropDownForm">
+
+            <div class="content_manutencao">
+                <p>Prioridade das tarefas</p>
+                <a class="botao_adicionar" href="{{ path('cadastroPrioridade') }}"><button>+ Adicionar Prioridade</button></a>
+            </div>
+            <div class="content-body">
+                <table class="content-table">
+
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cor</th>
+                        <th class="acoes">Ações</th>
+                    </tr>
+                    </thead>
+                    {% for prioridade in prioridade %}
+                        <tbody>
+                        <tr>
+                            <td>{{ prioridade.nomePrioridade }}</td>
+                            <td class="td_color" style="background-color: {{  prioridade.cor }}"></td>
+                            <td class="acoes">
+                                <a href="{{ path('editarPrioridade', {id: prioridade.id }) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>
+                                <a href="{{ path('deletePrioridade', {id: prioridade.id }) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
