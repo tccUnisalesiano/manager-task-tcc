@@ -24,7 +24,7 @@
 
 .btnDropDownForm i{
     padding: 0.2rem;
-    transform: translateY(10%) rotate(140deg);
+    transform: translateY(10%) rotate(-45deg);
 }
 
 /*=============== cabeçalho ==============*/
