@@ -5,6 +5,7 @@
 /*=============== ocultar e mostrar conteúdo ===========*/
 .dropDownForm{
     width: 100%;
+    display: block;
 }
 
 .btnDropDownForm{
