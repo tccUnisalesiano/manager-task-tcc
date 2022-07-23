@@ -33,8 +33,5 @@ class ClienteType extends AbstractType
                         'Pessoa Jurídica' => 'Pessoa Jurídica',
                     ],
                 ]);
-
-
     }
-
 }
