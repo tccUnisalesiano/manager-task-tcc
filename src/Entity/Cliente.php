@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClienteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -35,6 +37,14 @@ class Cliente implements \JsonSerializable
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     public ?string $cpf_cnpj;
+
+//    #[ORM\OneToMany(mappedBy: 'idCliente', targetEntity: Projeto::class)]
+//    private Collection $idProjeto;
+//
+//    public function __construct()
+//    {
+//        $this->idProjeto = new ArrayCollection();
+//    }
 
     /**
      * @return int|null
@@ -136,4 +146,34 @@ class Cliente implements \JsonSerializable
             "cpf_cnpj" => $this->getCpfCnpj()
         ];
     }
+//
+//    /**
+//     * @return Collection<int, Projeto>
+//     */
+//    public function getIdProjeto(): Collection
+//    {
+//        return $this->idProjeto;
+//    }
+//
+//    public function addIdProjeto(Projeto $idProjeto): self
+//    {
+//        if (!$this->idProjeto->contains($idProjeto)) {
+//            $this->idProjeto[] = $idProjeto;
+//            $idProjeto->setIdCliente($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeIdProjeto(Projeto $idProjeto): self
+//    {
+//        if ($this->idProjeto->removeElement($idProjeto)) {
+//            // set the owning side to null (unless already changed)
+//            if ($idProjeto->getIdCliente() === $this) {
+//                $idProjeto->setIdCliente(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 }
