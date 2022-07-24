@@ -8,7 +8,7 @@
 
             <div class="content_manutencao">
                 <p>Prioridade das tarefas</p>
-                <a class="botao_adicionar" href="{{ path('cadastroPrioridade') }}"><button>+ Adicionar Prioridade</button></a>
+                <a class="botao_adicionar"><button id="modalBtn">+ Adicionar Prioridade</button></a>
             </div>
             <div class="content-body">
                 <table class="content-table">
@@ -36,5 +36,14 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <div id="boxModal" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-body">
+                {{ render(url('cadastroPrioridade')) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
