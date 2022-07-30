@@ -56,7 +56,7 @@ class SprintController extends AbstractController
             return $this->redirectToRoute('sprint');   //implementar route
         }
 
-        return $this->renderForm('view/user/.html.twig', [
+        return $this->renderForm('view/user/sprintCadastrar.html.twig', [
             'sprint' => $form
         ]);
     }
@@ -71,7 +71,7 @@ class SprintController extends AbstractController
         $return = $doctrine->getRepository(Sprint::class);
         $sprintList = $return->findAll();
 
-        return $this->render('view/user/.html.twig', [
+        return $this->render('view/user/sprint.html.twig', [
             'sprint' => $sprintList
         ]);  //implementar rota
     }
@@ -97,7 +97,7 @@ class SprintController extends AbstractController
             return $this->redirectToRoute('sprint');
         }
 
-        return $this->renderForm('view/user/.html.twig', [
+        return $this->renderForm('view/user/sprintCadastrar.html.twig', [
             'sprint' => $form
         ]);  //implementar route
     }
@@ -113,4 +113,23 @@ class SprintController extends AbstractController
 
         return $this->redirectToRoute('sprint');
     }
+
+    /**
+     * @Route("/sprint/{id}", name="detalheSprint")
+     * @param int $id
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param SprintRepository $sprintRepository
+     * @return Response
+     */
+    public function visualizar(int $id, Request $request, EntityManagerInterface $em, SprintRepository $sprintRepository): Response
+    {
+        $sprint = $sprintRepository->find($id);
+
+        return $this->render('view/user/clienteDetalhes.html.twig', [
+            'sprint' => $sprint
+        ]);
+    }
+
+
 }

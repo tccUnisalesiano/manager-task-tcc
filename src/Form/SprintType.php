@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use Doctrine\DBAL\Types\DateType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -17,16 +17,25 @@ class SprintType extends AbstractType
     {
         $builder
             ->add('situacao', TextType::class,
-                ['label' => "Situação Sprint: "])
+                ['label' => "Situação: "])
             ->add('descricao', TextType::class,
                 ['label' => "Descricao: "])
             ->add('versao', TextType::class,
                 ['label' => "Versão: "])
             ->add('duracao', TextType::class,
-                ['label' => "Duração: "])
+                ['label' => "Duração (Semanas): "])
             ->add('dataIni', DateType::class,   //testar esse dateType, pode nao corresponder com o que queremos
-                ['label' => "Data Inicial: "])
+                ['label' => "Data Inicial: ",
+                    'html5' => false,
+                    'widget' => 'single_text',
+                    'attr' => ['class' => 'calendario'],
+                ])
+
             ->add('dataFim', DateType::class,
-                ['label' => "Data Final: "]);
+                ['label' => "Data Final: ",
+                    'html5' => false,
+                    'widget' => 'single_text',
+                    'attr' => ['class' => 'calendario'],
+                ]);
     }
 }

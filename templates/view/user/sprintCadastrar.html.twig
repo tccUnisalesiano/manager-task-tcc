@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        <h1>CADASTRAR SPRINT</h1>
+        {% block form %}
+        {% endblock %}
+        <div class="form_cadastro">
+            {{form_start(sprint) }}
+
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(sprint.situacao) }}
+                </div>
+                <div class="column">
+                    {{ form_row(sprint.versao) }}
+                </div>
+            </div>
+
+
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(sprint.dataIni) }}
+                </div>
+                <div class="column">
+                    {{ form_row(sprint.dataFim) }}
+                </div>
+            </div>
+
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(sprint.duracao) }}
+                </div>
+            </div>
+
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(sprint.descricao) }}
+                </div>
+
+            </div>
+
+            <div class="footer">
+                <button class="cancel" name="cancel" type="submit" value="Cancel" formnovalidate>Cancelar</button>
+                <button class="salvar" type="submit">Salvar</button>
+            </div>
+            {{ form_end(sprint) }}
+        </div>
+    </section>
+{% endblock %}
+
+

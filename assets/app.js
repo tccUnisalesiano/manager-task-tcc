@@ -15,7 +15,7 @@ import '../public/styles/css/detalhes.css';
 import '../public/styles/css/manutencao.css';
 import '../public/styles/css/modal.css';
 
-import '../public/styles/JS/manutencao.js';
+import '../public/styles/JS/calendario.js';
 
 
 
