@@ -52,6 +52,10 @@ class Tarefa implements \JsonSerializable
     #[ORM\Column(length: 100, nullable: true)]
     public ?string $tipoTarefa = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    public ?Funcionario $idFuncionario = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -190,6 +194,18 @@ class Tarefa implements \JsonSerializable
     }
 
 
+    public function getIdFuncionario(): ?Funcionario
+    {
+        return $this->idFuncionario;
+    }
+
+    public function setIdFuncionario(?Funcionario $idFuncionario): self
+    {
+        $this->idFuncionario = $idFuncionario;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         return[
@@ -204,7 +220,8 @@ class Tarefa implements \JsonSerializable
             "dataIni" => $this->getDataIni(),
             "dataFim" => $this->getDataFim(),
             "documentacao" => $this->getDocumentacao(),
-            "tipoTarefa" => $this->getTipoTarefa()
+            "tipoTarefa" => $this->getTipoTarefa(),
+            "idFuncionario" => $this->getIdFuncionario()
         ];
     }
 }

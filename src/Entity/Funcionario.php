@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\FuncionarioRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\ArrayShape;
+use ReturnTypeWillChange;
 
 
 /**
@@ -35,6 +37,9 @@ class Funcionario implements \JsonSerializable
 
     #[ORM\Column(type: 'blob', nullable: true)]
     public $imagemPerfil;
+
+    #[ORM\Column(nullable: true)]
+    public ?bool $isAtivo = null;
 
     public function getId(): ?int
     {
@@ -114,7 +119,21 @@ class Funcionario implements \JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+
+    public function getIsAtivo(): ?bool
+    {
+        return $this->isAtivo;
+    }
+
+    public function setIsAtivo(?bool $isAtivo): self
+    {
+        $this->isAtivo = $isAtivo;
+
+        return $this;
+    }
+
+    #[ArrayShape(["id" => "int|null", "nomeFuncionario" => "null|string", "emailFuncionario" => "null|string", "senha" => "null|string", "cargaHorariaSemanal" => "float|null", "isAdmin" => "bool|null", "isAtivo" => "bool|null"])]
+    public function jsonSerialize(): array
     {
         return [
             "id" => $this->getId(),
@@ -123,6 +142,7 @@ class Funcionario implements \JsonSerializable
             "senha" => $this->getSenha(),
             "cargaHorariaSemanal" => $this->getCargaHorariaSemanal(),
             "isAdmin" => $this->getIsAdmin(),
+            "isAtivo" => $this->getIsAtivo(),
             // "imagemPerfil" => $this->getImagemPerfil()
         ];
     }
