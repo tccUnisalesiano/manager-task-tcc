@@ -32,10 +32,10 @@ class Sprint implements \JsonSerializable
     #[ORM\Column(length: 255, nullable: true)]
     public ?string $duracao = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     public ?\DateTimeInterface $dataIni = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     public ?\DateTimeInterface $dataFim = null;
 
     public function getId(): ?int
@@ -110,12 +110,12 @@ class Sprint implements \JsonSerializable
 
     public function setDataFim(?\DateTimeInterface $dataFim): self
     {
-        $this->dataFim = $dataFim;
+        $this->dataFim = new \DateTime('today');
 
         return $this;
     }
 
-    #[ArrayShape(["Id" => "int|null", "situacao" => "null|string", "descricao" => "null|string", "versao" => "null|string", "duracao" => "null|string", "dataIni" => "\DateTimeInterface|null", "dataFim" => "\DateTimeInterface|null"])]
+    #[ArrayShape(["Id" => "int", "situacao" => "string", "descricao" => "string", "versao" => "string", "duracao" => "int", "dataIni" => "\DateTimeInterface", "dataFim" => "\DateTimeInterface"])]
     public function jsonSerialize(): array
     {
         return[
