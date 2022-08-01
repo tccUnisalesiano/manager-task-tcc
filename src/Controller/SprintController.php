@@ -126,7 +126,7 @@ class SprintController extends AbstractController
     {
         $sprint = $sprintRepository->find($id);
 
-        return $this->render('view/user/clienteDetalhes.html.twig', [
+        return $this->render('view/user/sprintDetalhes.html.twig', [
             'sprint' => $sprint
         ]);
     }

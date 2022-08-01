@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        <header>
+            <div class="cabecalho">
+                <p>Sprint</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar...">
+                    <a class="botao_buscar"><button>Buscar</button></a>
+                </div>
+            </div>
+        </header>
+        <div class="content_add">
+            <a class="botao_adicionar" href="{{ path('editarSprint', {id: sprint.id}) }}">
+                <button>Editar Sprint</button>
+            </a>
+        </div>
+        <div class="separacao"></div>
+        <div class="info_detalhes">
+            <div>
+                <h6>Situação:</h6>
+                <p class="info">   {{ sprint.situacao }}</p>
+            </div>
+            <div>
+                <h6>Versão:</h6>
+                <p class="info">  {{ sprint.versao }}</p>
+            </div>
+            <div>
+                <h6>Duração:</h6>
+                <p class="info">  {{ sprint.duracao }} Semana(s)</p>
+            </div>
+            <div>
+                <h6>Data Inicial:</h6>
+                <p class="info"> {{ sprint.dataIni |date('d-m-Y') }}</p>
+            </div>
+            <div>
+                <h6>Data Final:</h6>
+                <p class="info"> {{ sprint.dataFim |date('d-m-Y')}}</p>
+            </div>
+            <div>
+                <h6>Descrição:</h6>
+                <p class="info"> {{ sprint.descricao}}</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+

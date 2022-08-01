@@ -13,6 +13,22 @@
     padding: 1rem;
 }
 
+.form_cadastro .row_cadastro .column_textArea{
+    padding: 1rem;
+    display: flex;
+}
+
+.form_cadastro .row_cadastro .column_textArea textarea{
+    border: 2px solid var(--secondary-color);
+    display: flex;
+    min-width: 20rem;
+    width: 60rem;
+    max-width: 60rem;
+    min-height: 2rem;
+    max-height: 15rem;
+    background-color: transparent;
+}
+
 .form_cadastro .row_cadastro .column input,
 .form_cadastro .row_cadastro .column select{
     display: flex;
@@ -22,11 +38,14 @@
     background-color: transparent;
 }
 
-.form_cadastro .row_cadastro .column input:focus,
-.form_cadastro .row_cadastro .column select{
+.form_cadastro .row_cadastro input:focus,
+.form_cadastro .row_cadastro select,
+.form_cadastro .row_cadastro textarea{
     box-shadow: none;
     outline: none;
 }
+
+
 
 
 /*============ footer =============*/
@@ -35,8 +54,8 @@
     bottom: 0;
     right: 0;
     width: 100%;
+    background-color: var(--body-color);
 }
-
 
 .form_cadastro .footer button.cancel,
 .form_cadastro .footer button.salvar{
@@ -75,6 +94,13 @@
 
 }
 
+.form_cadastro .footer button,
+.form_cadastro .row_cadastro input,
+.form_cadastro .row_cadastro select,
+.form_cadastro .row_cadastro textarea{
+    border-radius: 5px;
+    box-shadow: 2px 3px #c4c4c4;
+}
 
 
 /*================== resposividade ==================*/
@@ -84,12 +110,11 @@
         width: 100%;
     }
 
+    .form_cadastro .row_cadastro .column_textArea textarea{
+        width: 20rem;
+    }
+
 }
 
-.form_cadastro .footer button,
-.form_cadastro .row_cadastro .column input,
-.form_cadastro .row_cadastro .column select{
-    border-radius: 5px;
-    box-shadow: 2px 3px #c4c4c4;
-}
+
 
