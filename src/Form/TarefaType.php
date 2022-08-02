@@ -37,6 +37,8 @@ class TarefaType extends AbstractType
             ->add('documentacao', TextType::class,
                 ['label' => "Documentação: "])
             ->add('tipoTarefa', TextType::class,
-                ['label' => "Tipo de Tarefa: "]);
+                ['label' => "Tipo de Tarefa: "])
+            ->add('idFuncionario', TextType::class,
+                ['label' => "Funcionario: "]);
     }
 }

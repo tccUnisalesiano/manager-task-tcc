@@ -16,6 +16,7 @@ class FuncionariosFactory
         @$funcionario->emailFuncionario = $dadoEmJson->emailFuncionario;
         @$funcionario->cargaHorariaSemanal = $dadoEmJson->cargaHorariaSemanal;
         @$funcionario->isAdmin = $dadoEmJson->isAdmin;
+        @$funcionario->isAtivo = $dadoEmJson->isAtivo;
         // $funcionario->imagemPerfil = $dadoEmJson->imagemPerfil;
 
         return $funcionario;

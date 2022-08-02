@@ -26,6 +26,7 @@ class TarefaFactory
         @$tarefa->dataFim = $dados->dataFim;
         @$tarefa->documentacao = $dados->documentacao;
         @$tarefa->tipoTarefa = $dados->tipoTarefa;
+        @$tarefa->idFuncionario = $dados->idFuncionario;
 
         return $tarefa;
     }
