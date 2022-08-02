@@ -22,8 +22,8 @@
                     <th>Situacao</th>
                     <th>Versão</th>
                     <th>Semanas de Duração</th>
-{#                    <th>Data Incial</th>#}
-{#                    <th>Data Final</th>#}
+                    <th>Data Incial</th>
+                    <th>Data Final</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
@@ -34,8 +34,8 @@
                         <td><a href="{{ path('detalheSprint', {id: sprint.id}) }}">{{ sprint.situacao }}</a></td>
                         <td><a href="{{ path('detalheSprint', {id: sprint.id}) }}">{{ sprint.versao }}</a></td>
                         <td><a href="{{ path('detalheSprint', {id: sprint.id}) }}">{{ sprint.duracao }}</a></td>
-{#                        <td><a href="{{ path('detalheSprint', {id: sprint.id}) }}">{{ sprint.dataIni}}</td>#}
-{#                        <td><a href="{{ path('detalheSprint', {id: sprint.id}) }}">{{ sprint.dataFim }}</a></td>#}
+                        <td><a href="{{ path('detalheSprint', {id: sprint.id}) }}">{{ sprint.dataIni |date('d-m-Y')}}</td>
+                        <td><a href="{{ path('detalheSprint', {id: sprint.id}) }}">{{ sprint.dataFim |date('d-m-Y')}}</a></td>
 
                         <td class="acoes">
                             <a href="{{ path('editarSprint', {id: sprint.id}) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>

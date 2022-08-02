@@ -33,8 +33,8 @@ class FuncionarioType extends AbstractType{
             ->add('isAtivo', ChoiceType::class,
                 ['label' => "Funcionario está ativo?: ",
                     'choices' =>[
-                        'Não' => False,
                         'Sim' => True,
+                        'Não' => False,
                     ],
                 ])
             ->add('senha', TextType::class,
