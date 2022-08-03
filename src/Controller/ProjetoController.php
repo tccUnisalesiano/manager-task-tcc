@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Classe responsável por gerenciar os metodos de cliente
@@ -32,6 +33,7 @@ class ProjetoController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
+     * @Route("/projeto/cadastrar", name="cadastroProjeto")
      */
     public function novo(Request $request, EntityManagerInterface $em): Response
     {
@@ -42,7 +44,8 @@ class ProjetoController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($request->get('cancel') == 'Cancel')  return $this->redirectToRoute('projeto');
+        if ($request->get('cancel') == 'Cancel')
+            return $this->redirectToRoute('projeto');
 
         if ($form->isSubmitted() && $form->isValid())
         {
@@ -52,19 +55,24 @@ class ProjetoController extends AbstractController
             return $this->redirectToRoute('projeto');
         }
 
-        return $this->renderForm('view/user/projetoCadastrar.html.twig', ['projeto' => $form ]);
+        return $this->renderForm('view/user/projetoCadastrar.html.twig', [
+            'projeto' => $form
+        ]);
     }
 
     /**
      * @param ManagerRegistry $doctrine
      * @return Response
+     * @Route("/projeto", name="projeto")
      */
     public function buscarTodos(ManagerRegistry $doctrine): Response
     {
         $return = $doctrine->getRepository(Projeto::class);
         $projetoList = $return->findAll();
 
-        return $this->render('inserir route', ['projeto' => $projetoList]);
+        return $this->render('view/user/projeto.html.twig', [
+            'projeto' => $projetoList
+        ]);
     }
 
     /**
@@ -73,6 +81,7 @@ class ProjetoController extends AbstractController
      * @param EntityManagerInterface $em
      * @param ProjetoRepository $projetoRepository
      * @return Response
+     * @Route("/projeto/editar/{id}", name="editarProjeto")
      */
     public function update(int $id, Request $request, EntityManagerInterface $em, ProjetoRepository $projetoRepository): Response
     {
@@ -87,7 +96,7 @@ class ProjetoController extends AbstractController
             return $this->redirectToRoute('projeto');
         }
 
-        return $this->renderForm('view/user/.html.twig', [
+        return $this->renderForm('view/user/projetoCadastrar.html.twig', [
             'projeto' => $form
         ]);  //implementar route
     }
@@ -97,6 +106,7 @@ class ProjetoController extends AbstractController
      * @param EntityManagerInterface $em
      * @param ProjetoRepository $projetoRepository
      * @return Response
+     * @Route("/projeto/excluir/{id}", name="deleteProjeto")
      */
     public function remove(int $id, EntityManagerInterface $em, ProjetoRepository $projetoRepository): Response
     {
@@ -105,5 +115,23 @@ class ProjetoController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('projeto');
+    }
+
+
+    /**
+     * @Route("/projeto/{id}", name="detalheProjeto")
+     * @param int $id
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param ProjetoRepository $projetoRepository
+     * @return Response
+     */
+    public function visualizar(int $id, Request $request, EntityManagerInterface $em, ProjetoRepository $projetoRepository): Response
+    {
+        $projeto = $projetoRepository->find($id);
+
+        return $this->render('view/user/projetoDetalhes.html.twig', [
+            'projeto' => $projeto
+        ]);
     }
 }
