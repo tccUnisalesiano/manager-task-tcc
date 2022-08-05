@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Cliente;
 use App\Entity\Projeto;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -33,9 +34,13 @@ class ProjetoType extends AbstractType
                     'Pausada' => 'Pausada',
                 ],
             ])
-            ->add('cpf_cnpj', EntityType::class, [
+            ->add('cliente_id', EntityType::class, [
                 'class' => Cliente::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u');
+                },
                 'choice_label' => 'cpf_cnpj',
+                'label' => 'CPF ou CNPJ do Cliente: '
             ])
             ->add('dataIniPrevisto', DateType::class,
                 ['label' => "Data Início Previsto: ",

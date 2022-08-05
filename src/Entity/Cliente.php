@@ -38,6 +38,16 @@ class Cliente implements \JsonSerializable
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     public ?string $cpf_cnpj;
 
+    #[ORM\OneToMany(mappedBy: 'cliente_id', targetEntity: Projeto::class)]
+    private $projetos;
+
+    public function __construct()
+    {
+        $this->projetos = new ArrayCollection();
+    }
+
+
+
 //    #[ORM\OneToMany(mappedBy: 'idCliente', targetEntity: Projeto::class)]
 //    private Collection $idProjeto;
 //
@@ -176,4 +186,36 @@ class Cliente implements \JsonSerializable
 //
 //        return $this;
 //    }
+
+/**
+ * @return Collection<int, Projeto>
+ */
+public function getProjetos(): Collection
+{
+    return $this->projetos;
+}
+
+public function addProjeto(Projeto $projeto): self
+{
+    if (!$this->projetos->contains($projeto)) {
+        $this->projetos[] = $projeto;
+        $projeto->setClienteId($this);
+    }
+
+    return $this;
+}
+
+public function removeProjeto(Projeto $projeto): self
+{
+    if ($this->projetos->removeElement($projeto)) {
+        // set the owning side to null (unless already changed)
+        if ($projeto->getClienteId() === $this) {
+            $projeto->setClienteId(null);
+        }
+    }
+
+    return $this;
+}
+
+
 }

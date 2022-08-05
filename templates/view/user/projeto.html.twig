@@ -31,7 +31,7 @@
                         <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.Id }}</a></td>
                         <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.nome }}</a></td>
                         <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.situacao }}</a></td>
-                        <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.cliente }}</a></td>
+                        <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.cliente_id.cpf_cnpj}}</a></td>
 
                         <td class="acoes">
                             <a href="{{ path('editarProjeto', {id: projeto.id}) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>

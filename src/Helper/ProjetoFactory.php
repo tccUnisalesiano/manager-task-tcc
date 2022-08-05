@@ -14,7 +14,6 @@ class ProjetoFactory
         @$projeto->nome = $dados->nome;
         @$projeto->descricao = $dados->descricao;
         @$projeto->situacao = $dados->situacao;
-        @$projeto->cpf_cnpj = $dados->cpf_cnpj;
         @$projeto->dataEntregaFinal = $dados->dataEntregaFinal;
         @$projeto->dataFimPrevisto = $dados->dataFimPrevisto;
         @$projeto->dataIniPrevisto = $dados->dataIniPrevisto;

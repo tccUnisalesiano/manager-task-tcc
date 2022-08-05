@@ -39,9 +39,8 @@ class Projeto implements \JsonSerializable
     #[ORM\Column(type: 'datetime', nullable: true)]
     public ?\DateTimeInterface $dataInicial = null;
 
-    #[ORM\Column(type: 'string', length: 100, nullable: true)]
-    public ?string $cpf_cnpj;
-
+    #[ORM\ManyToOne(targetEntity: Cliente::class)]
+    public ?Cliente $cliente_id;
 
     /**
      * @return int|null
@@ -51,13 +50,10 @@ class Projeto implements \JsonSerializable
     {
         return $this->id;
     }
-
     public function setId(?int $id): void
     {
         $this->id = $id;
     }
-
-
 
     /**
      * @return string|null
@@ -67,7 +63,6 @@ class Projeto implements \JsonSerializable
     {
         return $this->nomeProjeto;
     }
-
     public function setNomeProjeto(string $nomeProjeto): void
     {
         $this->nomeProjeto = $nomeProjeto;
@@ -103,19 +98,7 @@ class Projeto implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
 
-    public function getCpfCnpj(): ?string
-    {
-        return $this->cpf_cnpj;
-    }
-
-    public function setCpfCnpj(string $cpf_cnpj): void
-    {
-        $this->cpf_cnpj = $cpf_cnpj;
-    }
 
     /**
      * @return \DateTimeInterface|null
@@ -177,7 +160,7 @@ class Projeto implements \JsonSerializable
         return $this->dataInicial;
     }
 
-    #[ArrayShape(["Id" => "int", "nome" => "string", "descricao" => "string", "situacao" =>"string", "cpf_cnpj" => "string", "dataEntregaFinal" => "\DateTimeInterface","dataInicial" => "\DateTimeInterface","dataFimPrevisto" => "\DateTimeInterface", "dataIniPrevisto" => "\DateTimeInterface" ])]
+    #[ArrayShape(["Id" => "int", "nome" => "string", "descricao" => "string", "situacao" =>"string", "cliente_id" => "integer", "dataEntregaFinal" => "\DateTimeInterface","dataInicial" => "\DateTimeInterface","dataFimPrevisto" => "\DateTimeInterface", "dataIniPrevisto" => "\DateTimeInterface" ])]
     public function jsonSerialize(): array
     {
         return[
@@ -185,11 +168,24 @@ class Projeto implements \JsonSerializable
             "nome" => $this->getNomeProjeto(),
             "descricao" => $this->getDescricao(),
             "situacao" => $this->getSituacao(),
-            "cpf_cnpj" => $this->getCpfCnpj(),
+            "cliente_id"=>$this->getClienteId(),
             "dataEntregaFinal" => $this->getDataEntregaFinal(),
             "dataInicial" => $this->getDataInicial(),
             "dataFimPrevisto" => $this->getDataFimPrevisto(),
             "dataIniPrevisto" => $this->getDataIniPrevisto(),
         ];
     }
+
+    public function getClienteId(): ?Cliente
+    {
+        return $this->cliente_id;
+    }
+
+    public function setClienteId(?Cliente $cliente_id): self
+    {
+        $this->cliente_id = $cliente_id;
+
+        return $this;
+    }
+
 }
