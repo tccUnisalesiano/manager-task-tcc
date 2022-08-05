@@ -12,8 +12,6 @@ import '../public/styles/css/navbar.css';
 import '../public/styles/css/lista.css';
 import '../public/styles/css/cadastro.css';
 import '../public/styles/css/detalhes.css';
-import '../public/styles/css/manutencao.css';
-import '../public/styles/css/modal.css';
 
 import '../public/styles/JS/calendario.js';
 
