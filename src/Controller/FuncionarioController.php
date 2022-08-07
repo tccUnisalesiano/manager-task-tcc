@@ -67,7 +67,7 @@ class FuncionarioController extends AbstractController
             return $this->redirectToRoute('funcionario');
         }
 
-        return $this ->renderForm('view/admin/cadastrarFuncionario.html.twig', [
+        return $this ->renderForm('view/admin/funcionarioCadastrar.html.twig', [
             'funcionario' => $form
         ]);
     }
@@ -82,6 +82,7 @@ class FuncionarioController extends AbstractController
         $functionaryList = $return->findAll();
 
         // return new JsonResponse($functionaryList);
+
         return $this->render('view/admin/funcionario.html.twig', [
             'funcionario' =>$functionaryList
         ]);
@@ -107,11 +108,10 @@ class FuncionarioController extends AbstractController
             $em->persist($functionary);
             $em->flush();
             return $this->redirectToRoute('funcionario');
-
-
         }
-        return $this ->renderForm('view/admin/cadastrarFuncionario.html.twig', [
+        return $this ->renderForm('view/admin/funcionarioCadastrar.html.twig', [
             'funcionario' => $form
+
         ]);
 
 
@@ -128,5 +128,23 @@ class FuncionarioController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('funcionario');
+    }
+
+
+    /**
+     * @Route("/funcionario/{id}", name="detalheFuncionario")
+     * @param int $id
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param FuncionarioRepository $funcionarioRepository
+     * @return Response
+     */
+    public function visualizar(int $id, Request $request, EntityManagerInterface $em, FuncionarioRepository $funcionarioRepository): Response
+    {
+        $funcionario = $funcionarioRepository->find($id);
+
+        return $this->render('view/admin/funcionarioDetalhes.html.twig', [
+            'funcionario' => $funcionario
+        ]);
     }
 }

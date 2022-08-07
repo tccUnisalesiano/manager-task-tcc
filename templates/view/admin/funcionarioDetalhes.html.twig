@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        <header>
+            <div class="cabecalho">
+                <p>Funcionário</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar...">
+                    <a class="botao_buscar"><button>Buscar</button></a>
+                </div>
+            </div>
+        </header>
+        <div class="content_add">
+            <a class="botao_adicionar" href="{{ path('editarFuncionario', {id: funcionario.id}) }}">
+                <button>Editar Funcionário</button>
+            </a>
+        </div>
+        <div class="content_add">
+            <a class="botao_adicionar" href="{{ path('#', {id: funcionario.id}) }}">
+                <button>Valores</button>
+            </a>
+        </div>
+        <div class="separacao"></div>
+        <div class="info_detalhes">
+            <div>
+                <h6>Nome:</h6>
+                <p class="info">   {{ funcionario.nomeFuncionario }}</p>
+            </div>
+            <div>
+                <h6>Email:</h6>
+                <p class="info">  {{ funcionario.emailFuncionario }}</p>
+            </div>
+            <div>
+                <h6>Carga Horária Semanal:</h6>
+                <p class="info">  {{ funcionario.cargaHorariaSemanal }}</p>
+            </div>
+            <div>
+                <h6>Administrador:</h6>
+                <p class="info">
+                    {% if funcionario.isAdmin == 1 %}
+                        Sim
+                    {% else %}
+                        Não
+                    {% endif %}
+                </p>
+            </div>
+            <div>
+                <h6>Status Funcionário:</h6>
+                <p class="info">
+                    {% if funcionario.isAtivo == 1 %}
+                        Ativo
+                    {% else %}
+                        Desativo
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+

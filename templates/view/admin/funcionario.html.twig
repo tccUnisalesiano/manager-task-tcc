@@ -25,17 +25,17 @@
                     <th>E-mail</th>
                     <th>Carga Horaria</th>
                     <th>Administrador</th>
-                    <th>Ativo</th>
+                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
                 {% for funcionario in funcionario %}
                 <tbody>
                 <tr>
-                    <td>{{ funcionario.id }}</td>
-                    <td>{{ funcionario.nomeFuncionario }}</td>
-                    <td>{{ funcionario.emailFuncionario }}</td>
-                    <td>{{ funcionario.cargaHorariaSemanal }}</td>
+                    <td><a href="{{ path('detalheFuncionario', {id: funcionario.id}) }}">{{ funcionario.id }}</td>
+                    <td><a href="{{ path('detalheFuncionario', {id: funcionario.id}) }}">{{ funcionario.nomeFuncionario }}</td>
+                    <td><a href="{{ path('detalheFuncionario', {id: funcionario.id}) }}">{{ funcionario.emailFuncionario }}</td>
+                    <td><a href="{{ path('detalheFuncionario', {id: funcionario.id}) }}">{{ funcionario.cargaHorariaSemanal }}</td>
                     <td>
                         {% if funcionario.isAdmin == 1 %}
                             Sim
@@ -45,9 +45,9 @@
                     </td>
                     <td>
                         {% if funcionario.isAtivo == 1 %}
-                            Sim
+                            Ativo
                         {% else %}
-                            Não
+                            Desativo
                         {% endif %}
                     </td>
                     <td class="acoes">
