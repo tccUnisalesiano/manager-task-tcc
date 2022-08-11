@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        <header>
+            <div class="cabecalho">
+                <p>Sprint</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar...">
+                    <a class="botao_buscar"><button>Buscar</button></a>
+                </div>
+            </div>
+        </header>
+        <div class="content_add">
+            <a class="botao_adicionar" href="{{ path('editarProjeto', {id: projeto.id}) }}">
+                <button>Editar Projeto</button>
+            </a>
+        </div>
+        <div class="separacao"></div>
+        <div class="info_detalhes">
+            <div>
+                <h6>Nome:</h6>
+                <p class="info">   {{ projeto.nome }}</p>
+            </div>
+            <div>
+                <h6>Situação:</h6>
+                <p class="info">  {{ projeto.situacao }}</p>
+            </div>
+            <div>
+                <h6>Data Inicio: </h6>
+                <p class="info"> {{ projeto.cliente_id.cpf_cnpj }}</p>
+            </div>
+            <div>
+                <h6>Data Inicio: </h6>
+                <p class="info"> {{ projeto.dataInicial |date('d-m-Y')}}</p>
+            </div>
+            <div>
+                <h6>Data Fim:</h6>
+                <p class="info"> {{ projeto.dataEntregaFinal |date('d-m-Y') }}</p>
+            </div>
+            <div>
+                <h6>Data Fim Previsto:</h6>
+                <p class="info"> {{ projeto.dataFimPrevisto |date('d-m-Y') }}</p>
+            </div>
+            <div>
+                <h6>Data Inicial Projeto:</h6>
+                <p class="info"> {{ projeto.dataIniPrevisto |date('d-m-Y')}}</p>
+            </div>
+            <div>
+                <h6>Descrição:</h6>
+                <p class="info"> {{ projeto.descricao }}</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+

@@ -16,11 +16,11 @@
                 <button>Editar Funcionário</button>
             </a>
         </div>
-        <div class="content_add">
-            <a class="botao_adicionar" href="{{ path('#', {id: funcionario.id}) }}">
-                <button>Valores</button>
-            </a>
-        </div>
+{#        <div class="content_add">#}
+{#            <a class="botao_adicionar" href="{{ path('cadastroValorFuncionario', {id: funcionario.id}) }}">#}
+{#                <button>Valores</button>#}
+{#            </a>#}
+{#        </div>#}
         <div class="separacao"></div>
         <div class="info_detalhes">
             <div>
@@ -56,6 +56,9 @@
                 </p>
             </div>
         </div>
+
+        {{ render(url('valorfuncionario')) }}
+
     </section>
 {% endblock %}
 

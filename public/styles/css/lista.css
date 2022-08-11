@@ -110,7 +110,6 @@ header .search-bar input:focus{
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    margin: 25px 0;
     font-size: 0.9rem;
     min-width: 300px;
 }
