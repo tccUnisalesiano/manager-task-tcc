@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\TarefaRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Internal\TentativeType;
 
 /**
  * Classe responsável por gerenciar a tabela de Tarefa
@@ -29,7 +28,7 @@ class Tarefa implements \JsonSerializable
     public ?string $situacao = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    public ?string $nomeTarefa = null;
+    public ?string $status = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     public ?string $nome = null;
@@ -55,6 +54,9 @@ class Tarefa implements \JsonSerializable
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     public ?Funcionario $idFuncionario = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    public ?int $porcentagem = null;
 
     public function getId(): ?int
     {
@@ -97,14 +99,14 @@ class Tarefa implements \JsonSerializable
         return $this;
     }
 
-    public function getNomeTarefa(): ?string
+    public function getStatus(): ?string
     {
-        return $this->nomeTarefa;
+        return $this->status;
     }
 
-    public function setNomeTarefa(?string $nomeTarefa): self
+    public function setStatus(?string $status): self
     {
-        $this->nomeTarefa = $nomeTarefa;
+        $this->status = $status;
 
         return $this;
     }
@@ -169,17 +171,17 @@ class Tarefa implements \JsonSerializable
         return $this;
     }
 
-    public function getDocumentacao(): ?string
-    {
-        return $this->documentacao;
-    }
-
-    public function setDocumentacao(?string $documentacao): self
-    {
-        $this->documentacao = $documentacao;
-
-        return $this;
-    }
+//    public function getDocumentacao(): ?string
+//    {
+//        return $this->documentacao;
+//    }
+//
+//    public function setDocumentacao(?string $documentacao): self
+//    {
+//        $this->documentacao = $documentacao;
+//
+//        return $this;
+//    }
 
     public function getTipoTarefa(): ?string
     {
@@ -206,6 +208,19 @@ class Tarefa implements \JsonSerializable
         return $this;
     }
 
+
+    public function getPorcentagem(): ?int
+    {
+        return $this->porcentagem;
+    }
+
+    public function setPorcentagem(?int $porcentagem): self
+    {
+        $this->porcentagem = $porcentagem;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         return[
@@ -213,15 +228,17 @@ class Tarefa implements \JsonSerializable
             "idProjeto" => $this->getIdProjeto(),
             "prioridade" => $this->getPrioridade(),
             "situacao" => $this->getSituacao(),
-            "nomeTarefa" => $this->getNomeTarefa(),
+            "status" => $this->getStatus(),
             "nome" => $this->getNome(),
             "descricao" => $this->getDescricao(),
             "tempoEstimado" => $this->getTempoEstimado(),
             "dataIni" => $this->getDataIni(),
             "dataFim" => $this->getDataFim(),
-            "documentacao" => $this->getDocumentacao(),
+//            "documentacao" => $this->getDocumentacao(),
             "tipoTarefa" => $this->getTipoTarefa(),
-            "idFuncionario" => $this->getIdFuncionario()
+            "idFuncionario" => $this->getIdFuncionario(),
+            "porcentagem" => $this->getPorcentagem()
         ];
     }
+
 }

@@ -20,7 +20,7 @@ class valorfuncionarioType extends AbstractType
             ->add('idFuncionario', EntityType::class, [
                 'class' => Funcionario::class,
                 'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u');
+                    return $er->createQueryBuilder('f');
                 },
                 'choice_label' => 'nomeFuncionario',
                 'label' => 'Funcionário: '

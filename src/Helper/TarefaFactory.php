@@ -18,13 +18,13 @@ class TarefaFactory
         @$tarefa->idProjeto = $dados->idProjeto;
         @$tarefa->prioridade = $dados->prioridade;
         @$tarefa->situacao = $dados->situacao;
-        @$tarefa->nomeTarefa = $dados->nomeTarefa;
+        @$tarefa->status = $dados->status;
         @$tarefa->nome = $dados->nome;
         @$tarefa->descricao = $dados->descricao;
         @$tarefa->tempoEstimado = $dados->tempoEstimado;
         @$tarefa->dataIni = $dados->dataIni;
         @$tarefa->dataFim = $dados->dataFim;
-        @$tarefa->documentacao = $dados->documentacao;
+//        @$tarefa->documentacao = $dados->documentacao;
         @$tarefa->tipoTarefa = $dados->tipoTarefa;
         @$tarefa->idFuncionario = $dados->idFuncionario;
 
