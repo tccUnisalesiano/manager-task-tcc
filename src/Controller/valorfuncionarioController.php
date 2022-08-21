@@ -7,6 +7,7 @@ use App\Form\valorfuncionarioType;
 use App\Helper\valorfuncionarioFactory;
 use App\Repository\ValorfuncionarioRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,12 +70,15 @@ class valorfuncionarioController extends AbstractController
     public function buscarTodos(ManagerRegistry $doctrine): Response
     {
         $return = $doctrine->getRepository(Valorfuncionario::class);
-        $vFuncionarioList = $return->findAll();
+        //$vFuncionarioList = $return->findAll();
+        $vFuncionarioList = $return->findFuncionarioId();
 
         return $this->render('include/admin_valores.html.twig', [
             'valorfuncionario' => $vFuncionarioList
         ]);  //implementar rota
     }
+
+
 
     /**
      * @Route("/valorfuncionario/editar/{id}", name="editarValorFuncionario")
