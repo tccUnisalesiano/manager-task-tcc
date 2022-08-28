@@ -9,7 +9,6 @@
             <table class="content-table">
                 <thead>
                 <tr>
-                    <th>#</th>
                     <th>Funcionário</th>
                     <th>Valor/Hora</th>
                     <th>Data Inicio</th>
@@ -20,7 +19,6 @@
                 {% for valor in valorfuncionario %}
                     <tbody>
                     <tr>
-                        <td>{{ valor.id }}</td>
                         <td>{{ valor.idFuncionario.nomeFuncionario }}</td>
                         <td>{{ valor.valorHora }}</td>
                         <td>{{ valor.dataIni |date('d-m-Y')}}</td>

@@ -18,6 +18,7 @@ class ProjetoFactory
         @$projeto->dataFimPrevisto = $dados->dataFimPrevisto;
         @$projeto->dataIniPrevisto = $dados->dataIniPrevisto;
         @$projeto->dataInicial = $dados->dataInicial;
+        @$projeto->tempoGastoTotal = $dados->tempoGastoTotal;
 
         return $projeto;
     }

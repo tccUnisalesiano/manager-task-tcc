@@ -42,6 +42,14 @@
                     {{ form_row(tarefa.porcentagem) }}
                 </div>
             </div>
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(tarefa.tempoGasto) }}
+                </div>
+                <div class="column">
+                    {{ form_row(tarefa.tempoEstimado) }}
+                </div>
+            </div>
 
             <div class="row_cadastro">
                 <div class="column">
@@ -51,7 +59,6 @@
                     {{ form_row(tarefa.dataFim) }}
                 </div>
             </div>
-
             <div class="row_cadastro">
                 <div class="column_textArea">
                     {{ form_row(tarefa.descricao) }}
@@ -60,9 +67,7 @@
 
             <div class="footer">
                 <button class="cancel" name="cancel" type="submit" value="Cancel" formnovalidate>Cancelar</button>
-{#                Algo deu errado, pede para preencher campos mesmo que já tenha preenchido todos, arrumar e#}
-{#                tirar o formnovalidade para validações#}
-                <button class="salvar" type="submit" formnovalidate>Salvar</button>
+                <button class="salvar" type="submit">Salvar</button>
             </div>
             {{ form_end(tarefa) }}
         </div>

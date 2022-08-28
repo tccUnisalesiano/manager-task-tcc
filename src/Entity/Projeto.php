@@ -42,6 +42,12 @@ class Projeto implements \JsonSerializable
     #[ORM\ManyToOne(targetEntity: Cliente::class)]
     public ?Cliente $cliente_id;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    public ?int $porcentagem = null;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    public ?float $tempoGastoTotal = null;
+
     /**
      * @return int|null
      */
@@ -155,9 +161,35 @@ class Projeto implements \JsonSerializable
 
         return $this;
     }
+
     public function getDataInicial(): ?\DateTimeInterface
     {
         return $this->dataInicial;
+    }
+
+    public function getClienteId(): ?Cliente
+    {
+        return $this->cliente_id;
+    }
+
+    public function setClienteId(?Cliente $cliente_id): self
+    {
+        $this->cliente_id = $cliente_id;
+
+        return $this;
+    }
+
+
+    public function getTempoGastoTotal(): ?float
+    {
+        return $this->tempoGastoTotal;
+    }
+
+    public function setTempoGastoTotal(?float $tempoGastoTotal): self
+    {
+        $this->tempoGastoTotal = $tempoGastoTotal;
+
+        return $this;
     }
 
     #[ArrayShape(["Id" => "int", "nome" => "string", "descricao" => "string", "situacao" =>"string", "cliente_id" => "integer", "dataEntregaFinal" => "\DateTimeInterface","dataInicial" => "\DateTimeInterface","dataFimPrevisto" => "\DateTimeInterface", "dataIniPrevisto" => "\DateTimeInterface" ])]
@@ -173,19 +205,9 @@ class Projeto implements \JsonSerializable
             "dataInicial" => $this->getDataInicial(),
             "dataFimPrevisto" => $this->getDataFimPrevisto(),
             "dataIniPrevisto" => $this->getDataIniPrevisto(),
+            "tempoGastoTotal" => $this->getTempoGastoTotal(),
         ];
     }
 
-    public function getClienteId(): ?Cliente
-    {
-        return $this->cliente_id;
-    }
-
-    public function setClienteId(?Cliente $cliente_id): self
-    {
-        $this->cliente_id = $cliente_id;
-
-        return $this;
-    }
 
 }

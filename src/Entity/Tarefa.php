@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TarefaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -57,6 +59,17 @@ class Tarefa implements \JsonSerializable
 
     #[ORM\Column(type: 'integer', nullable: true)]
     public ?int $porcentagem = null;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    public ?float $tempoGasto = null;
+
+    #[ORM\OneToMany(mappedBy: 'idFuncionario', targetEntity: Tempogasto::class)]
+    private $no;
+
+    public function __construct()
+    {
+        $this->no = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -221,6 +234,18 @@ class Tarefa implements \JsonSerializable
         return $this;
     }
 
+    public function getTempoGasto(): ?float
+    {
+        return $this->tempoGasto;
+    }
+
+    public function setTempoGasto(?float $tempoGasto): self
+    {
+        $this->tempoGasto = $tempoGasto;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         return[
@@ -232,6 +257,7 @@ class Tarefa implements \JsonSerializable
             "nome" => $this->getNome(),
             "descricao" => $this->getDescricao(),
             "tempoEstimado" => $this->getTempoEstimado(),
+            "tempoGasto" => $this->getTempoGasto(),
             "dataIni" => $this->getDataIni(),
             "dataFim" => $this->getDataFim(),
 //            "documentacao" => $this->getDocumentacao(),
@@ -240,5 +266,4 @@ class Tarefa implements \JsonSerializable
             "porcentagem" => $this->getPorcentagem()
         ];
     }
-
 }

@@ -74,6 +74,8 @@ class TarefaType extends AbstractType
                 ['label' => "Descrição: "])
             ->add('tempoEstimado', NumberType::class,
                 ['label' => "Tempo Estimado: "])
+            ->add('tempoGasto', NumberType::class,
+                ['label' => "Tempo Gasto: "])
             ->add('dataIni', DateType::class,   //testar esse dateType, pode nao corresponder com o que queremos
                 ['label' => "Data Inicial: ",
                     'html5' => false,

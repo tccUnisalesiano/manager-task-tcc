@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="content_add">
+        <a class="botao_adicionar" href="{{ path('cadastroTempogasto') }}">
+            <button>+ Tempo Gasto</button>
+        </a>
+    </div>
+    <div class="content-body">
+        <table class="content-table">
+            <thead>
+            <tr>
+                <th>Funcionário</th>
+                <th>Atividade</th>
+                <th>Data</th>
+                <th>Tempo Gasto</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            {% for tg in tempogasto %}
+                <tbody>
+                <tr>
+                    <td>{{ tg.idFuncionario.nomeFuncionario }}</td>
+                    <td>{{ tg.atividade }}</td>
+                    <td>{{ tg.data |date('d-m-Y')}}</td>
+                    <td>{{ tg.tempo }}</td>
+                    <td class="acoes">
+                        <a href="{{ path('editartempogasto', {id: tg.id }) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>
+                        <a href="{{ path('deleteTempogasto', {id: tg.id }) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}

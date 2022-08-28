@@ -45,7 +45,7 @@ class tempogastoController extends AbstractController
 
         //btn cancelar
         if ($request->get('cancel') == 'Cancel')
-            return $this->redirectToRoute('tempogasto');    //implementar route
+            return $this->redirectToRoute('tarefa');    //implementar route
 
         //salvar
         if ($form->isSubmitted() && $form->isValid())
@@ -53,10 +53,10 @@ class tempogastoController extends AbstractController
             $tempogasto = $form->getData();
             $em->persist($tempogasto);
             $em->flush();
-            return $this->redirectToRoute('tempogasto');   //implementar route
+            return $this->redirectToRoute('tarefa');   //implementar route
         }
 
-        return $this->renderForm('view/user/.html.twig', [
+        return $this->renderForm('view/user/tempoGastoCadastrar.html.twig', [
             'tempogasto' => $form
         ]);
     }
@@ -71,7 +71,7 @@ class tempogastoController extends AbstractController
         $return = $doctrine->getRepository(Tempogasto::class);
         $tempogastoList = $return->findAll();
 
-        return $this->render('view/user/.html.twig', [
+        return $this->render('include/user_tempoGasto.html.twig', [
             'tempogasto' => $tempogastoList
         ]);  //implementar rota
     }
@@ -94,10 +94,10 @@ class tempogastoController extends AbstractController
         {
             $em->persist($tempogasto);
             $em->flush();
-            return $this->redirectToRoute('tempogasto');
+            return $this->redirectToRoute('tarefa');
         }
 
-        return $this->renderForm('view/user/.html.twig', [
+        return $this->renderForm('view/user/tempoGastoCadastrar.html.twig', [
             'tempogasto' => $form
         ]);  //implementar route
     }
@@ -111,6 +111,6 @@ class tempogastoController extends AbstractController
         $em->remove($tempogasto);
         $em->flush();
 
-        return $this->redirectToRoute('tempogasto');
+        return $this->redirectToRoute('tarefa');
     }
 }

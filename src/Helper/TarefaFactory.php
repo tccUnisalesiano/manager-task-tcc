@@ -22,6 +22,7 @@ class TarefaFactory
         @$tarefa->nome = $dados->nome;
         @$tarefa->descricao = $dados->descricao;
         @$tarefa->tempoEstimado = $dados->tempoEstimado;
+        @$tarefa->tempoGasto = $dados->tempoGasto;
         @$tarefa->dataIni = $dados->dataIni;
         @$tarefa->dataFim = $dados->dataFim;
 //        @$tarefa->documentacao = $dados->documentacao;
