@@ -69,7 +69,7 @@ class tempogastoController extends AbstractController
     public function buscarTodos(ManagerRegistry $doctrine): Response
     {
         $return = $doctrine->getRepository(Tempogasto::class);
-        $tempogastoList = $return->findAll();
+        $tempogastoList = $return->findFuncionarioId();
 
         return $this->render('include/user_tempoGasto.html.twig', [
             'tempogasto' => $tempogastoList

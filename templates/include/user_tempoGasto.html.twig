@@ -9,6 +9,7 @@
         <table class="content-table">
             <thead>
             <tr>
+                <th>Tarefa</th>
                 <th>Funcionário</th>
                 <th>Atividade</th>
                 <th>Data</th>
@@ -19,6 +20,7 @@
             {% for tg in tempogasto %}
                 <tbody>
                 <tr>
+                    <td>{{ tg.idTarefa.nome }}</td>
                     <td>{{ tg.idFuncionario.nomeFuncionario }}</td>
                     <td>{{ tg.atividade }}</td>
                     <td>{{ tg.data |date('d-m-Y')}}</td>
