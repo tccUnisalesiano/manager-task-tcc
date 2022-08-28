@@ -39,7 +39,7 @@ class TempogastoRepository extends ServiceEntityRepository
         }
     }
 
-    public function  findFuncionarioId()
+    public function  findTarefaId()
     {
         //pega a url atual
         $url = $_SERVER["REQUEST_URI"];
