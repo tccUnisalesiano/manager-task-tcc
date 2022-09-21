@@ -8,12 +8,5 @@
       <jdbc-url>jdbc:mysql://localhost:3306/gerenciador</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="gerenciamento_tarefas@localhost" uuid="ec54686c-f2dd-4540-86d2-ac3c3f312d14">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/gerenciamento_tarefas</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
   </component>
 </project>

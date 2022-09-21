@@ -1,15 +1,376 @@
 {% extends "base.html.twig" %}
 {% block body %}
+    <style>
+        /* Google Fonts Import Link */
+        /*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');*/
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            /* ===== Colors ===== */
+            --body-color: #E4E9F7;
+            --sidebar-color: #FFF;
+            --primary-color: #9212CE;
+            --secondary-color: #BC4DF0;
+            --primary-color-light: #F6F5FF;
+            --toggle-color: #DDD;
+            --text-color: #707070;
+        }
+
+        .sidebar{
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background: var(--primary-color-light);
+            z-index: 100;
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.close{
+            width: 78px;
+        }
+
+        /*=========== Hearder sidebar ========*/
+        .sidebar header{
+            position: relative;
+        }
+
+        .sidebar header .image-text{
+            display: flex;
+            align-items: center;
+        }
+        .sidebar header .logo-text{
+            display: flex;
+            flex-direction: column;
+        }
+        header .image-text .name {
+            margin-top: 2px;
+            font-size: 18px;
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        .sidebar header .image{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+        }
+
+        .sidebar header .image img{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: black;
+        }
+        .sidebar header .logo-text a{
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .sidebar header .logo-text a:hover{
+            color: var(--primary-color);
+        }
+
+
+        .sidebar li.search-box{
+            border-radius: 6px;
+            background-color: var(--primary-color-light);
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .sidebar li.search-box input{
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+            background-color: var(--primary-color-light);
+            color: var(--text-color);
+            border-radius: 6px;
+            font-size: 17px;
+            font-weight: 500;
+            transition: all 0.5s ease;
+        }
+
+
+        /* =========================== */
+        .sidebar .text{
+            color: var(--text-color);
+            transition: all 0.5s ease;
+        }
+
+        .sidebar .text{
+            font-size: 17px;
+            font-weight: 500;
+            opacity: 1;
+        }
+        .sidebar.close .text,
+        .sidebar.close input{
+            opacity: 0;
+        }
+
+        .sidebar.close .image-text a{
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+        .sidebar header .toggle{
+            position: absolute;
+            top: 50%;
+            right: -15px;
+            transform: translateY(-50%) rotate(180deg);
+            height: 25px;
+            width: 25px;
+            background-color: var(--primary-color);
+            color: var(--sidebar-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .sidebar header .toggle{
+            color: var(--text-color);
+        }
+
+        .sidebar.close .toggle{
+            transform: translateY(-50%) rotate(0deg);
+        }
+
+        .sidebar .nav-links{
+            height: 100%;
+            padding: 30px 0 150px 0;
+            overflow: auto;
+        }
+        .sidebar.close .nav-links{
+            overflow: visible;
+        }
+        .sidebar .nav-links::-webkit-scrollbar{
+            display: none;
+        }
+        .sidebar .nav-links li{
+            position: relative;
+            list-style: none;
+            transition: all 0.4s ease;
+        }
+        .sidebar .nav-links li:hover{
+            background: var(--primary-color);
+        }
+        .sidebar .nav-links li .iocn-link{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .sidebar.close .nav-links li .iocn-link,
+        .sidebar.close input{
+            display: block
+        }
+        .sidebar .nav-links li i{
+            height: 50px;
+            min-width: 70px;
+            text-align: center;
+            line-height: 50px;
+            color: var(--text-color);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .sidebar .nav-links li:hover i,
+        .sidebar .nav-links li:hover .link_name{
+            color: white;
+        }
+
+        .sidebar .nav-links li.showMenu i.arrow{
+            transform: rotate(-180deg);
+        }
+        .sidebar.close .nav-links i.arrow{
+            display: none;
+        }
+        .sidebar .nav-links li a{
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .sidebar .nav-links li a .link_name{
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-color);
+            transition: all 0.4s ease;
+        }
+        .sidebar.close .nav-links li a .link_name,
+        .sidebar.close input{
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+        .sidebar .nav-links li .sub-menu{
+            padding: 6px 6px 14px 80px;
+            margin-top: -10px;
+            background: var(--primary-color);
+            display: none;
+        }
+        .sidebar .nav-links li.showMenu .sub-menu{
+            display: block;
+        }
+        .sidebar .nav-links li .sub-menu a{
+            color: #fff;
+            font-size: 14px;
+            padding: 5px 0;
+            white-space: nowrap;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        .sidebar .nav-links li .sub-menu a:hover{
+            opacity: 1;
+        }
+        .sidebar.close .nav-links li .sub-menu{
+            position: absolute;
+            left: 100%;
+            top: -10px;
+            margin-top: 0;
+            padding: 10px 20px;
+            border-radius: 0 6px 6px 0;
+            opacity: 0;
+            display: block;
+            pointer-events: none;
+            transition: 0s;
+        }
+        .sidebar.close .nav-links li:hover .sub-menu{
+            top: 0;
+            opacity: 1;
+            pointer-events: auto;
+            transition: all 0.4s ease;
+        }
+        .sidebar .nav-links li .sub-menu .link_name{
+            display: none;
+        }
+        .sidebar.close .nav-links li .sub-menu .link_name{
+            font-size: 18px;
+            opacity: 1;
+            display: block;
+        }
+        .sidebar .nav-links li .sub-menu.blank{
+            padding: 3px 20px 6px 16px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .sidebar .nav-links li:hover .sub-menu.blank{
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .sidebar .footer_sidebar{
+            position: fixed;
+            bottom: 0;
+            width: 250px;
+            display: flex;
+            align-items: center;
+            background: var(--body-color);
+            padding: 10px 0;
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.close .footer_sidebar .text{
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sidebar .footer_sidebar .text{
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-color);
+            transition: all 0.4s ease;
+        }
+
+        .sidebar .footer_sidebar:hover .text{
+            color: white;
+        }
+
+        .sidebar .footer_sidebar:hover,
+        .sidebar.close .footer_sidebar:hover
+        {
+            background-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .sidebar.close .footer_sidebar{
+            background: var(--primary-color-light);
+            width: 78px;
+        }
+
+        .home-section{
+            position: relative;
+            background: var(--body-color);
+            height: 100vh;
+            left: 260px;
+            width: calc(100% - 260px);
+            transition: all 0.5s ease;
+        }
+        .sidebar.close ~ .home{
+            left: 78px;
+            width: calc(100% - 78px);
+        }
+
+        .home{
+            padding: 0;
+            position: absolute;
+            top: 0;
+            left: 250px;
+            height: 100vh;
+            width: calc(100% - 250px);
+            background-color: var(--body-color);
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.close ~ .home{
+            left: 78px;
+            height: 100vh;
+            width: calc(100% - 78px);
+        }
+
+        @media (max-width: 400px) {
+            .sidebar.close .nav-links li .sub-menu{
+                display: none;
+            }
+            .sidebar{
+                width: 78px;
+            }
+            .sidebar.close{
+                width: 0;
+            }
+            .home-section{
+                left: 78px;
+                width: calc(100% - 78px);
+                z-index: 100;
+            }
+            .sidebar.close ~ .home-section{
+                width: 100%;
+                left: 0;
+            }
+        }
+    </style>
+
     <div class="sidebar close">
         <header>
 
             <div class="image-text">
                 <span class="image">
-                    <img src="{{ asset('styles/img/no-image.png')}}" alt="">
+                    <img src="{{ asset('styles/img/perfilGUI.jpeg')}}" alt="">
                 </span>
                 <div class="text logo-text" style="padding-right: 10px;">
                     <a href="#">
-                        <span class="name">Laleska Rodrigues</span>
+                        <span class="name">Guilherme Correia</span>
                     </a>
                 </div>
             </div>
@@ -23,7 +384,7 @@
                     <span class="link_name">Home</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="{{ path('index') }}">Home</a></li>
+                    <li><a class="link_name" href="{{ path('app_dashboard') }}">Home</a></li>
                 </ul>
             </li>
 
@@ -88,7 +449,7 @@
                 <div class="footer_sidebar">
                     <a>
                         <i class="fa-solid fa-right-from-bracket"></i>
-                        <span class="text">Sair</span>
+                        <span class="text" href="{{ path('app_logout') }}">Sair</span>
                     </a>
                 </div>
             </li>

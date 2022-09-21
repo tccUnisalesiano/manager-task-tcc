@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use API\Form\FuncionarioType;
+use App\Form\FuncionarioType;
 use App\Entity\Funcionario;
 use App\Helper\FuncionariosFactory;
 use App\Repository\FuncionarioRepository;
@@ -32,13 +32,13 @@ class FuncionarioController extends AbstractController
     }
 
     // rotas para as páginas
-    /**
-     * @Route("/", name="index")
-     */
-    public function index()
-    {
-        return $this->render('index.html.twig');
-    }
+//    /**
+//     * @Route("/", name="index")
+//     */
+//    public function index(): Response
+//    {
+//        return $this->render('index.html.twig');
+//    }
 
     //rotas de cadastro
     /**
@@ -67,7 +67,7 @@ class FuncionarioController extends AbstractController
             return $this->redirectToRoute('funcionario');
         }
 
-        return $this ->renderForm('view/admin/cadastrarFuncionario.html.twig', [
+        return $this ->renderForm('view/Cadastros/Funcionario/Form/form.html.twig', [
             'funcionario' => $form
         ]);
     }
@@ -82,7 +82,7 @@ class FuncionarioController extends AbstractController
         $functionaryList = $return->findAll();
 
         // return new JsonResponse($functionaryList);
-        return $this->render('view/admin/funcionario.html.twig', [
+        return $this->render('view/Cadastros/Funcionario/index.html.twig', [
             'funcionario' =>$functionaryList
         ]);
     }
@@ -110,7 +110,7 @@ class FuncionarioController extends AbstractController
 
 
         }
-        return $this ->renderForm('view/admin/cadastrarFuncionario.html.twig', [
+        return $this ->renderForm('view/Cadastros/Funcionario/Form/form.html.twig', [
             'funcionario' => $form
         ]);
 
