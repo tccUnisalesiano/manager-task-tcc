@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        <header>
+            <div class="cabecalho">
+                <p>Tarefa</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar...">
+                    <a class="botao_buscar"><button>Buscar</button></a>
+                </div>
+            </div>
+        </header>
+        <div class="content_add">
+            <a class="botao_adicionar" href="{{ path('editarTarefa', {id: tarefa.id}) }}">
+                <button>Editar Tarefa</button>
+            </a>
+        </div>
+        <div class="separacao"></div>
+        <div class="info_detalhes">
+            <div>
+                <h6>Projeto:</h6>
+                <p class="info">   {{ tarefa.idProjeto.nome }}</p>
+            </div>
+            <div>
+                <h6>Atribuído para:</h6>
+                <p class="info">  {{ tarefa.idFuncionario.nomeFuncionario }}</p>
+            </div>
+            <div>
+                <h6>Data Inicio: </h6>
+                <p class="info"> {{ tarefa.dataIni |date('d-m-Y')}}</p>
+            </div>
+            <div>
+                <h6>Data Fim:</h6>
+                <p class="info"> {{ tarefa.dataFim |date('d-m-Y') }}</p>
+            </div>
+            <div>
+                <h6>Porcentagem:</h6>
+                <p class="info"> {{ tarefa.porcentagem }}</p>
+            </div>
+            <div>
+                <h6>Tipo Tarefa:</h6>
+                <p class="info"> {{ tarefa.tipoTarefa }}</p>
+            </div>
+            <div>
+                <h6>Prioridade:</h6>
+                <p class="info">   {{ tarefa.prioridade }}</p>
+            </div>
+            <div>
+                <h6>Situação:</h6>
+                <p class="info">  {{ tarefa.situacao }}</p>
+            </div>
+            <div>
+                <h6>Nome: </h6>
+                <p class="info"> {{ tarefa.nome}}</p>
+            </div>
+            <div>
+                <h6>Status:</h6>
+                <p class="info"> {{ tarefa.status }}</p>
+            </div>
+            <div>
+                <h6>Descrição:</h6>
+                <p class="info"> {{ tarefa.descricao }}</p>
+            </div>
+        </div>
+
+
+        {{ render(url('tempogasto')) }}
+    </section>
+
+{% endblock %}
+
+

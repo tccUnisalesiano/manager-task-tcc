@@ -13,6 +13,8 @@
 // import '../public/styles/css/cadastro.css';
 // import '../public/styles/css/detalhes.css';
 
+import '../public/styles/JS/calendario.js';
+
 
 
 // start the Stimulus application

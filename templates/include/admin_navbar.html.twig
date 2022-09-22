@@ -379,7 +379,7 @@
         </header>
         <ul class="nav-links">
             <li>
-                <a href="#">
+                <a href="{{ path('index') }}">
                     <i class="fa-solid fa-house"></i>
                     <span class="link_name">Home</span>
                 </a>
@@ -398,7 +398,7 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Administrador</a></li>
-                    <li><a href="{{ path('manutencao') }}">Manutenção</a></li>
+                    <li><a href="#">Tratamento de Dados</a></li>
                     <li><a href="{{ path('funcionario') }}">Funcionário</a></li>
                 </ul>
             </li>
@@ -412,8 +412,8 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Projetos</a></li>
-                    <li><a href="#">Projeto</a></li>
-                    <li><a href="#">Tarefa</a></li>
+                    <li><a href="{{ path('projeto') }}">Projeto</a></li>
+                    <li><a href="{{ path('tarefa') }}">Tarefa</a></li>
                 </ul>
             </li>
             <li>
@@ -422,29 +422,9 @@
                     <span class="link_name">Clientes</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Clientes</a></li>
+                    <li><a class="link_name" href="{{ path('cliente') }}">Clientes</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-list-check"></i>
-                    <span class="link_name">Sprint</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Sprint</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-comments"></i>
-                    <span class="link_name">Chat</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Chat</a></li>
-                </ul>
-            </li>
-
             <li>
                 <div class="footer_sidebar">
                     <a>
@@ -467,17 +447,13 @@
         const body = document.querySelector('body'),
             sidebar = body.querySelector('.sidebar'),
             toggle = body.querySelector(".toggle"),
-            searchBtn = body.querySelector(".search-box"),
             modeSwitch = body.querySelector(".toggle-switch"),
             modeText = body.querySelector(".mode-text");
-
 
         toggle.addEventListener("click" , () =>{
             sidebar.classList.toggle("close");
         })
 
-        searchBtn.addEventListener("click" , () =>{
-            sidebar.classList.remove("close");
-        })
+
     </script>
 {% endblock %}

@@ -7,6 +7,7 @@ use App\Form\valorfuncionarioType;
 use App\Helper\valorfuncionarioFactory;
 use App\Repository\ValorfuncionarioRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +46,7 @@ class valorfuncionarioController extends AbstractController
 
         //btn cancelar
         if ($request->get('cancel') == 'Cancel')
-            return $this->redirectToRoute('valorfuncionario');    //implementar route
+            return $this->redirectToRoute('funcionario');    //implementar route
 
         //salvar
         if ($form->isSubmitted() && $form->isValid())
@@ -53,10 +54,10 @@ class valorfuncionarioController extends AbstractController
             $vFuncionario = $form->getData();
             $em->persist($vFuncionario);
             $em->flush();
-            return $this->redirectToRoute('valorfuncionario');   //implementar route
+            return $this->redirectToRoute('funcionario');   //implementar route
         }
 
-        return $this->renderForm('view/user/.html.twig', [
+        return $this->renderForm('view/admin/valorFuncionarioCadastrar.html.twig', [
             'valorfuncionario' => $form
         ]);
     }
@@ -69,12 +70,15 @@ class valorfuncionarioController extends AbstractController
     public function buscarTodos(ManagerRegistry $doctrine): Response
     {
         $return = $doctrine->getRepository(Valorfuncionario::class);
-        $vFuncionarioList = $return->findAll();
+        //$vFuncionarioList = $return->findAll();
+        $vFuncionarioList = $return->findFuncionarioId();
 
-        return $this->render('view/user/.html.twig', [
+        return $this->render('include/admin_valores.html.twig', [
             'valorfuncionario' => $vFuncionarioList
         ]);  //implementar rota
     }
+
+
 
     /**
      * @Route("/valorfuncionario/editar/{id}", name="editarValorFuncionario")
@@ -94,10 +98,10 @@ class valorfuncionarioController extends AbstractController
         {
             $em->persist($vFuncionario);
             $em->flush();
-            return $this->redirectToRoute('valorfuncionario');
+            return $this->redirectToRoute('funcionario');
         }
 
-        return $this->renderForm('view/user/.html.twig', [
+        return $this->renderForm('view/admin/valorFuncionarioCadastrar.html.twig', [
             'valorfuncionario' => $form
         ]);  //implementar route
     }

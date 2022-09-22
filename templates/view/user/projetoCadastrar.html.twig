@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        <h1>CADASTRAR PROJETO</h1>
+        {% block form %}
+        {% endblock %}
+        <div class="form_cadastro">
+            {{form_start(projeto) }}
+
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(projeto.nome) }}
+                </div>
+                <div class="column">
+                    {{ form_row(projeto.situacao) }}
+                </div>
+            </div>
+
+
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(projeto.dataIniPrevisto) }}
+                </div>
+                <div class="column">
+                    {{ form_row(projeto.dataFimPrevisto) }}
+                </div>
+            </div>
+
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(projeto.dataInicial) }}
+                </div>
+                <div class="column">
+                    {{ form_row(projeto.dataEntregaFinal) }}
+                </div>
+            </div>
+            <div class="row_cadastro">
+                <div class="column">
+                    {{ form_row(projeto.cliente_id) }}
+                </div>
+                <div class="column">
+                    {{ form_row(projeto.tempoGastoTotal) }}
+                </div>
+            </div>
+            <div class="row_cadastro">
+                <div class="column_textArea">
+                    {{ form_row(projeto.descricao) }}
+                </div>
+
+            </div>
+
+            <div class="footer">
+                <button class="cancel" name="cancel" type="submit" value="Cancel" formnovalidate>Cancelar</button>
+                <button class="salvar" type="submit">Salvar</button>
+            </div>
+            {{ form_end(projeto) }}
+        </div>
+    </section>
+{% endblock %}
+
+

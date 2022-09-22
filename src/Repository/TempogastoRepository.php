@@ -39,6 +39,24 @@ class TempogastoRepository extends ServiceEntityRepository
         }
     }
 
+    public function  findTarefaId()
+    {
+        //pega a url atual
+        $url = $_SERVER["REQUEST_URI"];
+        //pega a última parte que é o id
+        $end = basename(parse_url($url, PHP_URL_PATH));
+
+        $qb = $this->createQueryBuilder('tg');
+        $qb
+            ->select(select: 'tg')
+            ->join('App\Entity\Tarefa', 't', 'WITH', 'tg.idTarefa = t.id')
+            ->where('t.id = :id')
+            ->setParameter('id', $end)
+        ;
+        return $qb->getQuery()->getResult();
+
+    }
+
 //    /**
 //     * @return Tempogasto[] Returns an array of Tempogasto objects
 //     */

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        <header>
+            <div class="cabecalho">
+                <p>Projeto</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar...">
+                    <a class="botao_buscar"><button>Buscar</button></a>
+                </div>
+            </div>
+        </header>
+        <div class="content_add">
+            <a class="botao_adicionar" href="{{ path('cadastroProjeto') }}"><button>+ Adicionar Projeto</button></a>
+        </div>
+        <div class="content-body">
+            <table class="content-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Situação</th>
+                    <th>Cliente</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                {% for projeto in projeto %}
+                    <tbody>
+                    <tr>
+                        <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.Id }}</a></td>
+                        <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.nome }}</a></td>
+                        <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.situacao }}</a></td>
+                        <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.cliente_id.cpf_cnpj}}</a></td>
+
+                        <td class="acoes">
+                            <a href="{{ path('editarProjeto', {id: projeto.id}) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>
+                            <a href="{{ path('deleteProjeto', {id: projeto.id}) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+{% endblock %}

@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Funcionario;
 use App\Entity\Valorfuncionario;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,6 +41,24 @@ class ValorfuncionarioRepository extends ServiceEntityRepository
         }
     }
 
+    public function  findFuncionarioId()
+    {
+        //pega a url atual
+        $url = $_SERVER["REQUEST_URI"];
+        //pega a última parte que é o id
+        $end = basename(parse_url($url, PHP_URL_PATH));
+
+        $qb = $this->createQueryBuilder('v');
+        $qb
+            ->select(select: 'v')
+            ->join('App\Entity\Funcionario', 'f', 'WITH', 'v.idFuncionario = f.id')
+            ->where('f.id = :id')
+            ->setParameter('id', $end)
+            ;
+        return $qb->getQuery()->getResult();
+
+    }
+
 //    /**
 //     * @return Valorfuncionario[] Returns an array of Valorfuncionario objects
 //     */
@@ -63,4 +83,5 @@ class ValorfuncionarioRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

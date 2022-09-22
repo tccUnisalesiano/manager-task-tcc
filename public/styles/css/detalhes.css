@@ -3,7 +3,6 @@
 }
 
 .info_detalhes{
-    margin-top: 4rem; /*ficar abaixo do botão*/
     display: flex;
     justify-content: space-between;
     padding: 0 1rem ;
