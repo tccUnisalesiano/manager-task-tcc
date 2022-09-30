@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="content_add">
-        <a class="botao_adicionar" href="{{ path('cadastroTempogasto') }}">
-            <button>+ Tempo Gasto</button>
-        </a>
+    <div class="col-lg-12" style="margin-top: 15px; margin-bottom: 15px;">
+        <div class="form-group" style="float: right; margin-right: 26px">
+            <a class="btn btn-primary" href="{{ path('cadastroTempogasto') }}">Adicionar Tempo Gasto</a>
+        </div>
     </div>
-    <div class="content-body">
-        <table class="content-table">
+    <div class="col-lg-12">
+        <table class="table table-hover">
             <thead>
             <tr>
                 <th>Tarefa</th>
@@ -23,11 +23,13 @@
                     <td>{{ tg.idTarefa.nome }}</td>
                     <td>{{ tg.idFuncionario.nomeFuncionario }}</td>
                     <td>{{ tg.atividade }}</td>
-                    <td>{{ tg.data |date('d-m-Y')}}</td>
+                    <td>{{ tg.data |date('d-m-Y') }}</td>
                     <td>{{ tg.tempo }}</td>
                     <td class="acoes">
-                        <a href="{{ path('editartempogasto', {id: tg.id }) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>
-                        <a href="{{ path('deleteTempogasto', {id: tg.id }) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
+                        <a href="{{ path('editartempogasto', {id: tg.id }) }}" title="Editar"><i
+                                    class="fa-solid fa-pen edit"></i></a>
+                        <a href="{{ path('deleteTempogasto', {id: tg.id }) }}" title="Excluir"><i
+                                    class="fa-solid fa-trash delete"></i></a>
                     </td>
                 </tr>
                 </tbody>

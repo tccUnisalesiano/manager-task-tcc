@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        {% include 'include/navbar_top.html.twig' %}
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-lg-6"><h4 class="card-title" id="hidden-label-round-controls">Clientes</h4></div>
+                        <div class="col-lg-6" style="display: flex;">
+                            <div class="input-group" style="justify-content: end;">
+                                <div class="form-outline">
+                                    <input type="search" placeholder="PESQUISAR" id="pesquisar" class="form-control" />
+                                </div>
+                                <button id="pesquisarForm" type="button" class="btn btn-primary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12" style="margin-top: 10px;">
+                    <div class="form-group" style="float: right;margin-right: 30px; ">
+                        <a class="btn btn-primary" href="{{ path('cadastroCliente') }}">Adicionar Cliente</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="form-group">
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nome</th>
+                                                <th>E-mail</th>
+                                                <th>Tipo</th>
+                                                <th>Celular</th>
+                                                <th>Nº CPF/CNPJ</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        {% for cliente in cliente %}
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="{{ path('detalheCliente', {id: cliente.id}) }}">{{ cliente.id }}</a></td>
+                                                    <td><a href="{{ path('detalheCliente', {id: cliente.id}) }}">{{ cliente.nomeCliente }}</a></td>
+                                                    <td>{{ cliente.emailCliente }}</a></td>
+                                                    <td>{{ cliente.tipoCliente }}</a></td>
+                                                    <td>{{ cliente.celularCliente }}</td>
+                                                    <td>{{ cliente.cpf_cnpj }}</a></td>
+
+                                                    <td>
+                                                        <a class="btn btn-primary" href="{{ path('editarCliente', {id: cliente.id}) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>
+                                                        <a class="btn btn-danger" href="{{ path('deleteCliente', {id: cliente.id}) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

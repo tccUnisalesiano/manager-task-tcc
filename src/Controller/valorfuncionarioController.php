@@ -57,7 +57,7 @@ class valorfuncionarioController extends AbstractController
             return $this->redirectToRoute('funcionario');   //implementar route
         }
 
-        return $this->renderForm('view/admin/valorFuncionarioCadastrar.html.twig', [
+        return $this->renderForm('view/admin/valorFuncionario/valorFuncionarioCadastrar.html.twig', [
             'valorfuncionario' => $form
         ]);
     }
@@ -73,9 +73,9 @@ class valorfuncionarioController extends AbstractController
         //$vFuncionarioList = $return->findAll();
         $vFuncionarioList = $return->findFuncionarioId();
 
-        return $this->render('include/admin_valores.html.twig', [
+        return $this->render('view/admin/valorFUncionario/include/admin_valores.html.twig', [
             'valorfuncionario' => $vFuncionarioList
-        ]);  //implementar rota
+        ]);
     }
 
 

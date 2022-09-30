@@ -77,11 +77,9 @@ class FuncionarioController extends AbstractController
      */
     public function buscarTodos(ManagerRegistry $doctrine): Response
     {
-
         $return = $doctrine->getRepository(Funcionario::class);
         $functionaryList = $return->findAll();
 
-        // return new JsonResponse($functionaryList);
         return $this->render('view/Cadastros/Funcionario/index.html.twig', [
             'funcionario' =>$functionaryList
         ]);
@@ -144,7 +142,7 @@ class FuncionarioController extends AbstractController
     {
         $funcionario = $funcionarioRepository->find($id);
 
-        return $this->render('view/admin/funcionarioDetalhes.html.twig', [
+        return $this->render('view/Cadastros/Funcionario/detalhes/funcionarioDetalhes.html.twig', [
             'funcionario' => $funcionario
         ]);
     }

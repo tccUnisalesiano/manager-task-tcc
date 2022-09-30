@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        {% include 'include/navbar_top.html.twig' %}
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Cadastrar Valor Funcionário</h3>
+                </div>
+                <div class="card-body">
+                    {{form_start(valorfuncionario) }}
+
+                    <div class="row">
+                        <div class="col-lg-5">
+                            {{ form_row(valorfuncionario.idFuncionario) }}
+                        </div>
+                        <div class="col-lg-2">
+                            {{ form_row(valorfuncionario.valorHora) }}
+                        </div>
+<br>
+                        <div class="col-lg-2">
+                            <label for="DataIni">Data Inicial</label>
+                            <input class="form-control" type="datetime-local" name="dataIni" title="DataIni" >
+{#                            {{ form_row(valorfuncionario.dataIni) }}#}
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="DataFim">Data Final</label>
+                            <input class="form-control" type="datetime-local" name="dataFim" title="DataFim" >
+{#                            {{ form_row(valorfuncionario.dataFim) }}#}
+                        </div>
+
+                        <div class="col-lg-12" style="margin-top: 15px !important;">
+                            <div class="form-group" style="float: right">
+                                <button class="btn btn-danger" name="cancel" type="submit" value="Cancel" formnovalidate>Cancelar</button>
+                                <button class="btn btn-success" type="submit" >Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+

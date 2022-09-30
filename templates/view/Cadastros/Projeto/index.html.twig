@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-lg-6"><h4 class="card-title" id="hidden-label-round-controls">Funcionário</h4></div>
+                        <div class="col-lg-6"><h4 class="card-title" id="hidden-label-round-controls">Projetos</h4></div>
                         <div class="col-lg-6" style="display: flex;">
                             <div class="input-group" style="justify-content: end;">
                                 <div class="form-outline">
@@ -30,30 +30,23 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nome</th>
-                                            <th>E-mail</th>
-                                            <th>Carga Horaria</th>
-                                            <th>Administrador</th>
-                                            <th>Status</th>
+                                            <th>Situação</th>
+                                            <th>Cliente</th>
                                             <th>Ações</th>
                                         </tr>
                                         </thead>
-                                        {% for funcionario in funcionario %}
+                                        {% for projeto in projeto %}
                                             <tbody>
                                             <tr>
-                                                <td><a href="{{ path('detalheFuncionario', {id: funcionario.id}) }}">{{ funcionario.id }}</td>
-                                                <td><a href="{{ path('detalheFuncionario', {id: funcionario.id}) }}">{{ funcionario.nomeFuncionario }}</td>
-                                                <td>{{ funcionario.emailFuncionario }}</td>
-                                                <td>{{ funcionario.cargaHorariaSemanal }}</td>
+                                                <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.Id }}</a></td>
+                                                <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.nome }}</a></td>
+                                                <td>{{ projeto.situacao }}</td>
+                                                <td>{{ projeto.cliente_id.cpf_cnpj}}</td>
                                                 <td>
-                                                    {{ (funcionario.isAdmin == 1) ? "Sim" : "Não" }}
+                                                    <a class="btn btn-primary" href="{{ path('editarProjeto', {id: projeto.id}) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>
+                                                    <a class="btn btn-danger" href="{{ path('deleteProjeto', {id: projeto.id}) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
                                                 </td>
-                                                <td>
-                                                    {{ (funcionario.isAtivo == 1) ? "Ativo" : "Desativo" }}
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-primary" href="{{ path('editarFuncionario', {id: funcionario.id }) }}" title="Editar"><i class="fa-solid fa-pen edit"></i> </a>
-                                                    <a class="btn btn-danger" href="{{ path('deleteFuncionario', {id: funcionario.id }) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i> </a>
-                                                </td>
+
                                             </tr>
                                             </tbody>
                                         {% endfor %}
@@ -62,14 +55,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12" style="margin-top: 15px;">
-                        <div class="form-group" style="float: right;">
-                            <a class="btn btn-success" href="{{ path('cadastroFuncionario') }}">Adicionar Funcionario</a>
+                        <div class="col-lg-12" style="margin-top: 15px;">
+                            <div class="form-group" style="float: right; margin-right: 10px">
+                                <a class="btn btn-success" href="{{ path('cadastroProjeto') }}">Adicionar Projeto</a>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
-
     </section>
 {% endblock %}
