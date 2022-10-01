@@ -56,7 +56,7 @@ class TarefaController extends AbstractController
             return $this->redirectToRoute('tarefa');   //implementar route
         }
 
-        return $this->renderForm('view/user/tarefaCadastrar.html.twig', [
+        return $this->renderForm('view/Cadastros/Tarefa/form/form.html.twig', [
             'tarefa' => $form
         ]);
     }
@@ -71,9 +71,9 @@ class TarefaController extends AbstractController
         $return = $doctrine->getRepository(Tarefa::class);
         $tarefaList = $return->findAll();
 
-        return $this->render('view/user/tarefa.html.twig', [
+        return $this->render('view/Cadastros/Tarefa/index.html.twig', [
             'tarefa' => $tarefaList
-        ]);  //implementar rota
+        ]);
     }
 
     /**
@@ -97,9 +97,9 @@ class TarefaController extends AbstractController
             return $this->redirectToRoute('tarefa');
         }
 
-        return $this->renderForm('view/user/tarefaCadastrar.html.twig', [
+        return $this->renderForm('view/Cadastros/Tarefa/form/form.html.twig', [
             'tarefa' => $form
-        ]);  //implementar route
+        ]);
     }
 
     /**
@@ -113,6 +113,7 @@ class TarefaController extends AbstractController
 
         return $this->redirectToRoute('tarefa');
     }
+
     /**
      * @Route("/tarefa/{id}", name="detalheTarefa")
      * @param int $id
@@ -125,7 +126,7 @@ class TarefaController extends AbstractController
     {
         $tarefa = $tarefaRepository->find($id);
 
-        return $this->render('view/user/tarefaDetalhes.html.twig', [
+        return $this->render('view/Cadastros/Tarefa/detalhes/tarefaDetalhes.html.twig', [
             'tarefa' => $tarefa
         ]);
     }

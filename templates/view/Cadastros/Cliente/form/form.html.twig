@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        {% include 'include/navbar_top.html.twig' %}
+        <div class="container-fluid">
+            <div class="card" >
+                <div class="card-header">
+                    <h3>Cadastrar Cliente</h3>
+                </div>
+                <div class="card-body">
+                    {{form_start(cliente) }}
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            {{ form_row(cliente.nomeCliente) }}
+                        </div>
+
+                        <div class="col-lg-3">
+                            {{ form_row(cliente.tipoCliente) }}
+                        </div>
+
+                        <div class="col-lg-4">
+                            {{ form_row(cliente.emailCliente) }}
+                        </div>
+
+                        <div class="col-lg-3">
+                            {{ form_row(cliente.celularCliente) }}
+                        </div>
+
+                        <div class="col-lg-3">
+                            {{ form_row(cliente.cpf_cnpj ) }}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12" style="margin-top: 15px !important;">
+                        <div class="form-group" style="float: right">
+                            <a class="btn btn-danger" href="{{ path('cliente') }}" >Cancelar</a>
+                            <button class="btn btn-success " type="submit" >Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+

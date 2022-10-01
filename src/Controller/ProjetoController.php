@@ -55,22 +55,20 @@ class ProjetoController extends AbstractController
             return $this->redirectToRoute('projeto');
         }
 
-        return $this->renderForm('view/user/projetoCadastrar.html.twig', [
+        return $this->renderForm('view/Cadastros/Projeto/form/form.html.twig', [
             'projeto' => $form
         ]);
     }
 
     /**
-     * @param ManagerRegistry $doctrine
-     * @return Response
-     * @Route("/projeto", name="projeto")
+     * @Route("/projeto", name="projeto", methods={"GET"})
      */
     public function buscarTodos(ManagerRegistry $doctrine): Response
     {
         $return = $doctrine->getRepository(Projeto::class);
         $projetoList = $return->findAll();
 
-        return $this->render('view/user/projeto.html.twig', [
+        return $this->render('view/Cadastros/Projeto/index.html.twig', [
             'projeto' => $projetoList
         ]);
     }
@@ -96,9 +94,9 @@ class ProjetoController extends AbstractController
             return $this->redirectToRoute('projeto');
         }
 
-        return $this->renderForm('view/user/projetoCadastrar.html.twig', [
+        return $this->renderForm('view/Cadastros/Projeto/form/form.html.twig', [
             'projeto' => $form
-        ]);  //implementar route
+        ]);
     }
 
     /**
@@ -130,7 +128,7 @@ class ProjetoController extends AbstractController
     {
         $projeto = $projetoRepository->find($id);
 
-        return $this->render('view/user/projetoDetalhes.html.twig', [
+        return $this->render('view/Cadastros/Projeto/detalhes/projetoDetalhes.html.twig', [
             'projeto' => $projeto
         ]);
     }

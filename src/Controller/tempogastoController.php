@@ -56,7 +56,7 @@ class tempogastoController extends AbstractController
             return $this->redirectToRoute('tarefa');   //implementar route
         }
 
-        return $this->renderForm('view/user/tempoGastoCadastrar.html.twig', [
+        return $this->renderForm('view/Cadastros/TempoGasto/form/form.html.twig', [
             'tempogasto' => $form
         ]);
     }
@@ -71,7 +71,7 @@ class tempogastoController extends AbstractController
         $return = $doctrine->getRepository(Tempogasto::class);
         $tempogastoList = $return->findTarefaId();
 
-        return $this->render('include/user_tempoGasto.html.twig', [
+        return $this->render('view/Cadastros/TempoGasto/include/tableTempoGasto.html.twig', [
             'tempogasto' => $tempogastoList
         ]);  //implementar rota
     }
@@ -97,7 +97,7 @@ class tempogastoController extends AbstractController
             return $this->redirectToRoute('tarefa');
         }
 
-        return $this->renderForm('view/user/tempoGastoCadastrar.html.twig', [
+        return $this->renderForm('view/Cadastros/TempoGasto/form/form.html.twig', [
             'tempogasto' => $form
         ]);  //implementar route
     }

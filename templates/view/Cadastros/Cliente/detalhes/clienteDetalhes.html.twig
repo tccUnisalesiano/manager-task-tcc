@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        {% include 'include/navbar_top.html.twig' %}
+        <div class="container-fluid">
+            <div class="card" >
+                <div class="card-header">
+                    <h3>Cliente Detalhes</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="Nome">Nome:</label>
+                            <input class="form-control" value="{{ cliente.nomeCliente }}" title="Nome" readonly>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="Email">Email:</label>
+                            <input class="form-control" title="Email" value="{{ cliente.emailCliente }}" readonly>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="Tipo">Tipo:</label>
+                            <input class="form-control" title="Tipo" value="{{ cliente.tipoCliente }}" readonly>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="Celular">Celular:</label>
+                            <input class="form-control" title="Celular" value="{{ cliente.celularCliente }}" readonly>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="CPF/CNPJ">CPF/CNPJ:</label>
+                            <input class="form-control" title="CPF/CNPJ" value="{{ cliente.cpf_cnpj }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group" style="float: right">
+                            <a class="btn btn-danger" href="{{ path('cliente') }}" >Voltar</a>
+                            <a class="btn btn-primary" href="{{ path('editarCliente', {id: cliente.id}) }}">Editar Cliente</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+

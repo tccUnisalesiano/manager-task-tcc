@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        {% include 'include/navbar_top.html.twig' %}
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Tarefa Detalhes</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group" style="float: right; margin-right: 26px">
+                                <a class="btn btn-primary" href="{{ path('editarTarefa', {id: tarefa.id}) }}">Editar
+                                    Tarefa</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label for="projeto">Projeto:</label>
+                                <input class="form-control" title="projeto" value="{{ tarefa.idProjeto.nome }}"
+                                       readonly>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="Nome Funcionário">Atribuído para:</label>
+                                <input class="form-control" title="Nome Funcionário"
+                                       value="{{ tarefa.idFuncionario.nomeFuncionario }}" readonly>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="DataIni">Data Inicio: </label>
+                                <input class="form-control" title="DataIni" value="{{ tarefa.dataIni |date('d-m-Y') }}"
+                                       readonly>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="DataFim">Data Fim:</label>
+                                <input class="form-control" title="DataFim" value="{{ tarefa.dataFim |date('d-m-Y') }}"
+                                       readonly>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="porcentagem">Porcentagem:</label>
+                                <input class="form-control" title="porcentagem" value="{{ tarefa.porcentagem }}"
+                                       readonly>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="tarefa">Tipo Tarefa:</label>
+                                <input class="form-control" title="tarefa" value="{{ tarefa.tipoTarefa }}" readonly>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="prioridade">Prioridade:</label>
+                                <input class="form-control" title="prioridade" value="{{ tarefa.prioridade }}" readonly>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="situacao">Situação:</label>
+                                <input class="form-control" title="situacao" value="{{ tarefa.situacao }}" readonly>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="nome">Nome: </label>
+                                <input class="form-control" title="nome" value="{{ tarefa.nome }}" readonly>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="status">Status:</label>
+                                <input class="form-control" title="status" value="{{ tarefa.status }}" readonly>
+                            </div>
+                            <div class="col-lg-12">
+                                <label for="descricao">Descrição:</label>
+                                <textarea class="form-control" title="descricao"
+                                          readonly>{{ tarefa.descricao }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    {{ render(url('tempogasto')) }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        {% include 'include/navbar_top.html.twig' %}
+        <div class="container-fluid">
+            <div class="card" >
+                <div class="card-header">
+                    <h3>Cadastrar Tarefa</h3>
+                </div>
+                <div class="card-body">
+                    {{form_start(projeto) }}
+
+                    <div class="row">
+                            <div class="col-lg-4">
+                                {{ form_row(projeto.nome) }}
+                            </div>
+                            <div class="col-lg-4">
+                                {{ form_row(projeto.situacao) }}
+                            </div>
+
+                            <div class="col-lg-2">
+                                {{ form_row(projeto.dataIniPrevisto) }}
+                            </div>
+                            <div class="col-lg-2">
+                                {{ form_row(projeto.dataFimPrevisto) }}
+                            </div>
+
+                            <div class="col-lg-2">
+                                {{ form_row(projeto.dataInicial) }}
+                            </div>
+                            <div class="col-lg-2">
+                                {{ form_row(projeto.dataEntregaFinal) }}
+                            </div>
+                    </div>
+                    <div class="col-lg-12" style="margin-top: 10px !important;">
+                        <h4>Cliente</h4>
+                        <hr/>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            {{ form_row(projeto.cliente_id) }}
+                        </div>
+                        <div class="col-lg-4">
+                            {{ form_row(projeto.tempoGastoTotal) }}
+                        </div>
+
+                        <div class="col-lg-12">
+                            {{ form_row(projeto.descricao) }}
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-12" style="margin-top: 15px !important;">
+                        <div class="form-group" style="float: right">
+                            <button class="btn btn-danger" name="cancel" type="submit" value="Cancel" formnovalidate>Cancelar</button>
+                            <button class="btn btn-success " type="submit" >Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+

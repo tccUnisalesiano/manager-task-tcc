@@ -61,7 +61,7 @@ class ClienteController extends AbstractController
             return $this->redirectToRoute('cliente');   //implementar route
         }
 
-        return $this->renderForm('view/user/clienteCadastrar.html.twig', [
+        return $this->renderForm('view/Cadastros/Cliente/form/form.html.twig', [
             'cliente' => $form
         ]);
     }
@@ -76,7 +76,7 @@ class ClienteController extends AbstractController
         $return = $doctrine->getRepository(Cliente::class);
         $clienteList = $return->findAll();
 
-        return $this->render('view/user/cliente.html.twig', [
+        return $this->render('view/Cadastros/Cliente/index.html.twig', [
             'cliente' => $clienteList
         ]);  //implementar rota
     }
@@ -102,7 +102,7 @@ class ClienteController extends AbstractController
             return $this->redirectToRoute('cliente');
         }
 
-        return $this->renderForm('view/user/clienteCadastrar.html.twig', [
+        return $this->renderForm('view/Cadastros/Cliente/form/form.html.twig', [
             'cliente' => $form
         ]);  //implementar route
     }
@@ -134,7 +134,7 @@ class ClienteController extends AbstractController
     {
         $cliente = $clienteRepository->find($id);
 
-        return $this->render('view/user/clienteDetalhes.html.twig', [
+        return $this->render('view/Cadastros/Cliente/detalhes/clienteDetalhes.html.twig', [
             'cliente' => $cliente
         ]);
     }
