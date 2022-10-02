@@ -57,10 +57,8 @@ class tempogastoType extends AbstractType
                 ['label' => "Descrição: "])
             ->add('data', DateType::class,   //testar esse dateType, pode nao corresponder com o que queremos
                 ['label' => "Data: ",
-                    'html5' => false,
                     'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy',
-                    'attr' => ['class' => 'calendario'],
+                    'attr' => ['class' => 'js-datepicker'],
                 ])
             ;
     }

@@ -78,17 +78,13 @@ class TarefaType extends AbstractType
                 ['label' => "Tempo Gasto: "])
             ->add('dataIni', DateType::class,   //testar esse dateType, pode nao corresponder com o que queremos
                 ['label' => "Data Inicial: ",
-                    'html5' => false,
                     'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy',
-                    'attr' => ['class' => 'calendario'],
+                    'attr' => ['class' => 'js-datepicker'],
                 ])
             ->add('dataFim', DateType::class,   //testar esse dateType, pode nao corresponder com o que queremos
                 ['label' => "Data Final: ",
-                    'html5' => false,
                     'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy',
-                    'attr' => ['class' => 'calendario'],
+                    'attr' => ['class' => 'js-datepicker'],
                 ])
 //            ->add('documentacao', TextType::class,
 //                ['label' => "Documentação: "])

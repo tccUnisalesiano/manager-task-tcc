@@ -45,9 +45,9 @@
                                         </thead>
                                         {% for tarefa in tarefa %}
                                             <tbody>
-                                            <tr>
-                                                <td><a href="{{ path('detalheTarefa', {id: tarefa.id}) }}">{{ tarefa.id }}</a></td>
-                                                <td><a href="{{ path('detalheTarefa', {id: tarefa.id}) }}">{{ tarefa.idProjeto.nome }}</a></td>
+                                            <tr onclick="window.location='{{ path('detalheTarefa', {id: tarefa.id}) }}';">
+                                                <td>{{ tarefa.id }}</td>
+                                                <td>{{ tarefa.idProjeto.nome }}</td>
                                                 <td>{{ tarefa.nome }}</td>
                                                 <td>{{ tarefa.idFuncionario.nomeFuncionario}}</td>
                                                 <td>{{ tarefa.prioridade }}</td>

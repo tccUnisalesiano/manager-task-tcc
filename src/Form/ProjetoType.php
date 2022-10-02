@@ -48,31 +48,23 @@ class ProjetoType extends AbstractType
             ])
             ->add('dataIniPrevisto', DateType::class,
                 ['label' => "Data Início Previsto: ",
-                    'html5' => false,
                     'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy',
-                    'attr' => ['class' => 'calendario'],
+                    'attr' => ['class' => 'js-datepicker'],
                 ])
             ->add('dataFimPrevisto', DateType::class,
                 ['label' => "Data Final Previsto: ",
-                    'html5' => false,
                     'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy',
-                    'attr' => ['class' => 'calendario'],
+                    'attr' => ['class' => 'js-datepicker'],
                 ])
             ->add('dataInicial', DateType::class,
                 ['label' => "Data Inicial: ",
-                    'html5' => false,
                     'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy',
-                    'attr' => ['class' => 'calendario'],
+                    'attr' => ['class' => 'js-datepicker'],
                 ])
             ->add('dataEntregaFinal', DateType::class,
                 ['label' => "Data Entrega Final: ",
-                    'html5' => false,
                     'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy',
-                    'attr' => ['class' => 'calendario'],
+                    'attr' => ['class' => 'js-datepicker'],
                 ]);
     }
 }

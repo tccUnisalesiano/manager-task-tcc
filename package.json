@@ -21,5 +21,9 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "fast-levenshtein": "^3.0.0",
+        "jquery-datepicker": "^1.12.3"
     }
 }

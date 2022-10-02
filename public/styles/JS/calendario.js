@@ -1,9 +1,6 @@
-$(function() {
-    $( ".calendario" ).datepicker({
-        dateFormat: 'dd-mm-yy'
+$(document).ready(function() {
+    $('.js-datepicker').datepicker({
+        format: 'dd-mm-yyyy'
     });
 });
 
-$(document).ready(() =>{
-    document.getElementsByClassName('calendario').value = new Date().format('dd-mm-yy');
-});

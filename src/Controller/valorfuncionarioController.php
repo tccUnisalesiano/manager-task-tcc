@@ -101,7 +101,7 @@ class valorfuncionarioController extends AbstractController
             return $this->redirectToRoute('funcionario');
         }
 
-        return $this->renderForm('view/admin/valorFuncionarioCadastrar.html.twig', [
+        return $this->renderForm('view/admin/valorFuncionario/valorFuncionarioCadastrar.html.twig', [
             'valorfuncionario' => $form
         ]);  //implementar route
     }

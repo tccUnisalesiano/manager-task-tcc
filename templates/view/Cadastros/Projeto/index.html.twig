@@ -37,9 +37,9 @@
                                         </thead>
                                         {% for projeto in projeto %}
                                             <tbody>
-                                            <tr>
-                                                <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.Id }}</a></td>
-                                                <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.nome }}</a></td>
+                                            <tr onclick="window.location='{{ path('detalheProjeto', {id: projeto.id}) }}';">
+                                                <td>{{ projeto.Id }}</td>
+                                                <td>{{ projeto.nome }}</td>
                                                 <td>{{ projeto.situacao }}</td>
                                                 <td>{{ projeto.cliente_id.cpf_cnpj}}</td>
                                                 <td>

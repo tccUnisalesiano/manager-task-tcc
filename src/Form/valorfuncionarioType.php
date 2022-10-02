@@ -28,17 +28,13 @@ class valorfuncionarioType extends AbstractType
 
             ->add('dataIni', DateType::class,
                 ['label' => "Data Incial: ",
-                    'html5' => false,
                     'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy',
-                    'attr' => ['class' => 'calendario'],
+                    'attr' => ['class' => 'js-datepicker'],
                 ])
             ->add('dataFim', DateType::class,
                 ['label' => "Data Final: ",
-                    'html5' => false,
                     'widget' => 'single_text',
-                    'format' => 'dd-MM-yyyy',
-                    'attr' => ['class' => 'calendario'],
+                    'attr' => ['class' => 'js-datepicker'],
                 ]);
     }
 }

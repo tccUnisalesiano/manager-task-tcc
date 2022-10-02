@@ -39,9 +39,9 @@
                                         </thead>
                                         {% for funcionario in funcionario %}
                                             <tbody>
-                                            <tr>
-                                                <td><a href="{{ path('detalheFuncionario', {id: funcionario.id}) }}">{{ funcionario.id }}</td>
-                                                <td><a href="{{ path('detalheFuncionario', {id: funcionario.id}) }}">{{ funcionario.nomeFuncionario }}</td>
+                                            <tr onclick="window.location='{{ path('detalheFuncionario', {id: funcionario.id}) }}';">
+                                                <td>{{ funcionario.id }}</td>
+                                                <td>{{ funcionario.nomeFuncionario }}</td>
                                                 <td>{{ funcionario.emailFuncionario }}</td>
                                                 <td>{{ funcionario.cargaHorariaSemanal }}</td>
                                                 <td>
