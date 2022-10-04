@@ -25,19 +25,19 @@
                             </div>
                             <div class="col-lg-2">
                                 <label for="DataInicio">Data Inicio</label>
-                                <input class="form-control" title="DataInicio" value="{{ projeto.dataInicial |date('d-m-Y')}}" readonly type="datetime-local">
+                                <input class="form-control" title="DataInicio" value="{{ projeto.dataInicial |date('d-m-Y')}}" readonly type="date">
                             </div>
                             <div class="col-lg-2">
                                 <label for="DataFim">Data Fim</label>
-                                <input class="form-control" type="datetime-local" title="DataFim" value="{{ projeto.dataEntregaFinal |date('d-m-Y') }}">
+                                <input class="form-control" type="date" title="DataFim" value="{{ projeto.dataEntregaFinal |date('d-m-Y') }}" readonly>
                             </div>
                             <div class="col-lg-2 ">
                                 <label for="DataFimPrevisto">Data Fim Previsto:</label>
-                                <input class="form-control" title="DataFimPrevisto" value="{{ projeto.dataFimPrevisto |date('d-m-Y') }}">
+                                <input class="form-control" title="DataFimPrevisto" value="{{ projeto.dataFimPrevisto |date('d-m-Y') }}" readonly>
                             </div>
                             <div class="col-lg-2">
                                 <label for="DataInicialProjeto">Data Inicial Projeto:</label>
-                                <input class="form-control" title="DataInicialProjeto" value="{{ projeto.dataIniPrevisto |date('d-m-Y')}}">
+                                <input class="form-control" title="DataInicialProjeto" value="{{ projeto.dataIniPrevisto |date('d-m-Y')}}" readonly>
                             </div>
                             <div class="col-lg-12">
                                 <label for="descricao">Descrição:</label>
