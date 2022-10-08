@@ -20,9 +20,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12" style="margin-top: 10px;">
-                    <div class="form-group" style="float: right;margin-right: 30px; ">
-                        <a class="btn btn-primary" href="{{ path('cadastroCliente') }}">Adicionar Cliente</a>
+                <div class="col-lg-12" style="margin-top: 15px;">
+                    <div class="form-group" style="float: right; margin-bottom: 0; padding-bottom: 0;">
+                        <a class="btn btn-success" href="{{ path('cadastroCliente') }}">Adicionar Cliente</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -44,13 +44,13 @@
                                         </thead>
                                         {% for cliente in cliente %}
                                             <tbody>
-                                                <tr>
-                                                    <td><a href="{{ path('detalheCliente', {id: cliente.id}) }}">{{ cliente.id }}</a></td>
-                                                    <td><a href="{{ path('detalheCliente', {id: cliente.id}) }}">{{ cliente.nomeCliente }}</a></td>
-                                                    <td>{{ cliente.emailCliente }}</a></td>
-                                                    <td>{{ cliente.tipoCliente }}</a></td>
+                                                <tr onclick="window.location='{{ path('detalheCliente', {id: cliente.id}) }}';">
+                                                    <td>{{ cliente.id }}</td>
+                                                    <td>{{ cliente.nomeCliente }}</td>
+                                                    <td>{{ cliente.emailCliente }}</td>
+                                                    <td>{{ cliente.tipoCliente }}</td>
                                                     <td>{{ cliente.celularCliente }}</td>
-                                                    <td>{{ cliente.cpf_cnpj }}</a></td>
+                                                    <td>{{ cliente.cpf_cnpj }}</td>
 
                                                     <td>
                                                         <a class="btn btn-primary" href="{{ path('editarCliente', {id: cliente.id}) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>

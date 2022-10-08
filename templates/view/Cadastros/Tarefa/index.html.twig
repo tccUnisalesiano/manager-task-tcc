@@ -20,9 +20,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <div class="form-group" style="float: right; margin-top: 10px !important; margin-right: 30px !important;">
-                        <a class="btn btn-primary" href="{{ path('cadastroTarefa') }}">Adicionar Tarefa</a>
+                <div class="col-lg-12" style="margin-top: 15px;">
+                    <div class="form-group" style="float: right; margin-bottom: 0; padding-bottom: 0;">
+                        <a class="btn btn-success" href="{{ path('cadastroTarefa') }}">Adicionar Tarefa</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -45,9 +45,9 @@
                                         </thead>
                                         {% for tarefa in tarefa %}
                                             <tbody>
-                                            <tr>
-                                                <td><a href="{{ path('detalheTarefa', {id: tarefa.id}) }}">{{ tarefa.id }}</a></td>
-                                                <td><a href="{{ path('detalheTarefa', {id: tarefa.id}) }}">{{ tarefa.idProjeto.nome }}</a></td>
+                                            <tr onclick="window.location='{{ path('detalheTarefa', {id: tarefa.id}) }}';">
+                                                <td>{{ tarefa.id }}</td>
+                                                <td>{{ tarefa.idProjeto.nome }}</td>
                                                 <td>{{ tarefa.nome }}</td>
                                                 <td>{{ tarefa.idFuncionario.nomeFuncionario}}</td>
                                                 <td>{{ tarefa.prioridade }}</td>

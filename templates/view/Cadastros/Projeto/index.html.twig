@@ -20,6 +20,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-12" style="margin-top: 15px;">
+                    <div class="form-group" style="float: right; margin-bottom: 0; padding-bottom: 0;">
+                        <a class="btn btn-success" href="{{ path('cadastroProjeto') }}">Adicionar Projeto</a>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="container-fluid">
                         <div class="form-group">
@@ -37,9 +42,9 @@
                                         </thead>
                                         {% for projeto in projeto %}
                                             <tbody>
-                                            <tr>
-                                                <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.Id }}</a></td>
-                                                <td><a href="{{ path('detalheProjeto', {id: projeto.id}) }}">{{ projeto.nome }}</a></td>
+                                            <tr onclick="window.location='{{ path('detalheProjeto', {id: projeto.id}) }}';">
+                                                <td>{{ projeto.Id }}</td>
+                                                <td>{{ projeto.nome }}</td>
                                                 <td>{{ projeto.situacao }}</td>
                                                 <td>{{ projeto.cliente_id.cpf_cnpj}}</td>
                                                 <td>
@@ -55,11 +60,6 @@
                             </div>
                         </div>
                     </div>
-                        <div class="col-lg-12" style="margin-top: 15px;">
-                            <div class="form-group" style="float: right; margin-right: 10px">
-                                <a class="btn btn-success" href="{{ path('cadastroProjeto') }}">Adicionar Projeto</a>
-                            </div>
-                        </div>
                 </div>
             </div>
         </div>

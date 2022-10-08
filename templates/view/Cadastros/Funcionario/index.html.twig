@@ -20,6 +20,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-12" style="margin-top: 15px;">
+                    <div class="form-group" style="float: right; margin-bottom: 0; padding-bottom: 0;">
+                        <a class="btn btn-success" href="{{ path('cadastroFuncionario') }}">Adicionar Funcionario</a>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="container-fluid">
                         <div class="form-group">
@@ -39,9 +44,9 @@
                                         </thead>
                                         {% for funcionario in funcionario %}
                                             <tbody>
-                                            <tr>
-                                                <td><a href="{{ path('detalheFuncionario', {id: funcionario.id}) }}">{{ funcionario.id }}</td>
-                                                <td><a href="{{ path('detalheFuncionario', {id: funcionario.id}) }}">{{ funcionario.nomeFuncionario }}</td>
+                                            <tr onclick="window.location='{{ path('detalheFuncionario', {id: funcionario.id}) }}';">
+                                                <td>{{ funcionario.id }}</td>
+                                                <td>{{ funcionario.nomeFuncionario }}</td>
                                                 <td>{{ funcionario.emailFuncionario }}</td>
                                                 <td>{{ funcionario.cargaHorariaSemanal }}</td>
                                                 <td>
@@ -60,11 +65,6 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12" style="margin-top: 15px;">
-                        <div class="form-group" style="float: right;">
-                            <a class="btn btn-success" href="{{ path('cadastroFuncionario') }}">Adicionar Funcionario</a>
                         </div>
                     </div>
                 </div>

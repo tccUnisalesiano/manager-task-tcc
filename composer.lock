@@ -1174,6 +1174,18 @@
         },
         {
             "name": "doctrine/orm",
+<<<<<<< HEAD
+            "version": "2.13.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/orm.git",
+                "reference": "a8b02fd70fa777ca8278b9604fdef75c15c6a12f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/a8b02fd70fa777ca8278b9604fdef75c15c6a12f",
+                "reference": "a8b02fd70fa777ca8278b9604fdef75c15c6a12f",
+=======
             "version": "2.13.3",
             "source": {
                 "type": "git",
@@ -1184,6 +1196,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/orm/zipball/e750360bd52b080c4cbaaee1b48b80f7dc873b36",
                 "reference": "e750360bd52b080c4cbaaee1b48b80f7dc873b36",
+>>>>>>> 2fcb8ddb42871c89d41c87f718e2c1e1ecc71412
                 "shasum": ""
             },
             "require": {
@@ -1268,9 +1281,15 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
+<<<<<<< HEAD
+                "source": "https://github.com/doctrine/orm/tree/2.13.2"
+            },
+            "time": "2022-09-22T13:36:43+00:00"
+=======
                 "source": "https://github.com/doctrine/orm/tree/2.13.3"
             },
             "time": "2022-10-07T06:37:17+00:00"
+>>>>>>> 2fcb8ddb42871c89d41c87f718e2c1e1ecc71412
         },
         {
             "name": "doctrine/persistence",
@@ -3676,52 +3695,6 @@
                 }
             ],
             "time": "2022-01-02T09:55:41+00:00"
-        },
-        {
-            "name": "symfony/orm-pack",
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/orm-pack.git",
-                "reference": "c4728ba9ed071876f71df637c7dff0490c9252b2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/orm-pack/zipball/c4728ba9ed071876f71df637c7dff0490c9252b2",
-                "reference": "c4728ba9ed071876f71df637c7dff0490c9252b2",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/doctrine-bundle": "*",
-                "doctrine/doctrine-migrations-bundle": "*",
-                "doctrine/orm": "*",
-                "symfony/proxy-manager-bridge": "*"
-            },
-            "type": "symfony-pack",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A pack for the Doctrine ORM",
-            "support": {
-                "issues": "https://github.com/symfony/orm-pack/issues",
-                "source": "https://github.com/symfony/orm-pack/tree/v2.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2022-01-12T09:53:02+00:00"
         },
         {
             "name": "symfony/password-hasher",
@@ -6291,6 +6264,18 @@
         },
         {
             "name": "symfony/maker-bundle",
+<<<<<<< HEAD
+            "version": "v1.46.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/maker-bundle.git",
+                "reference": "682ce4fc6602acad33653ba0194d922356fd81f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/682ce4fc6602acad33653ba0194d922356fd81f9",
+                "reference": "682ce4fc6602acad33653ba0194d922356fd81f9",
+=======
             "version": "v1.47.0",
             "source": {
                 "type": "git",
@@ -6301,6 +6286,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/e607f129d29a6c1e9a9e1ef3d229d653311d58f3",
                 "reference": "e607f129d29a6c1e9a9e1ef3d229d653311d58f3",
+>>>>>>> 2fcb8ddb42871c89d41c87f718e2c1e1ecc71412
                 "shasum": ""
             },
             "require": {
@@ -6364,7 +6350,11 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
+<<<<<<< HEAD
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.46.0"
+=======
                 "source": "https://github.com/symfony/maker-bundle/tree/v1.47.0"
+>>>>>>> 2fcb8ddb42871c89d41c87f718e2c1e1ecc71412
             },
             "funding": [
                 {
@@ -6380,7 +6370,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
+            "time": "2022-09-23T13:30:21+00:00"
+=======
             "time": "2022-10-04T15:05:10+00:00"
+>>>>>>> 2fcb8ddb42871c89d41c87f718e2c1e1ecc71412
         }
     ],
     "aliases": [],
