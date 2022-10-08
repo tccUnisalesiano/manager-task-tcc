@@ -1,0 +1,23 @@
+.btn-danger {
+    color: var(--primary-color) !important;
+    background-color: transparent !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-success, .btn-primary{
+    color: var( --primary-color-light) !important;
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+#pesquisarForm, #pesquisar{
+    height: 2.5rem !important;
+}
+
+#pesquisarForm{
+    border-radius:  0 10px 10px 0;
+}
+
+#pesquisar{
+    border-radius: 10px 0 0 10px;
+}
