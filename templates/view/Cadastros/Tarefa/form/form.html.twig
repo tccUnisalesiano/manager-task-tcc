@@ -12,63 +12,56 @@
                     {{form_start(tarefa) }}
 
                     <div class="row">
-                        <div class="col-lg-2">
-                            {{ form_row(tarefa.idProjeto) }}
-                        </div>
-                        <div class="col-lg-2">
-                            {{ form_row(tarefa.idFuncionario) }}
-                        </div>
-
-                        <div class="col-lg-4">
-                            {{ form_row(tarefa.prioridade) }}
-                        </div>
-
-                        <div class="col-lg-4">
-                            {{ form_row(tarefa.situacao) }}
-                        </div>
-
-                        <div class="col-lg-4">
-                            {{ form_row(tarefa.nome) }}
-                        </div>
-
-                        <div class="col-lg-4">
-                            {{ form_row(tarefa.status) }}
-                        </div>
-
-                        <div class="col-lg-4">
-                            {{ form_row(tarefa.tipoTarefa) }}
-                        </div>
-
-                        <div class="col-lg-2">
-                            {{ form_row(tarefa.porcentagem) }}
+                        <div class="col-lg-3">
+                            {{ form_row(tarefa.idProjeto, {'attr': {'class': 'camposInput'}}) }}
                         </div>
 
                         <div class="col-lg-3">
-                            {{ form_row(tarefa.tempoGasto) }}
+                            {{ form_row(tarefa.nome, {'attr': {'class': 'camposInput'}}) }}
+                        </div>
+                        <div class="col-lg-3">
+                            {{ form_row(tarefa.idFuncionario, {'attr': {'class': 'camposInput'}}) }}
+                        </div>
+                        <div class="col-lg-3">
+                            {{ form_row(tarefa.prioridade, {'attr': {'class': 'camposInput'}}) }}
                         </div>
 
                         <div class="col-lg-3">
-                            {{ form_row(tarefa.tempoEstimado) }}
+                            {{ form_row(tarefa.tipoTarefa, {'attr': {'class': 'camposInput'}}) }}
                         </div>
-
                         <div class="col-lg-3">
-                            {{ form_row(tarefa.dataIni) }}
+                            {{ form_row(tarefa.status, {'attr': {'class': 'camposInput'}}) }}
                         </div>
-
                         <div class="col-lg-3">
-                            {{ form_row(tarefa.dataFim) }}
+                            {{ form_row(tarefa.situacao, {'attr': {'class': 'camposInput'}}) }}
+                        </div>
+                        <div class="col-lg-3">
+                            {{ form_row(tarefa.porcentagem, {'attr': {'class': 'camposInput'}}) }}
+                        </div>
+                        <div class="col-lg-3">
+                            {{ form_row(tarefa.tempoEstimado, {'attr': {'class': 'camposInput'}}) }}
+                        </div>
+                        <div class="col-lg-3">
+                            {{ form_row(tarefa.tempoGasto, {'attr': {'class': 'camposInput'}}) }}
+                        </div>
+                        <div class="col-lg-3">
+                            {{ form_row(tarefa.dataIni, {'attr': {'class': 'camposInput'}}) }}
+                        </div>
+                        <div class="col-lg-3">
+                            {{ form_row(tarefa.dataFim, {'attr': {'class': 'camposInput'}}) }}
                         </div>
 
                         <div class="col-lg-12">
-                            {{ form_row(tarefa.descricao) }}
+                            {{ form_row(tarefa.descricao, {'attr': {'class': 'camposInput'}}) }}
                         </div>
                     </div>
                     <div class="col-lg-12" style="margin-top: 15px !important;">
                         <div class="form-group" style="float: right">
-                            <a class="btn btn-danger" href="{{ path('tarefa') }}" >Cancelar</a>
+                            <button class="btn btn-danger" name="cancel" type="submit" value="Cancel" formnovalidate>Cancelar</button>
                             <button class="btn btn-success " type="submit" >Salvar</button>
                         </div>
                     </div>
+                    {{ form_end(tarefa) }}
                 </div>
             </div>
         </div>

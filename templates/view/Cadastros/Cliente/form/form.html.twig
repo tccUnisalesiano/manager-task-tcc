@@ -9,36 +9,37 @@
                     <h3>Cadastrar Cliente</h3>
                 </div>
                 <div class="card-body">
-                    {{form_start(cliente) }}
+                    {{form_start(cliente)}}
 
                     <div class="row">
                         <div class="col-lg-4">
-                            {{ form_row(cliente.nomeCliente) }}
-                        </div>
-
-                        <div class="col-lg-3">
-                            {{ form_row(cliente.tipoCliente) }}
+                            {{ form_row(cliente.nomeCliente, {'attr': {'class': 'camposInput'}}) }}
                         </div>
 
                         <div class="col-lg-4">
-                            {{ form_row(cliente.emailCliente) }}
+                            {{ form_row(cliente.tipoCliente, {'attr': {'class': 'camposInput'}}) }}
                         </div>
 
-                        <div class="col-lg-3">
-                            {{ form_row(cliente.celularCliente) }}
+                        <div class="col-lg-4">
+                            {{ form_row(cliente.cpf_cnpj, {'attr': {'class': 'camposInput'}}) }}
                         </div>
 
-                        <div class="col-lg-3">
-                            {{ form_row(cliente.cpf_cnpj ) }}
+                        <div class="col-lg-4">
+                            {{ form_row(cliente.emailCliente, {'attr': {'class': 'camposInput'}}) }}
+                        </div>
+
+                        <div class="col-lg-4">
+                            {{ form_row(cliente.celularCliente, {'attr': {'class': 'camposInput'}}) }}
                         </div>
                     </div>
 
                     <div class="col-lg-12" style="margin-top: 15px !important;">
                         <div class="form-group" style="float: right">
-                            <a class="btn btn-danger" href="{{ path('cliente') }}" >Cancelar</a>
+                            <button class="btn btn-danger" name="cancel" type="submit" value="Cancel" formnovalidate>Cancelar</button>
                             <button class="btn btn-success " type="submit" >Salvar</button>
                         </div>
                     </div>
+                    {{ form_end(cliente) }}
                 </div>
             </div>
         </div>

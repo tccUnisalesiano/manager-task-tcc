@@ -37,7 +37,7 @@ class TarefaType extends AbstractType
                     'query_builder' => function (EntityRepository $er){
                         return $er->createQueryBuilder('f');
                     },
-                    'label' => "Funcionário: ",
+                    'label' => "Atribuído para: ",
                     'choice_label' => 'nomeFuncionario',
                 ])
 
@@ -69,7 +69,7 @@ class TarefaType extends AbstractType
                     ],
                 ])
             ->add('nome', TextType::class,
-                ['label' => "Nome: "])
+                ['label' => "Nome da Tarefa: "])
             ->add('descricao', TextareaType::class,
                 ['label' => "Descrição: "])
             ->add('tempoEstimado', NumberType::class,

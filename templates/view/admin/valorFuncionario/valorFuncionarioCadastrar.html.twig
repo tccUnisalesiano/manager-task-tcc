@@ -9,20 +9,20 @@
                     <h3>Cadastrar Valor Funcionário</h3>
                 </div>
                 <div class="card-body">
-                    {{form_start(valorfuncionario) }}
+                    {{form_start(valorfuncionario, {'attr': {'class': 'camposInput'}}) }}
 
                     <div class="row">
                         <div class="col-lg-5">
-                            {{ form_row(valorfuncionario.idFuncionario) }}
+                            {{ form_row(valorfuncionario.idFuncionario, {'attr': {'class': 'camposInput'}}) }}
                         </div>
                         <div class="col-lg-2">
-                            {{ form_row(valorfuncionario.valorHora) }}
+                            {{ form_row(valorfuncionario.valorHora, {'attr': {'class': 'camposInput'}}) }}
                         </div>
                         <div class="col-lg-2">
-                            {{ form_row(valorfuncionario.dataIni) }}
+                            {{ form_row(valorfuncionario.dataIni, {'attr': {'class': 'camposInput'}}) }}
                         </div>
                         <div class="col-lg-2">
-                            {{ form_row(valorfuncionario.dataFim) }}
+                            {{ form_row(valorfuncionario.dataFim, {'attr': {'class': 'camposInput'}}) }}
                         </div>
 
                         <div class="col-lg-12" style="margin-top: 15px !important;">

@@ -1,3 +1,4 @@
+/*Botões escuros e claros*/
 .btn-danger {
     color: var(--primary-color) !important;
     background-color: transparent !important;
@@ -10,6 +11,8 @@
     border-color: var(--primary-color) !important;
 }
 
+
+/*Barra de pesquisa*/
 #pesquisarForm, #pesquisar{
     height: 2.5rem !important;
 }
@@ -20,4 +23,22 @@
 
 #pesquisar{
     border-radius: 10px 0 0 10px;
+}
+
+/*Inputs*/
+.camposInput{
+    border-color: var(--primary-color) !important;
+}
+/*campos de pesquisa coom nome camposInput*/
+/*quando ativados ou com foco seus detalhes são roxos*/
+
+.camposInput:active, .camposInput:focus,
+input[name="camposInput"]:active, input[name="camposInput"]:focus,
+textarea[name="camposInput"]:active, textarea[name="camposInput"]:focus{
+    box-shadow: 0 0 1em rgba(146, 18, 206, 0.5) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn:active, .btn:focus{
+    box-shadow: 0 0 15px rgba(146, 18, 206, 0.9) !important;
 }
