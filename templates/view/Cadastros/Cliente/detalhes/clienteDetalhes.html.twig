@@ -12,23 +12,23 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <label for="Nome">Nome:</label>
-                            <input class="form-control" value="{{ cliente.nomeCliente }}" title="Nome" readonly>
-                        </div>
-                        <div class="col-lg-4">
-                            <label for="Email">Email:</label>
-                            <input class="form-control" title="Email" value="{{ cliente.emailCliente }}" readonly>
+                            <input class="form-control" name="camposInput" value="{{ cliente.nomeCliente }}" title="Nome" readonly>
                         </div>
                         <div class="col-lg-4">
                             <label for="Tipo">Tipo:</label>
-                            <input class="form-control" title="Tipo" value="{{ cliente.tipoCliente }}" readonly>
-                        </div>
-                        <div class="col-lg-4">
-                            <label for="Celular">Celular:</label>
-                            <input class="form-control" title="Celular" value="{{ cliente.celularCliente }}" readonly>
+                            <input class="form-control" name="camposInput" title="Tipo" value="{{ cliente.tipoCliente }}" readonly>
                         </div>
                         <div class="col-lg-4">
                             <label for="CPF/CNPJ">CPF/CNPJ:</label>
-                            <input class="form-control" title="CPF/CNPJ" value="{{ cliente.cpf_cnpj }}" readonly>
+                            <input class="form-control" name="camposInput" title="CPF/CNPJ" value="{{ cliente.cpf_cnpj }}" readonly>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="Email">Email:</label>
+                            <input class="form-control" name="camposInput" title="Email" value="{{ cliente.emailCliente }}" readonly>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="Celular">Celular:</label>
+                            <input class="form-control" name="camposInput" title="Celular" value="{{ cliente.celularCliente }}" readonly>
                         </div>
                     </div>
                     <div class="col-lg-12">
