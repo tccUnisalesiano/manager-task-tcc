@@ -35,9 +35,9 @@ class ClienteController extends AbstractController
 
     //ajustar rota durante o desenvolvimento do front
     /**
-     * @Route ("/cliente/cadastrar", name="cadastroCliente", methods={"POST|GET"})
+     * @Route ("/cliente/cadastrar", name="cadastroCliente", methods={"POST|GET"}, defaults={"title": "Cadastrar Cliente"})
      */
-    public function novo(Request $request, EntityManagerInterface $em): Response
+    public function novo(Request $request, EntityManagerInterface $em, string $title): Response
     {
         $return = $request->getContent();
         $cliente = $this->clienteFactory->criarCliente($return);
@@ -62,7 +62,7 @@ class ClienteController extends AbstractController
         }
 
         return $this->renderForm('view/Cadastros/Cliente/form/form.html.twig', [
-            'cliente' => $form
+            'cliente' => $form, 'title' => $title
         ]);
     }
 
@@ -82,14 +82,14 @@ class ClienteController extends AbstractController
     }
 
     /**
-     * @Route("/cliente/editar/{id}", name="editarCliente")
+     * @Route("/cliente/editar/{id}", name="editarCliente", defaults={"title": "Alterar Cliente"})
      * @param int $id
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param ClienteRepository $clienteRepository
      * @return Response
      */
-    public function update(int $id, Request $request, EntityManagerInterface $em, ClienteRepository $clienteRepository): Response
+    public function update(int $id, Request $request, EntityManagerInterface $em, ClienteRepository $clienteRepository, string $title): Response
     {
         $cliente = $clienteRepository->find($id);
         $form = $this->createForm(ClienteType::class, $cliente);
@@ -103,7 +103,7 @@ class ClienteController extends AbstractController
         }
 
         return $this->renderForm('view/Cadastros/Cliente/form/form.html.twig', [
-            'cliente' => $form
+            'cliente' => $form, 'title' => $title
         ]);  //implementar route
     }
 

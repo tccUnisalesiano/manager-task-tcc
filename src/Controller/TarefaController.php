@@ -30,9 +30,9 @@ class TarefaController extends AbstractController
     }
 
     /**
-     * @Route ("/tarefa/cadastrar", name="cadastroTarefa", methods={"POST|GET"})
+     * @Route ("/tarefa/cadastrar", name="cadastroTarefa", methods={"POST|GET"}, defaults={"title": "Cadastrar Tarefa"})
      */
-    public function novo(Request $request, EntityManagerInterface $em): Response
+    public function novo(Request $request, EntityManagerInterface $em, string $title): Response
     {
         $return = $request->getContent();
         $tarefa = $this->tarefaFactory->criarTarefa($return);
@@ -57,7 +57,7 @@ class TarefaController extends AbstractController
         }
 
         return $this->renderForm('view/Cadastros/Tarefa/form/form.html.twig', [
-            'tarefa' => $form
+            'tarefa' => $form, 'title' => $title
         ]);
     }
 
@@ -77,14 +77,14 @@ class TarefaController extends AbstractController
     }
 
     /**
-     * @Route("/tarefa/editar/{id}", name="editarTarefa")
+     * @Route("/tarefa/editar/{id}", name="editarTarefa", defaults={"title": "Alterar Tarefa"})
      * @param int $id
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param TarefaRepository $tarefaRepository
      * @return Response
      */
-    public function update(int $id, Request $request, EntityManagerInterface $em, TarefaRepository $tarefaRepository): Response
+    public function update(int $id, Request $request, EntityManagerInterface $em, TarefaRepository $tarefaRepository, string $title): Response
     {
         $tarefa = $tarefaRepository->find($id);
         $form = $this->createForm(TarefaType::class, $tarefa);
@@ -98,7 +98,7 @@ class TarefaController extends AbstractController
         }
 
         return $this->renderForm('view/Cadastros/Tarefa/form/form.html.twig', [
-            'tarefa' => $form
+            'tarefa' => $form, 'title' => $title
         ]);
     }
 
