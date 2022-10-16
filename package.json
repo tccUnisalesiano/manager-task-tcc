@@ -23,6 +23,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "chart.js": "^3.9.1",
+        "datatables.net-bs4": "^1.12.1",
         "fast-levenshtein": "^3.0.0",
         "jquery-datepicker": "^1.12.3"
     }
