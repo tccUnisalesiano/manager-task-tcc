@@ -7,11 +7,13 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-lg-6"><h4 class="card-title" id="hidden-label-round-controls">Clientes</h4></div>
+                        <div class="col-lg-6"><h4 class="card-title" id="hidden-label-round-controls">Clientes</h4>
+                        </div>
                         <div class="col-lg-6" style="display: flex;">
                             <div class="input-group" style="justify-content: end;">
                                 <div class="form-outline">
-                                    <input type="search" placeholder="PESQUISAR" id="pesquisar" class="form-control" name="camposInput"  />
+                                    <input type="search" placeholder="PESQUISAR" id="pesquisar" class="form-control"
+                                           name="camposInput"/>
                                 </div>
                                 <button id="pesquisarForm" type="button" class="btn btn-primary">
                                     <i class="fas fa-search"></i>
@@ -28,39 +30,41 @@
                 <div class="card-body">
                     <div class="container-fluid">
                         <div class="form-group">
-                            <div class="card">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Nome</th>
-                                                <th>E-mail</th>
-                                                <th>Tipo</th>
-                                                <th>Celular</th>
-                                                <th>Nº CPF/CNPJ</th>
-                                                <th>Ações</th>
-                                            </tr>
-                                        </thead>
-                                        {% for cliente in cliente %}
-                                            <tbody>
-                                                <tr onclick="window.location='{{ path('detalheCliente', {id: cliente.id}) }}';">
-                                                    <td>{{ cliente.id }}</td>
-                                                    <td>{{ cliente.nomeCliente }}</td>
-                                                    <td>{{ cliente.emailCliente }}</td>
-                                                    <td>{{ cliente.tipoCliente }}</td>
-                                                    <td>{{ cliente.celularCliente }}</td>
-                                                    <td>{{ cliente.cpf_cnpj }}</td>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped table-dataTables">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>E-mail</th>
+                                        <th>Tipo</th>
+                                        <th>Celular</th>
+                                        <th>Nº CPF/CNPJ</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    </thead>
+                                    {% for cliente in cliente %}
+                                        <tbody>
+                                        <tr onclick="window.location='{{ path('detalheCliente', {id: cliente.id}) }}';">
+                                            <td>{{ cliente.id }}</td>
+                                            <td>{{ cliente.nomeCliente }}</td>
+                                            <td>{{ cliente.emailCliente }}</td>
+                                            <td>{{ cliente.tipoCliente }}</td>
+                                            <td>{{ cliente.celularCliente }}</td>
+                                            <td>{{ cliente.cpf_cnpj }}</td>
 
-                                                    <td>
-                                                        <a class="btn btn-primary" href="{{ path('editarCliente', {id: cliente.id}) }}" title="Editar"><i class="fa-solid fa-pen edit"></i></a>
-                                                        <a class="btn btn-danger" href="{{ path('deleteCliente', {id: cliente.id}) }}" title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        {% endfor %}
-                                    </table>
-                                </div>
+                                            <td>
+                                                <a class="btn btn-primary"
+                                                   href="{{ path('editarCliente', {id: cliente.id}) }}"
+                                                   title="Editar"><i class="fa-solid fa-pen edit"></i></a>
+                                                <a class="btn btn-danger"
+                                                   href="{{ path('deleteCliente', {id: cliente.id}) }}" title="Excluir"><i
+                                                            class="fa-solid fa-trash delete"></i></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    {% endfor %}
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -68,4 +72,20 @@
             </div>
         </div>
     </section>
+
+    <script>
+        $('.table-dataTables').dataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json",
+                "searchPlaceholder": "Pesquisar"
+            },
+        });
+    </script>
 {% endblock %}
