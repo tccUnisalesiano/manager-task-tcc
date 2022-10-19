@@ -42,9 +42,9 @@ class FuncionarioController extends AbstractController
 
     //rotas de cadastro
     /**
-     *@Route ("/funcionario/cadastrar", name="cadastroFuncionario", methods={"POST|GET"})
+     *@Route ("/funcionario/cadastrar", name="cadastroFuncionario", methods={"POST|GET"}, defaults={"title": "Cadastrar Funcionário"})
      */
-    public function novo(Request $request, EntityManagerInterface $em): Response
+    public function novo(Request $request, EntityManagerInterface $em, string $title): Response
     {
         $return = $request->getContent();
         $functionary = $this->funcionarioFactory->criarFuncionario($return);
@@ -68,7 +68,7 @@ class FuncionarioController extends AbstractController
         }
 
         return $this ->renderForm('view/Cadastros/Funcionario/Form/form.html.twig', [
-            'funcionario' => $form
+            'funcionario' => $form, 'title' => $title
         ]);
     }
 
@@ -86,9 +86,9 @@ class FuncionarioController extends AbstractController
     }
 
     /**
-     * @Route("/funcionario/editar/{id}", name="editarFuncionario")
+     * @Route("/funcionario/editar/{id}", name="editarFuncionario", defaults={"title": "Alterar Funcionário"})
      */
-    public function update(int $id, Request $request, EntityManagerInterface $em, FuncionarioRepository $funcionarioRepository): Response
+    public function update(int $id, Request $request, EntityManagerInterface $em, FuncionarioRepository $funcionarioRepository, string $title): Response
     {
 
         $functionary = $funcionarioRepository->find($id);
@@ -109,7 +109,7 @@ class FuncionarioController extends AbstractController
 
         }
         return $this ->renderForm('view/Cadastros/Funcionario/Form/form.html.twig', [
-            'funcionario' => $form
+            'funcionario' => $form, 'title' => $title
 
         ]);
 

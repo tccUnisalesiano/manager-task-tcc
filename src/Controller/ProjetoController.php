@@ -33,9 +33,9 @@ class ProjetoController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
-     * @Route("/projeto/cadastrar", name="cadastroProjeto")
+     * @Route("/projeto/cadastrar", name="cadastroProjeto", defaults={"title": "Cadastrar Projeto"})
      */
-    public function novo(Request $request, EntityManagerInterface $em): Response
+    public function novo(Request $request, EntityManagerInterface $em, string $title): Response
     {
         $return = $request->getContent();
         $projeto = $this->projetoFactory->criarProjeto($return);
@@ -56,7 +56,7 @@ class ProjetoController extends AbstractController
         }
 
         return $this->renderForm('view/Cadastros/Projeto/form/form.html.twig', [
-            'projeto' => $form
+            'projeto' => $form, 'title' => $title
         ]);
     }
 
@@ -79,13 +79,14 @@ class ProjetoController extends AbstractController
      * @param EntityManagerInterface $em
      * @param ProjetoRepository $projetoRepository
      * @return Response
-     * @Route("/projeto/editar/{id}", name="editarProjeto")
+     * @Route("/projeto/editar/{id}", name="editarProjeto", defaults={"title": "Alterar Projeto"})
      */
-    public function update(int $id, Request $request, EntityManagerInterface $em, ProjetoRepository $projetoRepository): Response
+    public function update(int $id, Request $request, EntityManagerInterface $em, ProjetoRepository $projetoRepository, string $title): Response
     {
         $projeto = $projetoRepository->find($id);
         $form = $this->createForm(ProjetoType::class, $projeto);
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid())
         {
@@ -95,8 +96,9 @@ class ProjetoController extends AbstractController
         }
 
         return $this->renderForm('view/Cadastros/Projeto/form/form.html.twig', [
-            'projeto' => $form
+            'projeto' => $form, 'title' => $title
         ]);
+
     }
 
     /**

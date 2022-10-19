@@ -34,7 +34,9 @@
 
 .camposInput:active, .camposInput:focus,
 input[name="camposInput"]:active, input[name="camposInput"]:focus,
-textarea[name="camposInput"]:active, textarea[name="camposInput"]:focus{
+textarea[name="camposInput"]:active, textarea[name="camposInput"]:focus,
+input[name="password"]:active, input[name="password"]:focus,
+input[name="email"]:active, input[name="email"]:focus{
     box-shadow: 0 0 1em rgba(146, 18, 206, 0.5) !important;
     border-color: var(--primary-color) !important;
 }
