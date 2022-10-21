@@ -15,23 +15,23 @@
                     </div>
                     <div class="card-body">
                     <div class="row">
-                        <div class="form-group col-lg-3">
+                        <div class="form-group col-lg-6">
                             <label for="NomeFuncionario">Nome Funcionario</label>
                             <input class="form-control" name="camposInput" title="NomeFuncionario" value="{{ funcionario.nomeFuncionario }}" readonly>
                         </div>
-                        <div class="form-group col-lg-3">
+                        <div class="form-group col-lg-6">
                             <label for="Email">Email</label>
                             <input class="form-control" name="camposInput" readonly value="{{ funcionario.emailFuncionario }}" title="Email">
                         </div>
-                        <div class="form-group col-lg-2">
+                        <div class="form-group col-lg-4">
                             <label for="CargaHoraria">Carga Horária Semanal</label>
                             <input class="form-control" name="camposInput" readonly title="CargaHoraria" value="{{ funcionario.cargaHorariaSemanal }}">
                         </div>
-                        <div class="form-group col-lg-2">
+                        <div class="form-group col-lg-4">
                             <label for="adm">Administrador</label>
                             <input class="form-control" name="camposInput" value="{{ (funcionario.isAdmin == 1) ? "Sim" : "Não" }}" readonly title="adm">
                         </div>
-                        <div class="form-group col-lg-2">
+                        <div class="form-group col-lg-4">
                             <label for="status">Status</label>
                             <input class="form-control" name="camposInput" readonly value="{{ (funcionario.isAtivo == 1) ? "Ativo" : "Desativo" }}" title="status">
                         </div>
