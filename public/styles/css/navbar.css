@@ -353,7 +353,9 @@ body.dark .sidebar header .toggle{
         opacity: 0;
         pointer-events: none;
     }
-    .sidebar.close .nav-links li:hover{
+    .sidebar.close .nav-links li:hover, .sidebar.close .nav-links li i
+    {
+
         pointer-events: none;
     }
 

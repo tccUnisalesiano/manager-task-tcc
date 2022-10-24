@@ -44,3 +44,29 @@ input[name="email"]:active, input[name="email"]:focus{
 .btn:active, .btn:focus{
     box-shadow: 0 0 15px rgba(146, 18, 206, 0.9) !important;
 }
+
+
+/*======================= DATATABLE ============================*/
+
+
+.dataTables_filter label input{
+    border-color: var(--primary-color) !important;
+    border-radius: 5px
+}
+
+.dataTables_filter label input:focus{
+    box-shadow: 0 0 1em rgba(146, 18, 206, 0.5) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.table-responsive .page-item.active .page-link{
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var( --primary-color-light) !important;
+}
+
+.table-responsive .page-link{
+    color: var(--primary-color) !important;
+    background-color: transparent !important;
+    border-color: var(--primary-color) !important;
+}
