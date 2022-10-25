@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Projeto;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Classe responsável por realizar a persistencia dos dados referente ao repositório para o projeto
@@ -39,6 +40,32 @@ class ProjetoRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findProdutos() {
+        $qb = $this->createQueryBuilder('p')
+                   ->addOrderBy('p.nome', 'ASC');
+        $query = $qb->getQuery();
+//        var_dump($query->getDQL());
+//        die;
+        return $query->execute();
+    }
+
+    public function findALlProdutos(): array
+    {
+        $price = 1;
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM projeto p
+            WHERE p.id = :price
+            ORDER BY p.id ASC
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['price' => $price]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
     }
 
 //    /**

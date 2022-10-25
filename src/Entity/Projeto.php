@@ -67,11 +67,11 @@ class Projeto implements \JsonSerializable
 
     public function getNomeProjeto(): ?string
     {
-        return $this->nomeProjeto;
+        return $this->nome;
     }
-    public function setNomeProjeto(string $nomeProjeto): void
+    public function setNomeProjeto(string $nome): void
     {
-        $this->nomeProjeto = $nomeProjeto;
+        $this->nome = $nome;
     }
 
     /**

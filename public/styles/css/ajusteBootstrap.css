@@ -9,6 +9,7 @@
     color: var( --primary-color-light) !important;
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
+    margin-right: 20px !important;
 }
 
 

@@ -90,5 +90,6 @@
     <orderEntry type="library" name="dataTables.bootstrap4" level="application" />
     <orderEntry type="library" name="twitter-bootstrap" level="application" />
     <orderEntry type="library" name="jquery-3.1.0" level="application" />
+    <orderEntry type="library" name="highcharts" level="application" />
   </component>
 </module>

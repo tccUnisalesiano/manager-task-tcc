@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        {% include 'include/navbar_top.html.twig' %}
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-lg-6"><h4 class="card-title" id="hidden-label-round-controls">Controladores</h4>
+                        </div>
+                    </div>
+                </div>
+{#                <div class="row">#}
+{#                    <div class="col-lg-6">#}
+{#                        <div class="card">#}
+{#                            <div class="card-body" id="container">#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+                <div class="page-content page-container" id="page-content" style="margin-top: 15px; width: auto !important;">
+                    <div class="padding">
+                        <div class="row container d-flex">
+
+                            <div class="col-lg-10">
+                                    <div class="card-header" style="background-color: #9212CE; width: 100% !important;">
+                                        <h4 class="card-title" style="color: white">Projetos Relacionados</h4>
+                                    </div>
+                                    <div class="card-body">
+                                            <table class="table table-hover table-striped table-dataTables">
+                                                <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>ID</th>
+                                                    <th>Inicio</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td id="projetoid"></td>
+                                                    <td>1</td>
+                                                    <td>22 Jun 2022</td>
+                                                    <td><span class="badge badge-danger" style="background-color: red">Concluído</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Laleska Rodrigues</td>
+                                                    <td>2</td>
+                                                    <td>15 Jul 2022</td>
+                                                    <td><span class="badge badge-danger" style="background-color: darkgoldenrod">Em Andamento</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Chicão FMX</td>
+                                                    <td>35</td>
+                                                    <td>14 Ago 2022</td>
+                                                    <td><span class="badge badge-info" style="background-color: blue">Pausado</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Matheus R</td>
+                                                    <td>14</td>
+                                                    <td>16 Set 2022</td>
+                                                    <td><span class="badge badge-success" style="background-color: green">Concluído</span></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="button" onclick="buscarProjetos()">Buscar Projetos</button>
+        </div>
+    </section>
+
+    <script src="{{ asset('styles/JS/dados.js') }}"></script>
+
+{#    <script>#}
+{#        function buscarProjetos(){#}
+
+{#            $.ajax({#}
+{#                type: 'POST',#}
+{#                url: 'tratamentodados/ajaxAction',#}
+{#                dataType: 'JSON',#}
+{#                success: function(response) {#}
+{#                    console.log(response);#}
+{#                }, complete: function(resp) {#}
+{#                    console.log(resp);#}
+{#                }#}
+{#            })#}
+{#        }#}
+{#    </script>#}
+{% endblock %}
+
+
