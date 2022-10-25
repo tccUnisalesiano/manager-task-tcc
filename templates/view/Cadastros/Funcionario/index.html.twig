@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12" style="margin-top: 15px;">
-                    <div class="form-group" style="float: right; margin-bottom: 0; padding-bottom: 0;">
+                    <div class="form-group" style="float: right; margin: 0 1.3rem 0 0">
                         <a class="btn btn-success" href="{{ path('cadastroFuncionario') }}">Adicionar Funcionario</a>
                     </div>
                 </div>
@@ -63,5 +63,27 @@
         </div>
     </section>
 
+<<<<<<< HEAD
     <script src="{{ asset('styles/JS/dados.js') }}"></script>
+=======
+    <script>
+        $(document).ready(function () {
+            console.log("JQUERY IS LOAD");
+        });
+
+        $('.table-dataTables').dataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json",
+                "searchPlaceholder": "Pesquisar..."
+            },
+        });
+    </script>
+>>>>>>> d6f8d8b7efa39543d22f5e65aec2413a00b549f2
 {% endblock %}
