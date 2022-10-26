@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Projeto;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -51,20 +52,22 @@ class ProjetoRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    /**
+     * @throws Exception
+     */
     public function findALlProdutos(): array
     {
-        $price = 1;
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
             SELECT * FROM projeto p
-            WHERE p.id = :price
+            WHERE 1 = 1
             ORDER BY p.id ASC
             ';
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(['price' => $price]);
 
-        // returns an array of arrays (i.e. a raw data set)
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
         return $resultSet->fetchAllAssociative();
     }
 

@@ -1,4 +1,4 @@
-/*Botões escuros e claros*/
+/*/Botões escuros e claros/*/
 .btn-danger {
     color: var(--primary-color) !important;
     background-color: transparent !important;
@@ -9,11 +9,10 @@
     color: var( --primary-color-light) !important;
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
-    margin-right: 20px !important;
 }
 
 
-/*Barra de pesquisa*/
+/*/Barra de pesquisa/*/
 #pesquisarForm, #pesquisar{
     height: 2.5rem !important;
 }
@@ -26,12 +25,12 @@
     border-radius: 10px 0 0 10px;
 }
 
-/*Inputs*/
+/*/Inputs/*/
 .camposInput{
     border-color: var(--primary-color) !important;
 }
-/*campos de pesquisa coom nome camposInput*/
-/*quando ativados ou com foco seus detalhes são roxos*/
+/*/campos de pesquisa coom nome camposInput/*/
+/*/quando ativados ou com foco seus detalhes são roxos/*/
 
 .camposInput:active, .camposInput:focus,
 input[name="camposInput"]:active, input[name="camposInput"]:focus,
@@ -47,7 +46,7 @@ input[name="email"]:active, input[name="email"]:focus{
 }
 
 
-/*======================= DATATABLE ============================*/
+/**!======================= DATATABLE ============================!**/
 
 
 .dataTables_filter label input{

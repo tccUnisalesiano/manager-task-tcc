@@ -33,7 +33,7 @@
     width: 78px;
 }
 
-/*=========== Hearder sidebar ========*/
+/*/=========== Hearder sidebar ========/*/
 .sidebar header{
     position: relative;
 }
@@ -363,5 +363,3 @@ body.dark .sidebar header .toggle{
 
 
 }
-
-

@@ -32,37 +32,14 @@
                                             <table class="table table-hover table-striped table-dataTables">
                                                 <thead>
                                                 <tr>
-                                                    <th>Name</th>
-                                                    <th>ID</th>
-                                                    <th>Inicio</th>
-                                                    <th>Status</th>
+                                                    <th>#</th>
+                                                    <th>Projeto</th>
+                                                    <th>Data Inicial</th>
+                                                    <th>Data Final</th>
+                                                    <th>Situação</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td id="projetoid"></td>
-                                                    <td>1</td>
-                                                    <td>22 Jun 2022</td>
-                                                    <td><span class="badge badge-danger" style="background-color: red">Concluído</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Laleska Rodrigues</td>
-                                                    <td>2</td>
-                                                    <td>15 Jul 2022</td>
-                                                    <td><span class="badge badge-danger" style="background-color: darkgoldenrod">Em Andamento</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Chicão FMX</td>
-                                                    <td>35</td>
-                                                    <td>14 Ago 2022</td>
-                                                    <td><span class="badge badge-info" style="background-color: blue">Pausado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Matheus R</td>
-                                                    <td>14</td>
-                                                    <td>16 Set 2022</td>
-                                                    <td><span class="badge badge-success" style="background-color: green">Concluído</span></td>
-                                                </tr>
+                                                <tbody id="tblprojetos">
                                                 </tbody>
                                             </table>
                                     </div>
@@ -70,28 +47,43 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-lg-12 ">
+                        <button class="btn btn-primary" type="button" onclick="buscarProjetos()" style="float: right !important;">Buscar Projetos</button>
+                    </div>
+                </div>
             </div>
-            <button class="btn btn-primary" type="button" onclick="buscarProjetos()">Buscar Projetos</button>
         </div>
     </section>
 
     <script src="{{ asset('styles/JS/dados.js') }}"></script>
 
-{#    <script>#}
-{#        function buscarProjetos(){#}
+    <script>
+        function buscarProjetos(){
 
-{#            $.ajax({#}
-{#                type: 'POST',#}
-{#                url: 'tratamentodados/ajaxAction',#}
-{#                dataType: 'JSON',#}
-{#                success: function(response) {#}
-{#                    console.log(response);#}
-{#                }, complete: function(resp) {#}
-{#                    console.log(resp);#}
-{#                }#}
-{#            })#}
-{#        }#}
-{#    </script>#}
+            $.ajax({
+                type: 'POST',
+                url: 'tratamentodados/ajaxAction',
+                dataType: 'JSON',
+                success: function(response) {
+                    console.log(response);
+                    $('.filtroTR').remove();
+                    response.response.forEach((resp) => {
+                        $("#tblprojetos").append
+                        (`<tr class="filtroTR">
+                        <td> ${resp.id} </td>
+                        <td> ${resp.nome} </td>
+                        <td> ${resp.data_inicial} </td>
+                        <td> ${resp.data_entrega_final} </td>
+                        <td> ${resp.situacao} </td>
+                    </tr>`);
+                    });
+                }, complete: function(resp) {
+                    console.log(resp);
+                }
+            })
+        }
+    </script>
 {% endblock %}
 
 

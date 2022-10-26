@@ -4,7 +4,7 @@
     <section class="home">
         {% include 'include/navbar_top.html.twig' %}
         <div class="container-fluid">
-            <div class="card" >
+            <div class="card">
                 <div class="card-header">
                     <h3>Projeto Detalhes</h3>
                 </div>
@@ -13,44 +13,54 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <label for="Nome">Nome</label>
-                                <input class="form-control" name="camposInput" title="Nome" value="{{ projeto.nome }}" readonly>
+                                <input class="form-control" name="camposInput" title="Nome" value="{{ projeto.nome }}"
+                                       readonly>
                             </div>
                             <div class="col-lg-4">
                                 <label for="Situacao">Situação</label>
-                                <input class="form-control" name="camposInput" title="Situacao" value="{{ projeto.situacao }}" readonly>
+                                <input class="form-control" name="camposInput" title="Situacao"
+                                       value="{{ projeto.situacao }}" readonly>
                             </div>
                             <div class="col-lg-4">
                                 <label for="Cliente">Cliente</label>
-                                <input class="form-control" name="camposInput" value="{{ projeto.cliente_id.nomeCliente }}" title="Cliente" readonly>
+                                <input class="form-control" name="camposInput"
+                                       value="{{ projeto.cliente_id.nomeCliente }}" title="Cliente" readonly>
                             </div>
                             <div class="col-lg-2">
                                 <label for="DataInicialProjeto">Data Inicio Previsto:</label>
-                                <input class="form-control" name="camposInput" title="DataInicialProjeto" value="{{ projeto.dataIniPrevisto |date('d/m/Y')}}" readonly >
+                                <input class="form-control" name="camposInput" title="DataInicialProjeto"
+                                       value="{{ projeto.dataIniPrevisto |date('d/m/Y') }}" readonly>
                             </div>
                             <div class="col-lg-2">
                                 <label for="DataInicio">Data Inicial:</label>
-                                <input class="form-control" name="camposInput" title="DataInicio" value="{{ projeto.dataInicial |date('d/m/Y')}}" readonly>
+                                <input class="form-control" name="camposInput" title="DataInicio"
+                                       value="{{ projeto.dataInicial |date('d/m/Y') }}" readonly>
                             </div>
                             <div class="col-lg-2 ">
                                 <label for="DataFimPrevisto">Data Fim Previsto:</label>
-                                <input class="form-control" name="camposInput" title="DataFimPrevisto" value="{{ projeto.dataFimPrevisto |date('d/m/Y') }}" readonly >
+                                <input class="form-control" name="camposInput" title="DataFimPrevisto"
+                                       value="{{ projeto.dataFimPrevisto |date('d/m/Y') }}" readonly>
                             </div>
                             <div class="col-lg-2">
                                 <label for="DataFim">Data Entrega Final</label>
-                                <input class="form-control" name="camposInput" title="DataFim" value="{{ projeto.dataEntregaFinal |date('d/m/Y') }}" readonly>
+                                <input class="form-control" name="camposInput" title="DataFim"
+                                       value="{{ projeto.dataEntregaFinal |date('d/m/Y') }}" readonly>
                             </div>
                             <div class="col-lg-4">
                                 <label for="DataFim">Tempo Gasto no Projeto</label>
-                                <input class="form-control" name="camposInput" title="DataFim" value="{{ projeto.tempoGastoTotal }}" readonly>
+                                <input class="form-control" name="camposInput" title="DataFim"
+                                       value="{{ projeto.tempoGastoTotal }}" readonly>
                             </div>
                             <div class="col-lg-12">
                                 <label for="descricao">Descrição:</label>
-                                <textarea class="form-control" name="camposInput" title="descricao" readonly>{{ projeto.descricao }}</textarea>
+                                <textarea class="form-control" name="camposInput" title="descricao"
+                                          readonly>{{ projeto.descricao }}</textarea>
                             </div>
                             <div class="col-lg-12" style="margin-top: 10px;">
                                 <div class="form-group" style="float: right">
-                                    <a class="btn btn-danger"  href="{{ path('projeto') }}" >Voltar</a>
-                                    <a class="btn btn-success" href="{{ path('editarProjeto', {id: projeto.id}) }}">Editar Projeto</a>
+                                    <a class="btn btn-danger" href="{{ path('projeto') }}">Voltar</a>
+                                    <a class="btn btn-success" href="{{ path('editarProjeto', {id: projeto.id}) }}">Editar
+                                        Projeto</a>
                                 </div>
                             </div>
                         </div>
