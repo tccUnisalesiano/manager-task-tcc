@@ -39,6 +39,25 @@ class FuncionarioRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @throws Exception
+     */
+    public function findALlFuncionarios(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM funcionario f
+            WHERE 1 = 1
+            ORDER BY f.id ASC
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Funcionario[] Returns an array of Funcionario objects
 //     */

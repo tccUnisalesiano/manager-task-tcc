@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Projeto;
 use App\Repository\DadosAdminRepository;
+use App\Repository\FuncionarioRepository;
 use App\Repository\ProjetoRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManager;
@@ -29,7 +30,7 @@ class DadosAdminController extends AbstractController
     }
 
     /**
-     * @Route("/tratamentodados/ajaxAction", methods={"POST"})
+     * @Route("/tratamentodados/projetos", methods={"POST"})
      * @param EntityManagerInterface $em
      * @param Request $request
      * @param ManagerRegistry $registry
@@ -37,11 +38,33 @@ class DadosAdminController extends AbstractController
      * @return JsonResponse|NotFoundHttpException
      * @throws Exception
      */
-    public function ajaxAction(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
+    public function projetos(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
 
         $response = $projeto->findAllProdutos();
 //        print_r($response);
+
+        if(!$response) return new NotFoundHttpException();
+
+        return $this->json([
+            'success' => true,
+            'response' => $response
+        ]);
+    }
+
+    /**
+     * @Route("/tratamentodados/funcionarios", methods={"POST"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param ProjetoRepository $projeto
+     * @return JsonResponse|NotFoundHttpException
+     * @throws Exception
+     */
+    public function funcionarios(EntityManagerInterface $em, Request $request, ManagerRegistry $registry,
+                            FuncionarioRepository $funcionario): JsonResponse|NotFoundHttpException
+    {
+        $response = $funcionario->findALlFuncionarios();
 
         if(!$response) return new NotFoundHttpException();
 
