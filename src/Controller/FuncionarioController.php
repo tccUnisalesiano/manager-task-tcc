@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class FuncionarioController extends AbstractController
 {
@@ -21,24 +23,18 @@ class FuncionarioController extends AbstractController
      */
     private FuncionariosFactory $funcionarioFactory;
 
+
     /**
      * @param FuncionariosFactory $funcionarioFactory
-     *
+     * @param UploaderHelper $uploaderHelper
      */
     public function __construct(
-        FuncionariosFactory $funcionarioFactory
+        FuncionariosFactory $funcionarioFactory, UploaderHelper $uploaderHelper
     ){
         $this->funcionarioFactory = $funcionarioFactory;
+        $this->uploaderHelper = $uploaderHelper;
     }
 
-    // rotas para as páginas
-//    /**
-//     * @Route("/", name="index")
-//     */
-//    public function index(): Response
-//    {
-//        return $this->render('index.html.twig');
-//    }
 
     //rotas de cadastro
     /**
@@ -48,6 +44,7 @@ class FuncionarioController extends AbstractController
     {
         $return = $request->getContent();
         $functionary = $this->funcionarioFactory->criarFuncionario($return);
+
 
         //formulario de cadastro
         $form = $this->createForm(FuncionarioType::class, $functionary);
@@ -62,14 +59,20 @@ class FuncionarioController extends AbstractController
         //para salvar
         if ($form->isSubmitted() && $form->isValid()){
             $functionary = $form->getData();
+
+
             $em->persist($functionary);
             $em->flush();
+
             return $this->redirectToRoute('funcionario');
         }
 
         return $this ->renderForm('view/Cadastros/Funcionario/Form/form.html.twig', [
-            'funcionario' => $form, 'title' => $title
+            'funcionario' => $form, 'title' => $title,
+            $this->uploaderHelper->asset($form, 'imageName')
+
         ]);
+
     }
 
     /**
@@ -94,6 +97,10 @@ class FuncionarioController extends AbstractController
         $functionary = $funcionarioRepository->find($id);
         $form = $this->createForm(FuncionarioType::class, $functionary);
         $form->handleRequest($request);
+//        $form['imageFile'] = $this->uploaderHelper->asset($form, 'imageName');
+        $form['ImageFile'] = [
+            $this->uploaderHelper->asset($form, 'imageName')
+        ];
 
         //para o botão cancelar
         if($request->get('cancel') == 'Cancel')
@@ -102,15 +109,13 @@ class FuncionarioController extends AbstractController
         // salvar
         if ($form->isSubmitted() && $form->isValid()){
             //$functionary = $form->getData();
+
             $em->persist($functionary);
             $em->flush();
             return $this->redirectToRoute('funcionario');
-
-
         }
         return $this ->renderForm('view/Cadastros/Funcionario/Form/form.html.twig', [
             'funcionario' => $form, 'title' => $title
-
         ]);
 
 
