@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Security\Authenticator;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,8 +31,12 @@ class RegistrationController extends AbstractController
 //        $this->register($request, $userPasswordHasher, $userAuthenticator, $authenticator, $entityManager);
 //    }
 
-    #[Route('/register', name: 'app_cadastrarUser')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, Authenticator $authenticator, EntityManagerInterface $entityManager): Response
+    /**
+     *@Route ("/funcionario/cadastrar", name="cadastroFuncionario", methods={"POST|GET"}, defaults={"title": "Cadastrar Funcionário"})
+     */
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher,
+                             UserAuthenticatorInterface $userAuthenticator, Authenticator $authenticator,
+                             EntityManagerInterface $entityManager, string $title): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -66,8 +71,13 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+//        return $this->render('registration/register.html.twig', [
+//            'registrationForm' => $form->createView(),
+//        ]);
+
+        return $this ->renderForm('view/Cadastros/Funcionario/Form/form.html.twig', [
+            'registrationForm' => $form,
+            'title' => $title
         ]);
     }
 
@@ -89,5 +99,22 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_cadastrarUser');
+    }
+
+    /**
+     * @Route("/funcionario/{id}", name="detalheFuncionario")
+     * @param int $id
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param UserRepository $userRepository
+     * @return Response
+     */
+    public function visualizar(int $id, Request $request, EntityManagerInterface $em, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->find($id);
+
+        return $this->render('view/Cadastros/Funcionario/detalhes/funcionarioDetalhes.html.twig', [
+            'registrationForm' => $user
+        ]);
     }
 }

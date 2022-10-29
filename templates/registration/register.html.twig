@@ -21,6 +21,26 @@
                         label: 'Password'
                     }) }}
                 </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.isAtivo, {
+                        label: 'Funcionario está Ativo?'
+                    }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.nome, {
+                        label: 'Nome'
+                    }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.cargaHorariaSemanal, {
+                        label: 'Carga Semanal'
+                    }) }}
+                </div>
+{#                div class="form-group">#}
+{#                    {{ form_row(registrationForm.imagem, {#}
+{#                        label: 'Foto de Perfil'#}
+{#                    }) }}#}
+{#                </div>#}
 
                 <div class="form-group">
                     <label title="AgreeTerms" for="AgreeTerms">Aceita os Termos e Condições?</label>

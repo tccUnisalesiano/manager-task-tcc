@@ -12,151 +12,77 @@
         margin-left: 15px;
     }
 
+    .card {
+        overflow:hidden;
+    }
+
+    .card-body .rotate {
+        z-index: 8;
+        float: right;
+        height: 100%;
+    }
+
+    .card-body .rotate i {
+        color: rgba(20, 20, 20, 0.15);
+        position: absolute;
+        left: 0;
+        left: auto;
+        right: -10px;
+        bottom: 0;
+        display: block;
+        -webkit-transform: rotate(-44deg);
+        -moz-transform: rotate(-44deg);
+        -o-transform: rotate(-44deg);
+        -ms-transform: rotate(-44deg);
+        transform: rotate(-44deg);
+    }
+
 </style>
 
-<div class="row" style="margin: auto;">
-    <div class="col-lg-3 col-md-6">
-        <div class="card">
-            <div class="card-block">
-                <div class="row align-items-center">
-                    <div class="col-8 indicar_title">
-                        <h4 class="indicador_color_valor">$30200</h4>
-                        <h6>Projetos</h6>
-                    </div>
+<div class="row mb-3">
+    <div class="col-xl-3 col-sm-6 py-2">
+        <div class="card bg-success text-white h-100">
+            <div class="card-body bg-success">
+                <div class="rotate">
+                    <i class="fa fa-note-sticky fa-4x"></i>
                 </div>
-            </div>
-            <div class="card-footer indicador_valor_footer">
-                <div class="row align-items-center">
-                    <div class="col-9">
-                        <p class="text-white m-b-0">20% Lucro</p>
-                    </div>
-                    <div class="col-3 text-right">
-                        <i class="fa fa-line-chart text-white f-16"></i>
-                    </div>
-                </div>
+                <h6 class="text-uppercase">Users</h6>
+                <h1 class="display-4">134</h1>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="card">
-            <div class="card-block">
-                <div class="row align-items-center">
-                    <div class="col-8 indicar_title">
-                        <h4 class="indicador_color_valor">2</h4>
-                        <h6>Fase Final</h6>
-                    </div>
+    <div class="col-xl-3 col-sm-6 py-2">
+        <div class="card text-white bg-danger h-100">
+            <div class="card-body bg-danger">
+                <div class="rotate">
+                    <i class="fa fa-list fa-4x"></i>
                 </div>
-            </div>
-            <div class="card-footer" style="background-color: blue">
-                <div class="row align-items-center">
-                    <div class="col-9">
-                        <p class="text-white m-b-0">17% OK</p>
-                    </div>
-                    <div class="col-3 text-right">
-                        <i class="fa fa-line-chart text-white f-16"></i>
-                    </div>
-                </div>
+                <h6 class="text-uppercase">Posts</h6>
+                <h1 class="display-4">87</h1>
             </div>
         </div>
     </div>
-{#    <div class="col-xl-3 col-md-6">#}
-{#        <div class="card">#}
-{#            <div class="card-block">#}
-{#                <div class="row align-items-center">#}
-{#                    <div class="col-8 indicar_title">#}
-{#                        <h4 class="indicador_color_valor">5</h4>#}
-{#                        <h6>Aniversariantes</h6>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="card-footer" style="background-color: green">#}
-{#                <div class="row align-items-center">#}
-{#                    <div class="col-9">#}
-{#                        <p class="text-white m-b-0"> Este mes </p>#}
-{#                    </div>#}
-{#                    <div class="col-3 text-right">#}
-{#                        <i class="fa fa-line-chart text-white f-16"></i>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="col-xl-3 col-md-6">#}
-{#        <div class="card">#}
-{#            <div class="card-block">#}
-{#                <div class="row align-items-center">#}
-{#                    <div class="col-8 indicar_title">#}
-{#                        <h4 class="indicador_color_valor">2</h4>#}
-{#                        <h6>Projetos</h6>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="card-footer" style="background-color: red">#}
-{#                <div class="row align-items-center">#}
-{#                    <div class="col-9" >#}
-{#                        <p class="text-white m-b-0">2 Em Atraso</p>#}
-{#                    </div>#}
-{#                    <div class="col-3 text-right">#}
-{#                        <i class="fa fa-line-chart text-white f-16"></i>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+    <div class="col-xl-3 col-sm-6 py-2">
+        <div class="card text-white bg-info h-100">
+            <div class="card-body bg-info">
+                <div class="rotate">
+                    <i class="fa fa-twitter fa-4x"></i>
+                </div>
+                <h6 class="text-uppercase">Tweets</h6>
+                <h1 class="display-4">125</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 py-2">
+        <div class="card text-white bg-warning h-100">
+            <div class="card-body">
+                <div class="rotate">
+                    <i class="fa fa-share fa-4x"></i>
+                </div>
+                <h6 class="text-uppercase">Shares</h6>
+                <h1 class="display-4">36</h1>
+            </div>
+        </div>
+    </div>
 </div>
-{#<div class="col-lg-12">#}
-{#    <hr>#}
-{#</div>#}
 
-{#<div class="page-content page-container" id="page-content" style="margin-top: 15px; width: auto !important;">#}
-{#    <div class="padding">#}
-{#        <div class="row container d-flex">#}
-
-{#            <div class="col-lg-8 grid-margin stretch-card">#}
-{#                    <div class="card-header" style="background-color: darkorange; width: 100% !important;">#}
-{#                        <h4 class="card-title" style="color: white">Projetos Relacionados</h4>#}
-{#                    </div>#}
-{#                    <div class="card-body">#}
-{#                        <div class="table-responsive">#}
-{#                            <table class="table table-hover table-dataTables">#}
-{#                                <thead>#}
-{#                                <tr>#}
-{#                                    <th>Name</th>#}
-{#                                    <th>ID</th>#}
-{#                                    <th>Inicio</th>#}
-{#                                    <th>Status</th>#}
-{#                                </tr>#}
-{#                                </thead>#}
-{#                                <tbody>#}
-{#                                <tr>#}
-{#                                    <td>Guilherme Correia</td>#}
-{#                                    <td>1</td>#}
-{#                                    <td>22 Jun 2022</td>#}
-{#                                    <td><span class="badge badge-danger" style="background-color: red">Concluído</span></td>#}
-{#                                </tr>#}
-{#                                <tr>#}
-{#                                    <td>Laleska Rodrigues</td>#}
-{#                                    <td>2</td>#}
-{#                                    <td>15 Jul 2022</td>#}
-{#                                    <td><span class="badge badge-danger" style="background-color: darkgoldenrod">Em Andamento</span></td>#}
-{#                                </tr>#}
-{#                                <tr>#}
-{#                                    <td>Chicão FMX</td>#}
-{#                                    <td>35</td>#}
-{#                                    <td>14 Ago 2022</td>#}
-{#                                    <td><span class="badge badge-info" style="background-color: blue">Pausado</span></td>#}
-{#                                </tr>#}
-{#                                <tr>#}
-{#                                    <td>Matheus R</td>#}
-{#                                    <td>14</td>#}
-{#                                    <td>16 Set 2022</td>#}
-{#                                    <td><span class="badge badge-success" style="background-color: green">Concluído</span></td>#}
-{#                                </tr>#}
-{#                                </tbody>#}
-{#                            </table>#}
-{#                        </div>#}
-{#                    </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}

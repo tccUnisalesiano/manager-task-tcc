@@ -41,9 +41,7 @@ class FuncionarioController extends AbstractController
 //    }
 
     //rotas de cadastro
-    /**
-     *@Route ("/funcionario/cadastrar", name="cadastroFuncionario", methods={"POST|GET"}, defaults={"title": "Cadastrar Funcionário"})
-     */
+
     public function novo(Request $request, EntityManagerInterface $em, string $title): Response
     {
         $return = $request->getContent();

@@ -32,6 +32,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\Column]
+    private ?bool $isAtivo = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $nome = null;
+
+    #[ORM\Column]
+    private ?float $cargaHorariaSemanal = null;
+
+//    #[ORM\Column(length: 255)]
+//    private ?string $imagem = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,4 +125,52 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function isIsAtivo(): ?bool
+    {
+        return $this->isAtivo;
+    }
+
+    public function setIsAtivo(bool $isAtivo): self
+    {
+        $this->isAtivo = $isAtivo;
+
+        return $this;
+    }
+
+    public function getNome(): ?string
+    {
+        return $this->nome;
+    }
+
+    public function setNome(string $nome): self
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    public function getCargaHorariaSemanal(): ?float
+    {
+        return $this->cargaHorariaSemanal;
+    }
+
+    public function setCargaHorariaSemanal(float $cargaHorariaSemanal): self
+    {
+        $this->cargaHorariaSemanal = $cargaHorariaSemanal;
+
+        return $this;
+    }
+
+//    public function getImagem(): ?string
+//    {
+//        return $this->imagem;
+//    }
+//
+//    public function setImagem(string $imagem): self
+//    {
+//        $this->imagem = $imagem;
+//
+//        return $this;
+//    }
 }
