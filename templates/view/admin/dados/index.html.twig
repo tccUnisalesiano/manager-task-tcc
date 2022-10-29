@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include 'include/admin_navbar.html.twig' %}
+    <section class="home">
+        {% include 'include/navbar_top.html.twig' %}
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-lg-6"><h4 class="card-title" id="hidden-label-round-controls">Controladores</h4>
+                        </div>
+                    </div>
+                </div>
+{#                <div class="row">#}
+{#                    <div class="col-lg-6">#}
+{#                        <div class="card">#}
+{#                            <div class="card-body" id="container">#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+                <div class="page-content page-container" id="page-content" style="margin-top: 15px; width: auto !important;">
+                    <div class="padding">
+                        <div class="row container d-flex">
+
+                            <div class="col-lg-10">
+                                    <div class="card-header" style="background-color: #9212CE; width: 100% !important;">
+                                        <h4 class="card-title" style="color: white">Projetos Relacionados</h4>
+                                    </div>
+                                    <div class="card-body">
+                                            <table class="table table-hover table-striped table-dataTables">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Projeto</th>
+                                                    <th>Data Inicial</th>
+                                                    <th>Data Final</th>
+                                                    <th>Situação</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="tblprojetos">
+                                                </tbody>
+                                            </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-content page-container" id="page-content" style="margin-top: 15px; width: auto !important;">
+                    <div class="padding">
+                        <div class="row container d-flex">
+
+                            <div class="col-lg-10">
+                                <div class="card-header" style="background-color: #9212CE; width: 100% !important;">
+                                    <h4 class="card-title" style="color: white">Funcionarios Relacionados</h4>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-hover table-striped table-dataTables">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tarefa</th>
+                                            <th>Email</th>
+                                            <th>Carga Horária</th>
+                                            <th>Situação</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tblFuncionarios">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-12 ">
+                        <button class="btn btn-primary" type="button"  style="float: right !important;">Buscar Projetos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ asset('styles/JS/dados.js') }}"></script>
+
+    <script>
+        $(document).ready(function (){
+            $.ajax({
+                type: 'POST',
+                url: 'tratamentodados/projetos',
+                dataType: 'JSON',
+                success: function(response) {
+                    console.log(response);
+                    $('.filtroProj').remove();
+                    response.response.forEach((resp) => {
+                        $("#tblprojetos").append
+                        (`<tr class="filtroProj">
+                        <td> ${resp.id} </td>
+                        <td> ${resp.nome} </td>
+                        <td> ${resp.data_inicial} </td>
+                        <td> ${resp.data_entrega_final} </td>
+                        <td> ${resp.situacao} </td>
+                    </tr>`);
+                    });
+                }, complete: function(resp) {
+                    console.log(resp);
+                }
+            })
+        });
+
+        $(document).ready(function (){
+            $.ajax({
+                type: 'POST',
+                url: 'tratamentodados/funcionarios',
+                dataType: 'JSON',
+                success: function(response) {
+                    console.log(response);
+                    $('.filtroFun').remove();
+                    response.response.forEach((resp) => {
+                        $("#tblFuncionarios").append
+                        (`<tr class="filtroFun">
+                        <td> ${resp.id} </td>
+                        <td> ${resp.nome_funcionario} </td>
+                        <td> ${resp.email_funcionario} </td>
+                        <td> ${resp.carga_horaria_semanal} </td>
+                        <td> ${resp.is_ativo} </td>
+                    </tr>`);
+                    });
+                }, complete: function(resp) {
+                    console.log(resp);
+                }
+            })
+        });
+    </script>
+{% endblock %}
+
+

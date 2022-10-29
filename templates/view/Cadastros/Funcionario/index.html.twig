@@ -19,44 +19,43 @@
                 <div class="card-body">
                     <div class="container-fluid">
                         <div class="form-group">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-hover table-dataTables">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nome</th>
-                                        <th>E-mail</th>
-                                        <th>Imagem</th>
-                                        <th>Administrador</th>
-                                        <th>Status</th>
-                                        <th>Ações</th>
+                            <table class="table table-striped table-hover table-dataTables">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>E-mail</th>
+                                    <th>Carga Horaria</th>
+{#                                    <th>Administrador</th>#}
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in registrationForm %}
+                                    <tr onclick="window.location='{{ path('detalheFuncionario', {id: item.id}) }}';">
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.nome }}</td>
+                                        <td>{{ item.email }}</td>
+                                        <td>{{ item.cargaHorariaSemanal }}</td>
+{#                                        <td>#}
+{#                                            {{ (item.isAdmin == 1) ? "Sim" : "Não" }}#}
+{#                                        </td>#}
+                                        <td>
+                                            {{ (item.isAtivo == 1) ? "Ativo" : "Desativo" }}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary"
+                                               href="{{ path('editarFuncionario', {id: item.id }) }}"
+                                               title="Editar"><i class="fa-solid fa-pen edit"></i> </a>
+                                            <a class="btn btn-danger"
+                                               href="{{ path('deleteFuncionario', {id: item.id }) }}"
+                                               title="Excluir"><i class="fa-solid fa-trash delete"></i> </a>
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for funcionario in funcionario %}
-                                        <tr onclick="window.location='{{ path('detalheFuncionario', {id: funcionario.id}) }}';">
-                                            <td>{{ funcionario.id }}</td>
-                                            <td>{{ funcionario.nomeFuncionario }}</td>
-                                            <td>{{ funcionario.emailFuncionario }}</td>
-                                            <td>
-                                                {{ (funcionario.isAdmin == 1) ? "Sim" : "Não" }}
-                                            </td>
-                                            <td>
-                                                {{ (funcionario.isAtivo == 1) ? "Ativo" : "Desativo" }}
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-primary"
-                                                   href="{{ path('editarFuncionario', {id: funcionario.id }) }}"
-                                                   title="Editar"><i class="fa-solid fa-pen edit"></i> </a>
-                                                <a class="btn btn-danger"
-                                                   href="{{ path('deleteFuncionario', {id: funcionario.id }) }}"
-                                                   title="Excluir"><i class="fa-solid fa-trash delete"></i> </a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -64,23 +63,6 @@
         </div>
     </section>
 
-    <script>
-        $(document).ready(function () {
-            console.log("JQUERY IS LOAD");
-        });
+    <script src="{{ asset('styles/JS/dados.js') }}"></script>
 
-        $('.table-dataTables').dataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json",
-                "searchPlaceholder": "Pesquisar..."
-            },
-        });
-    </script>
 {% endblock %}

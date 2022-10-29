@@ -73,6 +73,23 @@ class ProjetoController extends AbstractController
         ]);
     }
 
+//    /**
+//     * @Route("/tratamentodados/ajaxAction", methods={"POST"})
+//     */
+//    public function buscarTodosProjetos(ManagerRegistry $doctrine): Response
+//    {
+//        $return = $doctrine->getRepository(Projeto::class);
+//        $projetoList = $return->buscarProjetos();
+//
+//        var_dump($projetoList);
+//
+//        return $this->render('view/admin/dados/index.html.twig', [
+//            'projeto' => $projetoList
+//        ]);
+//    }
+
+
+
     /**
      * @param int $id
      * @param Request $request
