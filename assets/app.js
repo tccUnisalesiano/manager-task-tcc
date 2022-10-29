@@ -19,6 +19,8 @@ import 'datatables.net-bs4/js/dataTables.bootstrap4';
 import 'datatables.net-bs4/css/dataTables.bootstrap4.css';
 global.$ = global.jQuery = $;
 
+var Highcharts = require ( 'highcharts' ) ;
+require ( 'highcharts/modules/exporting' ) ( Highcharts ) ;
 
 // start the Stimulus application
 

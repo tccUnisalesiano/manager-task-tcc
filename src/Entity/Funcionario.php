@@ -5,15 +5,14 @@ namespace App\Entity;
 use App\Repository\FuncionarioRepository;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\ArrayShape;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use ReturnTypeWillChange;
+
 
 /**
  * Classe responsável por gerenciar o funcionario
  * @author Guilherme Correia
  */
 #[ORM\Entity(repositoryClass: FuncionarioRepository::class)]
-#[Vich\Uploadable]
 class Funcionario implements \JsonSerializable
 {
     #[ORM\Id]
@@ -36,18 +35,11 @@ class Funcionario implements \JsonSerializable
     #[ORM\Column(type: 'boolean', nullable: true)]
     public ?bool $isAdmin;
 
+    #[ORM\Column(type: 'blob', nullable: true)]
+    public $imagemPerfil;
+
     #[ORM\Column(nullable: true)]
     public ?bool $isAtivo = null;
-
-    // imagem
-    #[Vich\UploadableField(mapping: 'user', fileNameProperty: 'imageName')]
-    public ?File $imageFile = null;
-
-    #[ORM\Column(type: 'string', length: 255 , nullable: true)]
-    public ?string $imageName;
-
-    #[ORM\Column(type: 'datetime')]
-    public ?\DateTimeInterface $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -115,6 +107,19 @@ class Funcionario implements \JsonSerializable
         return $this;
     }
 
+    public function getImagemPerfil()
+    {
+        return $this->imagemPerfil;
+    }
+
+    public function setImagemPerfil($imagemPerfil): self
+    {
+        $this->imagemPerfil = $imagemPerfil;
+
+        return $this;
+    }
+
+
     public function getIsAtivo(): ?bool
     {
         return $this->isAtivo;
@@ -127,35 +132,7 @@ class Funcionario implements \JsonSerializable
         return $this;
     }
 
-
-    public function setImageFile(?File $imageFile = null): void
-    {
-        $this->imageFile = $imageFile;
-
-        if (null !== $imageFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageName(?string $imageName): void
-    {
-        $this->imageName = $imageName;
-    }
-
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-
-//    #[ArrayShape(["id" => "int|null", "nomeFuncionario" => "null|string", "emailFuncionario" => "null|string", "senha" => "null|string", "cargaHorariaSemanal" => "float|null", "isAdmin" => "bool|null", "isAtivo" => "bool|null"])]
+    #[ArrayShape(["id" => "int|null", "nomeFuncionario" => "null|string", "emailFuncionario" => "null|string", "senha" => "null|string", "cargaHorariaSemanal" => "float|null", "isAdmin" => "bool|null", "isAtivo" => "bool|null"])]
     public function jsonSerialize(): array
     {
         return [
@@ -166,8 +143,7 @@ class Funcionario implements \JsonSerializable
             "cargaHorariaSemanal" => $this->getCargaHorariaSemanal(),
             "isAdmin" => $this->getIsAdmin(),
             "isAtivo" => $this->getIsAtivo(),
-            "imageName" => $this->getImageName(),
-            "imageFile" => $this->getImageFile()
+            // "imagemPerfil" => $this->getImagemPerfil()
         ];
     }
 }
