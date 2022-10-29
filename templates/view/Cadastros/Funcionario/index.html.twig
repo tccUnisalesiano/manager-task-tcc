@@ -26,30 +26,30 @@
                                     <th>Nome</th>
                                     <th>E-mail</th>
                                     <th>Carga Horaria</th>
-                                    <th>Administrador</th>
+{#                                    <th>Administrador</th>#}
                                     <th>Status</th>
                                     <th>Ações</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for funcionario in funcionario %}
-                                    <tr onclick="window.location='{{ path('detalheFuncionario', {id: funcionario.id}) }}';">
-                                        <td>{{ funcionario.id }}</td>
-                                        <td>{{ funcionario.nomeFuncionario }}</td>
-                                        <td>{{ funcionario.emailFuncionario }}</td>
-                                        <td>{{ funcionario.cargaHorariaSemanal }}</td>
+                                {% for item in registrationForm %}
+                                    <tr onclick="window.location='{{ path('detalheFuncionario', {id: item.id}) }}';">
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.nome }}</td>
+                                        <td>{{ item.email }}</td>
+                                        <td>{{ item.cargaHorariaSemanal }}</td>
+{#                                        <td>#}
+{#                                            {{ (item.isAdmin == 1) ? "Sim" : "Não" }}#}
+{#                                        </td>#}
                                         <td>
-                                            {{ (funcionario.isAdmin == 1) ? "Sim" : "Não" }}
-                                        </td>
-                                        <td>
-                                            {{ (funcionario.isAtivo == 1) ? "Ativo" : "Desativo" }}
+                                            {{ (item.isAtivo == 1) ? "Ativo" : "Desativo" }}
                                         </td>
                                         <td>
                                             <a class="btn btn-primary"
-                                               href="{{ path('editarFuncionario', {id: funcionario.id }) }}"
+                                               href="{{ path('editarFuncionario', {id: item.id }) }}"
                                                title="Editar"><i class="fa-solid fa-pen edit"></i> </a>
                                             <a class="btn btn-danger"
-                                               href="{{ path('deleteFuncionario', {id: funcionario.id }) }}"
+                                               href="{{ path('deleteFuncionario', {id: item.id }) }}"
                                                title="Excluir"><i class="fa-solid fa-trash delete"></i> </a>
                                         </td>
                                     </tr>

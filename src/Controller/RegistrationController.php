@@ -7,11 +7,15 @@ use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\Authenticator;
 use App\Security\EmailVerifier;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -115,6 +119,19 @@ class RegistrationController extends AbstractController
 
         return $this->render('view/Cadastros/Funcionario/detalhes/funcionarioDetalhes.html.twig', [
             'registrationForm' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/funcionario", name="funcionario", methods={"GET"})
+     */
+    public function buscarTodos(ManagerRegistry $doctrine): Response
+    {
+        $return = $doctrine->getRepository(User::class);
+        $userList = $return->findAll();
+
+        return $this->render('view/Cadastros/Funcionario/index.html.twig', [
+            'registrationForm' =>$userList
         ]);
     }
 }

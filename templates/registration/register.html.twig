@@ -36,11 +36,12 @@
                         label: 'Carga Semanal'
                     }) }}
                 </div>
-{#                div class="form-group">#}
-{#                    {{ form_row(registrationForm.imagem, {#}
-{#                        label: 'Foto de Perfil'#}
-{#                    }) }}#}
-{#                </div>#}
+                <div class="form-group">
+                    {{ form_row(registrationForm.imageFile) }}
+                </div>
+                <div class="image">
+                    <img src="public/perfil{{ registrationForm.imageFile }}">
+                </div>
 
                 <div class="form-group">
                     <label title="AgreeTerms" for="AgreeTerms">Aceita os Termos e Condições?</label>

@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -57,6 +58,10 @@ class RegistrationFormType extends AbstractType
                         'Desativo' => False,
                     ],
                 ])
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'label' => 'Imagem: ',
+            ]);
 
         ;
     }
