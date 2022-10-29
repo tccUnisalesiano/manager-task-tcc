@@ -83,7 +83,7 @@ class Projeto implements \JsonSerializable
         return $this->descricao;
     }
 
-    public function setDescricao(string $descricao): void
+    public function setDescricao(string $descricao = null): void
     {
         $this->descricao = $descricao;
     }
@@ -115,7 +115,7 @@ class Projeto implements \JsonSerializable
         return $this->dataIniPrevisto;
     }
 
-    public function setDataIni(?\DateTimeInterface $dataIniPrevisto): self
+    public function setDataIni(?\DateTimeInterface $dataIniPrevisto = null): self
     {
         $this->dataIniPrevisto = $dataIniPrevisto;
 
@@ -130,7 +130,7 @@ class Projeto implements \JsonSerializable
         return $this->dataFimPrevisto;
     }
 
-    public function setDataFimPrevisto(?\DateTimeInterface $dataFimPrevisto): self
+    public function setDataFimPrevisto(?\DateTimeInterface $dataFimPrevisto = null): self
     {
         $this->dataFimPrevisto = $dataFimPrevisto;
 
@@ -145,7 +145,7 @@ class Projeto implements \JsonSerializable
         return $this->dataEntregaFinal;
     }
 
-    public function setDataEntregaFinal(?\DateTimeInterface $dataEntregaFinal): self
+    public function setDataEntregaFinal(?\DateTimeInterface $dataEntregaFinal = null): self
     {
         $this->dataEntregaFinal = $dataEntregaFinal;
 
@@ -155,7 +155,7 @@ class Projeto implements \JsonSerializable
     /**
      * @return \DateTimeInterface|null
      */
-    public function setDataInicial(?\DateTimeInterface $dataInicial): self
+    public function setDataInicial(?\DateTimeInterface $dataInicial = null): self
     {
         $this->dataInicial = $dataInicial;
 
@@ -185,7 +185,7 @@ class Projeto implements \JsonSerializable
         return $this->tempoGastoTotal;
     }
 
-    public function setTempoGastoTotal(?float $tempoGastoTotal): self
+    public function setTempoGastoTotal(?float $tempoGastoTotal = null): self
     {
         $this->tempoGastoTotal = $tempoGastoTotal;
 

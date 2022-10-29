@@ -141,7 +141,7 @@ class Tarefa implements \JsonSerializable
         return $this->descricao;
     }
 
-    public function setDescricao(?string $descricao): self
+    public function setDescricao(?string $descricao = null): self
     {
         $this->descricao = $descricao;
 
@@ -153,7 +153,7 @@ class Tarefa implements \JsonSerializable
         return $this->tempoEstimado;
     }
 
-    public function setTempoEstimado(?float $tempoEstimado): self
+    public function setTempoEstimado(?float $tempoEstimado = null): self
     {
         $this->tempoEstimado = $tempoEstimado;
 
@@ -165,7 +165,7 @@ class Tarefa implements \JsonSerializable
         return $this->dataIni;
     }
 
-    public function setDataIni(?\DateTimeInterface $dataIni): self
+    public function setDataIni(?\DateTimeInterface $dataIni = null): self
     {
         $this->dataIni = $dataIni;
 
@@ -177,7 +177,7 @@ class Tarefa implements \JsonSerializable
         return $this->dataFim;
     }
 
-    public function setDataFim(?\DateTimeInterface $dataFim): self
+    public function setDataFim(?\DateTimeInterface $dataFim = null): self
     {
         $this->dataFim = $dataFim;
 
@@ -239,7 +239,7 @@ class Tarefa implements \JsonSerializable
         return $this->tempoGasto;
     }
 
-    public function setTempoGasto(?float $tempoGasto): self
+    public function setTempoGasto(?float $tempoGasto = null): self
     {
         $this->tempoGasto = $tempoGasto;
 

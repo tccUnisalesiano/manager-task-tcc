@@ -70,22 +70,35 @@ class TarefaType extends AbstractType
                 ])
             ->add('nome', TextType::class,
                 ['label' => "Nome da Tarefa: "])
-            ->add('descricao', TextareaType::class,
-                ['label' => "Descrição: "])
-            ->add('tempoEstimado', NumberType::class,
-                ['label' => "Tempo Estimado: "])
-            ->add('tempoGasto', NumberType::class,
-                ['label' => "Tempo Gasto: "])
-            ->add('dataIni', DateType::class,   //testar esse dateType, pode nao corresponder com o que queremos
-                ['label' => "Data Inicial: ",
+
+            ->add('descricao', TextareaType::class, [
+                'label' => "Descrição: ",
+                'required'=>false
+            ])
+
+            ->add('tempoEstimado', NumberType::class, [
+                'label' => "Tempo Estimado: ",
+                'required'=>false
+            ])
+
+            ->add('tempoGasto', NumberType::class, [
+                'label' => "Tempo Gasto: ",
+                'required'=>false
+                ])
+
+            ->add('dataIni', DateType::class, [
+                    'label' => "Data Inicial: ",
                     'widget' => 'single_text',
                     'attr' => ['class' => 'js-datepicker'],
+                    'required' => false
                 ])
-            ->add('dataFim', DateType::class,   //testar esse dateType, pode nao corresponder com o que queremos
-                ['label' => "Data Final: ",
+            ->add('dataFim', DateType::class,[
+                    'label' => "Data Final: ",
                     'widget' => 'single_text',
                     'attr' => ['class' => 'js-datepicker'],
+                    'required' => false
                 ])
+
 //            ->add('documentacao', TextType::class,
 //                ['label' => "Documentação: "])
             ->add('status', ChoiceType::class,
