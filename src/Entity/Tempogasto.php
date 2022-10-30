@@ -35,7 +35,7 @@ class Tempogasto implements \JsonSerializable
     public ?Tarefa $idTarefa = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    public ?User $iidUser;
+    public ?User $idUser;
 
 
 
