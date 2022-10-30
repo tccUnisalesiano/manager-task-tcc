@@ -53,8 +53,12 @@ class tempogastoType extends AbstractType
 
             ->add('tempo', NumberType::class,
                 ['label' => "Tempo: "])
-            ->add('descricao', TextareaType::class,
-                ['label' => "Descrição: "])
+
+            ->add('descricao', TextareaType::class, [
+                'label' => "Descrição: ",
+                'required'=>false
+            ])
+
             ->add('data', DateType::class,   //testar esse dateType, pode nao corresponder com o que queremos
                 ['label' => "Data: ",
                     'widget' => 'single_text',

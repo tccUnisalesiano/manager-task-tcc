@@ -27,7 +27,6 @@
                                     <th>Atribuído para</th>
                                     <th>Prioridade</th>
                                     <th>Status</th>
-                                    <th>Porcentagem</th>
                                     <th>Ações</th>
                                 </tr>
                                 </thead>
@@ -40,7 +39,6 @@
                                         <td>{{ tarefa.idFuncionario.nomeFuncionario }}</td>
                                         <td>{{ tarefa.prioridade }}</td>
                                         <td>{{ tarefa.status }}</td>
-                                        <td>{{ tarefa.porcentagem }}%</td>
                                         <td>
                                             <a class="btn btn-primary"
                                                href="{{ path('editarTarefa', {id: tarefa.id}) }}" title="Editar"><i

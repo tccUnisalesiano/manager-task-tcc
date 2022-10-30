@@ -59,13 +59,13 @@ input[name="email"]:active, input[name="email"]:focus{
     border-color: var(--primary-color) !important;
 }
 
-.table-responsive .page-item.active .page-link{
+.page-item.active .page-link{
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
     color: var( --primary-color-light) !important;
 }
 
-.table-responsive .page-link{
+.page-link{
     color: var(--primary-color) !important;
     background-color: transparent !important;
     border-color: var(--primary-color) !important;

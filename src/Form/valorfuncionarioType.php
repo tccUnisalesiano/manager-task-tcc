@@ -35,6 +35,7 @@ class valorfuncionarioType extends AbstractType
                 ['label' => "Data Final: ",
                     'widget' => 'single_text',
                     'attr' => ['class' => 'js-datepicker'],
+                    'required' => false
                 ]);
     }
 }

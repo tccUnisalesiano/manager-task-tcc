@@ -23,10 +23,15 @@ class ProjetoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nome', TextType::class,
-                ['label' => "Nome: "])
-            ->add('descricao', TextareaType::class,
-                ['label' => "Descrição: "])
+            ->add('nome', TextType::class, [
+                'label' => "Nome: "
+            ])
+
+            ->add('descricao', TextareaType::class, [
+                'label' => "Descrição: ",
+                'required' => false
+            ])
+
             ->add('situacao', ChoiceType::class,
             ['label' => "Situação: ",
                 'choices' => [
@@ -35,9 +40,12 @@ class ProjetoType extends AbstractType
                     'Pausada' => 'Pausada',
                 ],
             ])
-            ->add('tempoGastoTotal', NumberType::class,
-                ['label' => "Tempo Gasto: "]
-            )
+
+            ->add('tempoGastoTotal', NumberType::class, [
+                'label' => "Tempo Gasto: ",
+                'required' => false
+                ])
+
             ->add('cliente_id', EntityType::class, [
                 'class' => Cliente::class,
                 'query_builder' => function (EntityRepository $er) {
@@ -46,25 +54,33 @@ class ProjetoType extends AbstractType
                 'choice_label' => 'cpf_cnpj',
                 'label' => 'CPF ou CNPJ do Cliente: '
             ])
-            ->add('dataIniPrevisto', DateType::class,
-                ['label' => "Data Início Previsto: ",
-                    'widget' => 'single_text',
-                    'attr' => ['class' => 'js-datepicker'],
+
+            ->add('dataIniPrevisto', DateType::class, [
+                'label' => "Data Início Previsto: ",
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker'],
+                'required' => false
                 ])
-            ->add('dataFimPrevisto', DateType::class,
-                ['label' => "Data Final Previsto: ",
-                    'widget' => 'single_text',
-                    'attr' => ['class' => 'js-datepicker'],
+
+            ->add('dataFimPrevisto', DateType::class, [
+                'label' => "Data Final Previsto: ",
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker'],
+                'required' => false
                 ])
-            ->add('dataInicial', DateType::class,
-                ['label' => "Data Inicial: ",
-                    'widget' => 'single_text',
-                    'attr' => ['class' => 'js-datepicker'],
+
+            ->add('dataInicial', DateType::class, [
+                'label' => "Data Inicial: ",
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker'],
+                'required' => false
                 ])
-            ->add('dataEntregaFinal', DateType::class,
-                ['label' => "Data Entrega Final: ",
-                    'widget' => 'single_text',
-                    'attr' => ['class' => 'js-datepicker'],
+
+            ->add('dataEntregaFinal', DateType::class, [
+                'label' => "Data Entrega Final: ",
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker'],
+                'required' => false
                 ]);
     }
 }

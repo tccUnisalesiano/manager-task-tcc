@@ -12,23 +12,40 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
+
+
     public function __construct(EmailVerifier $emailVerifier)
     {
         $this->emailVerifier = $emailVerifier;
+
     }
 
 //    public function route(){
@@ -63,7 +80,7 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('dev.guilhermecorreia@hotmail.com', 'Mail Bot'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Por favor, confirme seu e-mail')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
@@ -100,7 +117,7 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Seu e-mail foi verificado!');
 
         return $this->redirectToRoute('app_cadastrarUser');
     }
@@ -134,4 +151,81 @@ class RegistrationController extends AbstractController
             'registrationForm' =>$userList
         ]);
     }
+
+    /**
+     * @Route()
+     * @return Response
+     */
+    public function findUserIndex(): Response
+    {
+        return $this->render('include/admin_navbar.html.twig', [
+            'registrationForm'
+        ]);
+    }
+
+    /**
+     * @Route("/funcionario/editar/{id}", name="editarFuncionario", defaults={"title": "Alterar Funcionário"})
+     * @param int $id
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param UserRepository $userRepository
+     * @return Response
+     */
+    public function update(int $id, Request $request, EntityManagerInterface $em, UserRepository $userRepository, string $title): Response
+    {
+        $user = $userRepository->find($id);
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('funcionario');
+        }
+
+        return $this ->renderForm('view/Cadastros/Funcionario/Form/form.html.twig', [
+            'registrationForm' => $form,
+            'title' => $title
+        ]);
+    }
+
+    /**
+     * @param int $id
+     * @param EntityManagerInterface $em
+     * @param UserRepository $userRepository
+     * @return Response
+     * @Route("/funcionario/excluir/{id}", name="deleteFuncionario")
+     */
+    public function remove(int $id, EntityManagerInterface $em, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->find($id);
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('funcionario');
+    }
+
+
+    /**
+     * @Route("/perfil", name="perfilUser")
+     * @param int $id
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param UserRepository $userRepository
+     * @return Response
+     */
+    public function perfilUser(int $id, Request $request, EntityManagerInterface $em, UserRepository $userRepository): Response
+    {
+
+        $user = $this->getUser();
+
+        return $this->render('view/Cadastros/Funcionario/funcionarioPerfil.html.twig', [
+            'registrationForm' => $user
+        ]);
+    }
+
+
+
 }

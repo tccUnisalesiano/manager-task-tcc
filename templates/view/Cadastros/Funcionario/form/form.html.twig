@@ -34,11 +34,15 @@
                                 {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'camposInput'}})  }}
                             </div>
 
-{#                            <div class="col-lg-4 ">#}
-{#                                {{ form_row(registrationForm.isAdmin, {'attr': {'class': 'camposInput'}}) }}#}
-{#                            </div>#}
+                            <div class="col-lg-4 ">
+                                {{ form_row(registrationForm.roles, {'attr': {'class': 'camposInput'}}) }}
+                            </div>
+
                             <div class="col-lg-4 ">
                                 {{ form_row(registrationForm.isAtivo, {'attr': {'class': 'camposInput'}}) }}
+                            </div>
+                            <div class="col-lg-4 ">
+                                {{ form_row(registrationForm.imageFile, {'attr': {'class': 'camposInput'}}) }}
                             </div>
 
                             <div class="col-lg-12" style="margin-top: 15px !important;">
@@ -49,7 +53,6 @@
                             </div>
                             {{ form_end(registrationForm) }}
                         </div>
-{#                    {{ form_end(funcionario) }}#}
                 </div>
             </div>
         </div>
