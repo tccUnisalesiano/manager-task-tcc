@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Funcionario;
 use App\Entity\Projeto;
+use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -32,13 +32,13 @@ class TarefaType extends AbstractType
                     'choice_label' => 'nome',
                 ])
 
-            ->add('idFuncionario', EntityType::class,
-                [ 'class' => Funcionario::class,
+            ->add('idUser', EntityType::class,
+                [ 'class' => User::class,
                     'query_builder' => function (EntityRepository $er){
                         return $er->createQueryBuilder('f');
                     },
                     'label' => "Atribuído para: ",
-                    'choice_label' => 'nomeFuncionario',
+                    'choice_label' => 'nome',
                 ])
 
             ->add('prioridade', ChoiceType::class,
@@ -65,7 +65,6 @@ class TarefaType extends AbstractType
                     'choices' => [
                         'Defeito' => 'Defeito',
                         'Funcionalidade' => 'Funcionalidade',
-
                     ],
                 ])
             ->add('nome', TextType::class,

@@ -20,7 +20,7 @@ class tempogastoFactory
         @$tempogasto->tempo = $dados->tempo;
         @$tempogasto->descricao = $dados->descricao;
         @$tempogasto->idTarefa = $dados->idTarefa;
-        @$tempogasto->idFuncionario = $dados->idFuncionario;
+        @$tempogasto->idUser = $dados->idUser;
 
         return $tempogasto;
     }

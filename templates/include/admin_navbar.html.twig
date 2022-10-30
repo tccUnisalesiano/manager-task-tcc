@@ -28,6 +28,7 @@
                 </ul>
             </li>
 
+            {% if 'ROLE_ADMIN' in app.user.roles %}
             <li>
                 <div class="iocn-link">
                     <a href="#">
@@ -42,6 +43,8 @@
                     <li><a href="{{ path('funcionario') }}">Funcionário</a></li>
                 </ul>
             </li>
+            {% endif %}
+
             <li>
                 <div class="iocn-link">
                     <a href="#">

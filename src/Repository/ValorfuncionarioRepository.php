@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Funcionario;
+use App\Entity\User;
 use App\Entity\Valorfuncionario;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -51,37 +51,12 @@ class ValorfuncionarioRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('v');
         $qb
             ->select(select: 'v')
-            ->join('App\Entity\Funcionario', 'f', 'WITH', 'v.idFuncionario = f.id')
-            ->where('f.id = :id')
+            ->join('App\Entity\User', 'u', 'WITH', 'v.idUser = u.id')
+            ->where('u.id = :id')
             ->setParameter('id', $end)
             ;
         return $qb->getQuery()->getResult();
 
     }
-
-//    /**
-//     * @return Valorfuncionario[] Returns an array of Valorfuncionario objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('v.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Valorfuncionario
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 
 }

@@ -1,45 +1,44 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-    <div class="col-lg-12" style="margin-top: 15px; margin-bottom: 15px;">
-        <div class="form-group" style="float: right; margin-right: 26px">
+    <div class="col-lg-12" style="margin-top: 15px;">
+        <div class="form-group" style="float: right; margin: 0 ">
             <a class="btn btn-primary" href="{{ path('cadastroTempogasto') }}">Adicionar Tempo Gasto</a>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div class="form-group">
-            <table class="table table-hover table-striped table-dataTables">
-                <thead>
+    <div class="form-group">
+        <table class="table table-hover table-striped table-dataTables">
+            <thead>
+            <tr>
+                <th>Tarefa</th>
+                <th>Funcionário</th>
+                <th>Atividade</th>
+                <th>Data</th>
+                <th>Tempo Gasto</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            {% for tg in tempogasto %}
+                <tbody>
                 <tr>
-                    <th>Tarefa</th>
-                    <th>Funcionário</th>
-                    <th>Atividade</th>
-                    <th>Data</th>
-                    <th>Tempo Gasto</th>
-                    <th>Ações</th>
-                </tr>
-                </thead>
-                {% for tg in tempogasto %}
-                    <tbody>
-                    <tr>
-                        <td>{{ tg.idTarefa.nome }}</td>
-                        <td>{{ tg.idFuncionario.nomeFuncionario }}</td>
-                        <td>{{ tg.atividade }}</td>
-                        <td>{{ tg.data |date('d/m/Y') }}</td>
-                        <td>{{ tg.tempo }}</td>
-                        <td>
-                            <a class="btn btn-primary" href="{{ path('editartempogasto', {id: tg.id }) }}"
-                               title="Editar"><i class="fa-solid fa-pen edit"></i></a>
-                            <a class="btn btn-danger" href="{{ path('deleteTempogasto', {id: tg.id }) }}"
-                               title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
-                        </td>
+                    <td>{{ tg.idTarefa.nome }}</td>
+                    <td>{{ tg.idUser }}</td>
+                    <td>{{ tg.atividade }}</td>
+                    <td>{{ tg.data |date('d/m/Y') }}</td>
+                    <td>{{ tg.tempo }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('editartempogasto', {id: tg.id }) }}"
+                           title="Editar"><i class="fa-solid fa-pen edit"></i></a>
+                        <a class="btn btn-danger" href="{{ path('deleteTempogasto', {id: tg.id }) }}"
+                           title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
+                    </td>
 
-                    </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
-        </div>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
     </div>
+
 
     <script src="{{ asset('styles/JS/dados.js') }}"></script>
 
