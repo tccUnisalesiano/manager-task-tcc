@@ -34,8 +34,8 @@ class Tempogasto implements \JsonSerializable
     #[ORM\ManyToOne]
     public ?Tarefa $idTarefa = null;
 
-    #[ORM\ManyToOne(targetEntity: Funcionario::class)]
-    public ?Funcionario $idFuncionario;
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    public ?User $iidUser;
 
 
 
@@ -105,14 +105,14 @@ class Tempogasto implements \JsonSerializable
     }
 
 
-    public function getIdFuncionario(): ?Funcionario
+    public function getIdUser(): ?User
     {
-        return $this->idFuncionario;
+        return $this->idUser;
     }
 
-    public function setIdFuncionario(?Funcionario $idFuncionario): self
+    public function setIdUser(?User $idUser): self
     {
-        $this->idFuncionario = $idFuncionario;
+        $this->idUser = $idUser;
 
         return $this;
     }
@@ -127,7 +127,7 @@ class Tempogasto implements \JsonSerializable
             "tempo" => $this->getTempo(),
             "descricao" => $this->getDescricao(),
             "idTarefa" => $this->getIdTarefa(),
-            "idFuncionario" => $this->getIdFuncionario(),
+            "idUser" => $this->getIdUser(),
         ];
     }
 

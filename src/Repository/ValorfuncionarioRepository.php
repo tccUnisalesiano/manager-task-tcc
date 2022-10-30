@@ -51,7 +51,7 @@ class ValorfuncionarioRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('v');
         $qb
             ->select(select: 'v')
-            ->join('App\Entity\Funcionario', 'f', 'WITH', 'v.idFuncionario = f.id')
+            ->join('App\Entity\Funcionario', 'f', 'WITH', 'v.idUser = f.id')
             ->where('f.id = :id')
             ->setParameter('id', $end)
             ;

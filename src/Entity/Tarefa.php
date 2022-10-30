@@ -55,7 +55,7 @@ class Tarefa implements \JsonSerializable
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    public ?Funcionario $idFuncionario = null;
+    public ?User $idUser = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     public ?int $porcentagem = null;
@@ -63,7 +63,7 @@ class Tarefa implements \JsonSerializable
     #[ORM\Column(type: 'float', nullable: true)]
     public ?float $tempoGasto = null;
 
-    #[ORM\OneToMany(mappedBy: 'idFuncionario', targetEntity: Tempogasto::class)]
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Tempogasto::class)]
     private $no;
 
     public function __construct()
@@ -209,14 +209,14 @@ class Tarefa implements \JsonSerializable
     }
 
 
-    public function getIdFuncionario(): ?Funcionario
+    public function getIdUser(): ?User
     {
-        return $this->idFuncionario;
+        return $this->idUser;
     }
 
-    public function setIdFuncionario(?Funcionario $idFuncionario): self
+    public function setIdUser(?User $idUser ): self
     {
-        $this->idFuncionario = $idFuncionario;
+        $this->idUser  = $idUser ;
 
         return $this;
     }
@@ -262,7 +262,7 @@ class Tarefa implements \JsonSerializable
             "dataFim" => $this->getDataFim(),
 //            "documentacao" => $this->getDocumentacao(),
             "tipoTarefa" => $this->getTipoTarefa(),
-            "idFuncionario" => $this->getIdFuncionario(),
+            "idUser " => $this->getIdUser(),
             "porcentagem" => $this->getPorcentagem()
         ];
     }

@@ -63,7 +63,7 @@ class RegistrationFormType extends AbstractType
                 'expanded' => false,
                     'choices' => [
                         'Usuário' => 'ROLE_USER',
-                        'Administrador'=> 'ROLE_ADM'
+                        'Administrador'=> 'ROLE_ADMIN'
                     ],
             ])
 

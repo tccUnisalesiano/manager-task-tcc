@@ -11,7 +11,7 @@ class valorfuncionarioFactory
         $dados = json_decode($json);
 
         @$vFuncionario = new Valorfuncionario();
-        @$vFuncionario->idFuncionario = $dados->idFuncionario;
+        @$vFuncionario->idUser = $dados->idUser;
         @$vFuncionario->valorHora = $dados->valorHora;
         @$vFuncionario->dataIni = $dados->dataIni;
         @$vFuncionario->dataFim = $dados->dataFim;

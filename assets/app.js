@@ -11,6 +11,7 @@
 import '../public/styles/css/navbar.css';
 import '../public/styles/css/ajusteBootstrap.css';
 import '../public/styles/JS/calendario.js';
+import '../public/styles/css/tratamentoDados.css';
 import 'datatables.net-bs4';
 const $ = require('jquery');
 import 'datatables.net-bs4';

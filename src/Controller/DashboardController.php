@@ -38,7 +38,7 @@ class DashboardController extends AbstractController
     public function projetos(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
 
-        $response = $projeto->findAllProdutos();
+        $response = $projeto->findAllProjetos();
 
         if(!$response) return new NotFoundHttpException();
 
@@ -47,6 +47,30 @@ class DashboardController extends AbstractController
             'response' => count($response)
         ]);
     }
+
+    /**
+     * @Route("/dashboard/projetosAberto", methods={"POST"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param ProjetoRepository $projeto
+     * @return JsonResponse|NotFoundHttpException
+     * @throws Exception
+     */
+    public function projetosAberto(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
+    {
+
+        $response = $projeto->findAllProjetosAberto();
+
+        if(!$response) return new NotFoundHttpException();
+
+        return $this->json([
+            'success' => true,
+            'response' => count($response)
+        ]);
+    }
+
+
 
     /**
      * @Route("/dashboard/tarefas", methods={"POST"})

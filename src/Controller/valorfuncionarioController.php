@@ -119,6 +119,6 @@ class valorfuncionarioController extends AbstractController
         $em->remove($vFuncionario);
         $em->flush();
 
-        return $this->redirectToRoute('valorfuncionario');
+        return $this->redirectToRoute('funcionario');
     }
 }

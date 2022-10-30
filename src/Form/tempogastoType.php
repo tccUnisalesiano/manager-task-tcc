@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Funcionario;
 use App\Entity\Tarefa;
+use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -31,13 +31,13 @@ class tempogastoType extends AbstractType
                     'label' => "Tarefa: ",
                     'choice_label' => 'nome',
                 ])
-            ->add('idFuncionario', EntityType::class,
-                [ 'class' => Funcionario::class,
+            ->add('idUser', EntityType::class,
+                [ 'class' => User::class,
                     'query_builder' => function (EntityRepository $er){
                         return $er->createQueryBuilder('t');
                     },
                     'label' => "Funcionário: ",
-                    'choice_label' => 'nomeFuncionario',
+                    'choice_label' => 'nome',
 
                 ])
 

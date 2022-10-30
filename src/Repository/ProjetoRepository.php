@@ -55,7 +55,7 @@ class ProjetoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function findALlProdutos(): array
+    public function findALlProjetos(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -63,6 +63,24 @@ class ProjetoRepository extends ServiceEntityRepository
             SELECT * FROM projeto p
             WHERE 1 = 1
             ORDER BY p.id ASC
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function findALlProjetosAberto(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM projeto p
+            WHERE p.situacao = "Aberta"
             ';
 
         $stmt = $conn->prepare($sql);

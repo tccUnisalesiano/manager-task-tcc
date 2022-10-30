@@ -21,7 +21,7 @@ class Valorfuncionario implements \JsonSerializable
     public ?int $id = null;
 
     #[ORM\ManyToOne]
-    public ?Funcionario $idFuncionario = null;
+    public ?User $idUser = null;
 
     #[ORM\Column(nullable: true)]
     public ?float $valorHora = null;
@@ -37,14 +37,14 @@ class Valorfuncionario implements \JsonSerializable
         return $this->id;
     }
 
-    public function getIdFuncionario(): ?Funcionario
+    public function getIdUser(): ?User
     {
-        return $this->idFuncionario;
+        return $this->idUser ;
     }
 
-    public function setIdFuncionario(?Funcionario $idFuncionario): self
+    public function setIdUser(?User $idUser ): self
     {
-        $this->idFuncionario = $idFuncionario;
+        $this->idUser  = $idUser ;
 
         return $this;
     }
@@ -85,12 +85,12 @@ class Valorfuncionario implements \JsonSerializable
         return $this;
     }
 
-    #[ArrayShape(["Id" => "int|null", "idFuncionario" => "\App\Entity\Funcionario|null", "valorHora" => "float|null", "dataIni" => "\DateTimeInterface|null", "dataFim" => "\DateTimeInterface|null"])]
+    #[ArrayShape(["Id" => "int|null", "idUser " => "\App\Entity\User|null", "valorHora" => "float|null", "dataIni" => "\DateTimeInterface|null", "dataFim" => "\DateTimeInterface|null"])]
     public function jsonSerialize(): array
     {
         return[
             "Id" => $this->getId(),
-            "idFuncionario" => $this->getIdFuncionario(),
+            "idUser" => $this->getIdUser(),
             "valorHora" => $this->getValorHora(),
             "dataIni" => $this->getDataIni(),
             "dataFim" => $this->getDataFim()
