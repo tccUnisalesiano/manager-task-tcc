@@ -95,6 +95,10 @@ class ClienteController extends AbstractController
         $form = $this->createForm(ClienteType::class, $cliente);
         $form->handleRequest($request);
 
+        //btn cancelar
+        if ($request->get('cancel') == 'Cancel')
+            return $this->redirectToRoute('cliente');    //implementar route
+
         if ($form->isSubmitted() && $form->isValid())
         {
             $em->persist($cliente);

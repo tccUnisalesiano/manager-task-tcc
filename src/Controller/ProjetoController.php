@@ -104,6 +104,9 @@ class ProjetoController extends AbstractController
         $form = $this->createForm(ProjetoType::class, $projeto);
         $form->handleRequest($request);
 
+        //btn cancelar
+        if ($request->get('cancel') == 'Cancel')
+            return $this->redirectToRoute('projeto');    //implementar route
 
         if ($form->isSubmitted() && $form->isValid())
         {

@@ -63,6 +63,10 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
+        //btn cancelar
+        if ($request->get('cancel') == 'Cancel')
+            return $this->redirectToRoute('funcionario');    //implementar route
+
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -176,6 +180,10 @@ class RegistrationController extends AbstractController
         $user = $userRepository->find($id);
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+
+        //btn cancelar
+        if ($request->get('cancel') == 'Cancel')
+            return $this->redirectToRoute('funcionario');    //implementar route
 
 
         if ($form->isSubmitted() && $form->isValid())

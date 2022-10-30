@@ -94,6 +94,10 @@ class valorfuncionarioController extends AbstractController
         $form = $this->createForm(valorfuncionarioType::class, $vFuncionario);
         $form->handleRequest($request);
 
+        //btn cancelar
+        if ($request->get('cancel') == 'Cancel')
+            return $this->redirectToRoute('funcionario');    //implementar route
+
         if ($form->isSubmitted() && $form->isValid())
         {
             $em->persist($vFuncionario);

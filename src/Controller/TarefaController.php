@@ -90,6 +90,10 @@ class TarefaController extends AbstractController
         $form = $this->createForm(TarefaType::class, $tarefa);
         $form->handleRequest($request);
 
+        //btn cancelar
+        if ($request->get('cancel') == 'Cancel')
+            return $this->redirectToRoute('tarefa');    //implementar route
+
         if ($form->isSubmitted() && $form->isValid())
         {
             $em->persist($tarefa);
