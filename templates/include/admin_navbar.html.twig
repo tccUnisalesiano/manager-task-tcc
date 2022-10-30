@@ -2,17 +2,19 @@
 {% block body %}
     <div class="sidebar close" style="opacity: inherit !important;">
         <header>
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="image-text">
                 <span class="image">
-{#                    <img src="{{ asset('perfil/' ~ registrationForm.imageName()) }}" >#}
+                    <img src="{{ app.user.imageName is null ? asset('styles/img/no-image.png') : asset('perfil/' ~ app.user.imageName) }}" >
                 </span>
                 <div class="text logo-text" style="padding-right: 10px;">
                     <a href="#">
-                        <span class="name">Guilherme Correia</span>
+                        <span class="name">{{ app.user.nome }}</span>
                     </a>
                 </div>
             </div>
-
+            {% endif %}
             <i class="fa-solid fa-angle-right toggle"></i>
         </header>
         <ul class="nav-links">
@@ -73,6 +75,7 @@
             </li>
         </ul>
     </div>
+
     <script>
         let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
