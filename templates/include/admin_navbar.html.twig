@@ -9,7 +9,7 @@
                     <img src="{{ app.user.imageName is null ? asset('styles/img/no-image.png') : asset('perfil/' ~ app.user.imageName) }}" >
                 </span>
                 <div class="text logo-text" style="padding-right: 10px;">
-                    <a href="#">
+                    <a href="{{ path('perfilUser', { user: app.user.nome } )  }}">
                         <span class="name">{{ app.user.nome }}</span>
                     </a>
                 </div>

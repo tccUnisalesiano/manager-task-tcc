@@ -208,4 +208,24 @@ class RegistrationController extends AbstractController
     }
 
 
+    /**
+     * @Route("/perfil", name="perfilUser")
+     * @param int $id
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param UserRepository $userRepository
+     * @return Response
+     */
+    public function perfilUser(int $id, Request $request, EntityManagerInterface $em, UserRepository $userRepository): Response
+    {
+
+        $user = $this->getUser();
+
+        return $this->render('view/Cadastros/Funcionario/funcionarioPerfil.html.twig', [
+            'registrationForm' => $user
+        ]);
+    }
+
+
+
 }
