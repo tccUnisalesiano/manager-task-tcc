@@ -5,28 +5,7 @@
         {% include 'include/navbar_top.html.twig' %}
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6 ">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Projetos</h5>
-                        </div>
-                        <div class="card-body">
-                            {# indicadores contadores #}
-                            {% include 'include/indicadores.html.twig' %}
-                            {# end indicadores #}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 ">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Tarefas</h5>
-                        </div>
-                        <div class="card-body">
-                            {% include 'include/indicadores.html.twig' %}
-                        </div>
-                    </div>
-                </div>
+               {% include 'include/indicadores.html.twig' %}
             </div>
         </div>
     </section>

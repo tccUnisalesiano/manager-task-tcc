@@ -57,22 +57,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->add($user, true);
     }
 
-    /**
-     * @throws Exception
-     */
-    public function findPathImage(): array
-    {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = '
-            SELECT u.image_name FROM user u
-            WHERE u.id = 5';
-
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-
-        return $resultSet->fetchAllAssociative();
-    }
+//    /**
+//     * @throws Exception
+//     */
+//    public function findPathImage(): array
+//    {
+//        $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//            SELECT u.image_name FROM user u
+//            WHERE u.id = 5';
+//
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery();
+//
+//        return $resultSet->fetchAllAssociative();
+//    }
 
 //    /**
 //     * @return User[] Returns an array of User objects
