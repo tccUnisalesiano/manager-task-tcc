@@ -34,7 +34,7 @@ class tempogastoType extends AbstractType
             ->add('idUser', EntityType::class,
                 [ 'class' => User::class,
                     'query_builder' => function (EntityRepository $er){
-                        return $er->createQueryBuilder('t');
+                        return $er->createQueryBuilder('u');
                     },
                     'label' => "Funcionário: ",
                     'choice_label' => 'nome',
