@@ -18,28 +18,92 @@
                 <th>Ações</th>
             </tr>
             </thead>
-            {% for tg in tempogasto %}
+            {% for tempogasto in tempogasto %}
                 <tbody>
-                <tr>
-                    <td>{{ tg.idTarefa.nome }}</td>
-                    <td>{{ tg.idUser }}</td>
-                    <td>{{ tg.atividade }}</td>
-                    <td>{{ tg.data |date('d/m/Y') }}</td>
-                    <td>{{ tg.tempo }}</td>
+                <tr id="tblDetalhes" data-id="{{tempogasto.id }}" {{ path('detalheTempogasto', {id: tempogasto.id}) }}>
+
+                    <td id="tabletg" onclick="tempogasto(this.val)">{{ tempogasto.idTarefa.nome }}</td>
+                    <td>{{ tempogasto.idUser.nome }}</td>
+                    <td>{{ tempogasto.atividade }}</td>
+                    <td>{{ tempogasto.data |date('d/m/Y') }}</td>
+                    <td>{{ tempogasto.tempo }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ path('editartempogasto', {id: tg.id }) }}"
+                        <a class="btn btn-primary" href="{{ path('editartempogasto', {id: tempogasto.id }) }}"
                            title="Editar"><i class="fa-solid fa-pen edit"></i></a>
-                        <a class="btn btn-danger" href="{{ path('deleteTempogasto', {id: tg.id }) }}"
+                        <a class="btn btn-danger" href="{{ path('deleteTempogasto', {id: tempogasto.id }) }}"
                            title="Excluir"><i class="fa-solid fa-trash delete"></i></a>
                     </td>
-
                 </tr>
                 </tbody>
             {% endfor %}
         </table>
     </div>
 
-
+{#      modal       #}
+    <div class="modal fade" id="modalDetalhes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalhes Tempo Gasto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body">
+            </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="Tarefa">Tarefa:</label>
+                        <input class="form-control" name="camposInput" value="{{ tempogasto.idTarefa.nome }}" title="Nome" readonly>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="Funcionario">Funcionáro:</label>
+                        <input class="form-control" name="camposInput" title="Tipo" value="{{ tempogasto.idUser.nome }}" readonly>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="Data">Data:</label>
+                        <input class="form-control" name="camposInput" title="CPF/CNPJ" value="{{ tempogasto.data |date('d/m/Y')}}" readonly>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="Atividade">Atividade:</label>
+                        <input class="form-control" name="camposInput" title="Email" value="{{ tempogasto.atividade }}" readonly>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="Tempo">Tempo:</label>
+                        <input class="form-control" name="camposInput" title="Celular" value="{{ tempogasto.tempo }}" readonly>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="Descricao">Descrição:</label>
+                        <input class="form-control" name="camposInput" title="Celular" value="{{ tempogasto.descricao }}" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a class="btn btn-primary" href="{{ path('editartempogasto', {id: tempogasto.id}) }}">Editar Tempo Gasto</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="{{ asset('styles/JS/dados.js') }}"></script>
+    <script>
+        // $(document).on("click", "#tblDetalhes", function () {
+        //     $('#modalDetalhes').modal('show');
+        //
+        // });
+        function tempogasto(id){
+            console.log(id);
+            return false;
+            $.ajax({
+                type: 'GET',
+                url: '/tempoGasto/detalhe/'+id,
+                dataType: 'JSON',
+                success: function(response) {
+                    console.log(response);
+                }, complete: function(resp) {
+                    console.log(resp);
+                }
+            })
+        }
+    </script>
 
 {% endblock %}

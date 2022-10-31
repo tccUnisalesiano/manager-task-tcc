@@ -117,4 +117,17 @@ class tempogastoController extends AbstractController
 
         return $this->redirectToRoute('tarefa');
     }
+
+    /**
+     * @Route ("/tempoGasto/detalhe/{id}", name="detalheTempogasto")
+     */
+    public function visualizar(int $id, TempogastoRepository $tempogastoRepository): Response
+    {
+        $tempogasto = $tempogastoRepository->find($id);
+
+
+        return $this->render('view/Cadastros/TempoGasto/include/tableTempoGasto.html.twig', [
+            'tempogasto' => $tempogasto
+        ]);
+    }
 }

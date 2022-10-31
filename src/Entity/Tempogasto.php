@@ -31,7 +31,7 @@ class Tempogasto implements \JsonSerializable
     #[ORM\Column(length: 255, nullable: true)]
     public ?string $descricao = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: Tarefa::class)]
     public ?Tarefa $idTarefa = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
@@ -117,7 +117,7 @@ class Tempogasto implements \JsonSerializable
         return $this;
     }
 
-    #[ArrayShape(["Id" => "int|null", "atividade" => "null|string", "data" => "\DateTimeInterface|null", "tempo" => "float|null", "descricao" => "null|string", "idTarefa" => "\App\Entity\Tarefa|null", "idValorFuncionario" => "\App\Entity\Valorfuncionario|null"])]
+//    #[ArrayShape(["Id" => "int|null", "atividade" => "null|string", "data" => "\DateTimeInterface|null", "tempo" => "float|null", "descricao" => "null|string", "idTarefa" => "\App\Entity\Tarefa|null", "idValorFuncionario" => "\App\Entity\Valorfuncionario|null"])]
     public function jsonSerialize(): array
     {
         return[
