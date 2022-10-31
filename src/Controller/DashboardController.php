@@ -40,12 +40,18 @@ class DashboardController extends AbstractController
 
         $response = $projeto->findAllProjetos();
 
-        if(!$response) return new NotFoundHttpException();
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => count($response)
+            ]);
+        } else {
+            return $this->json([
+                'success' => true,
+                'response' => '0'
+            ]);
+        }
 
-        return $this->json([
-            'success' => true,
-            'response' => count($response)
-        ]);
     }
 
     /**
@@ -62,12 +68,17 @@ class DashboardController extends AbstractController
 
         $response = $projeto->findAllProjetosAberto();
 
-        if(!$response) return new NotFoundHttpException();
-
-        return $this->json([
-            'success' => true,
-            'response' => count($response)
-        ]);
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => count($response)
+            ]);
+        } else {
+            return $this->json([
+                'success' => true,
+                'response' => '0'
+            ]);
+        }
     }
 
     /**
@@ -83,12 +94,17 @@ class DashboardController extends AbstractController
 
         $response = $tarefa->findAll();
 
-        if(!$response) return new NotFoundHttpException();
-
-        return $this->json([
-            'success' => true,
-            'response' => count($response)
-        ]);
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => count($response)
+            ]);
+        } else {
+            return $this->json([
+                'success' => true,
+                'response' => '0'
+            ]);
+        }
     }
 
     /**
@@ -104,11 +120,16 @@ class DashboardController extends AbstractController
 
         $response = $cliente->findAll();
 
-        if(!$response) return new NotFoundHttpException();
-
-        return $this->json([
-            'success' => true,
-            'response' => count($response)
-        ]);
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => count($response)
+            ]);
+        } else {
+            return $this->json([
+                'success' => true,
+                'response' => '0'
+            ]);
+        }
     }
 }

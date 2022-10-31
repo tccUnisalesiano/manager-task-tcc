@@ -93,5 +93,6 @@
     <orderEntry type="library" name="twitter-bootstrap" level="application" />
     <orderEntry type="library" name="jquery-3.1.0" level="application" />
     <orderEntry type="library" name="highcharts" level="application" />
+    <orderEntry type="library" name="chart.js" level="application" />
   </component>
 </module>

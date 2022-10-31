@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{7f5a6becdb, bootstrap, dataTables.bootstrap4, highcharts, jquery-3.1.0, jquery-3.1.1, jquery.dataTables, twitter-bootstrap}" />
+    <file url="PROJECT" libraries="{7f5a6becdb, bootstrap, chart.js, dataTables.bootstrap4, highcharts, jquery-3.1.0, jquery-3.1.1, jquery.dataTables, twitter-bootstrap}" />
   </component>
 </project>
