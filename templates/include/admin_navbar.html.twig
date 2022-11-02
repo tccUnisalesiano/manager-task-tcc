@@ -9,7 +9,7 @@
                     <img src="{{ app.user.imageName is null ? asset('styles/img/no-image.png') : asset('perfil/' ~ app.user.imageName) }}" >
                 </span>
                 <div class="text logo-text" style="padding-right: 10px;">
-                    <a href="{{ path('perfilUser', { user: app.user.nome } )  }}">
+                    <a href="{{ path('perfilUser')  }}">
                         <span class="name">{{ app.user.nome }}</span>
                     </a>
                 </div>
@@ -69,12 +69,12 @@
                 </ul>
             </li>
             <li>
+                <a href="{{ path('app_logout') }}">
                 <div class="footer_sidebar">
-                    <a href="{{ path('app_logout') }}">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span class="text">Sair</span>
-                    </a>
                 </div>
+                </a>
             </li>
         </ul>
     </div>
