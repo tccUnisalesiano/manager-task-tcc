@@ -78,42 +78,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //    /**
 //     * @throws Exception
 //     */
-//    public function findPathImage(): array
+//    public function updateSenha($id, $password): array
 //    {
 //        $conn = $this->getEntityManager()->getConnection();
 //
-//        $sql = '
-//            SELECT u.image_name FROM user u
-//            WHERE u.id = 5';
-//
-//        $stmt = $conn->prepare($sql);
-//        $resultSet = $stmt->executeQuery();
-//
-//        return $resultSet->fetchAllAssociative();
+//        return $this->createQueryBuilder('User u')
+//            ->update('u')
+//            ->set('u.password =', $password)
+//            ->where('u.id =', $id)
+//            ->getQuery()
+//            ->getResult();
 //    }
 
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

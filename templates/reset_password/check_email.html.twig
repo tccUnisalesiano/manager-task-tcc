@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Link para criar nova senha enviado{% endblock %}
+
+{% block body %}
+    <p>
+        Confira no E-mail informado o link para criar sua nova senha
+        O link inspira em {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </p>
+    <p> Se você não recebeu, por favor, confira o Spam ou <a href="{{ path('app_forgot_password_request') }}">Tente Novamente</a>.</p>
+{% endblock %}
