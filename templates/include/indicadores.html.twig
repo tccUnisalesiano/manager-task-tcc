@@ -113,6 +113,17 @@
                 $('#clientesCount').text(response.response);
             }
         });
+
+        $.ajax({
+            type: 'POST',
+            url: '/dashboard/session',
+            dataType: 'JSON',
+            success: function (response) {
+                response.forEach((resp) => {
+                    console.log(resp.id);
+                });
+            }
+        });
     })
 </script>
 

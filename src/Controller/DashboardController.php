@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\ClienteRepository;
 use App\Repository\ProjetoRepository;
 use App\Repository\TarefaRepository;
+use App\Repository\UserRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class DashboardController extends AbstractController
 {
@@ -52,6 +54,19 @@ class DashboardController extends AbstractController
             ]);
         }
 
+    }
+
+    /**
+     * @Route("dashboard/session", methods={"POST"})
+     * @throws Exception
+     */
+    public function getSession(Request $request, AuthenticationUtils $authenticationUtils, UserRepository $user): JsonResponse
+    {
+        $response = $authenticationUtils->getLastUsername();    //email user
+
+        $return = $user->findUserByName($response);
+
+       return $this->json($return);
     }
 
     /**
