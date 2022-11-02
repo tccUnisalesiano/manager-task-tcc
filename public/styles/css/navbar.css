@@ -7,6 +7,12 @@
     font-family: 'Poppins', sans-serif;
 }
 
+html, body{
+    background-color: var(--body-color);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 :root {
     /* ===== Colors ===== */
     --body-color: #E4E9F7;
@@ -307,9 +313,8 @@ body.dark .sidebar header .toggle{
     position: absolute;
     top: 0;
     left: 250px;
-    height: 100vh;
+    height: 100%;
     width: calc(100% - 250px);
-    background-color: var(--body-color);
     transition: all 0.5s ease;
 }
 

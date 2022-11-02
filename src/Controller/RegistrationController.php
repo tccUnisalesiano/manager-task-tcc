@@ -217,23 +217,24 @@ class RegistrationController extends AbstractController
 
 
     /**
-     * @Route("/perfil", name="perfilUser")
-     * @param int $id
-     * @param Request $request
-     * @param EntityManagerInterface $em
-     * @param UserRepository $userRepository
+     * @Route("/funcionario_perfil", name="perfilUser")
+     *
      * @return Response
      */
-    public function perfilUser(int $id, Request $request, EntityManagerInterface $em, UserRepository $userRepository): Response
+    public function perfilUser(): Response
     {
 
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
+
         return $this->render('view/Cadastros/Funcionario/funcionarioPerfil.html.twig', [
-            'registrationForm' => $user
+            'registrationForm' =>$user
         ]);
+
+
+
+
     }
-
-
 
 }
