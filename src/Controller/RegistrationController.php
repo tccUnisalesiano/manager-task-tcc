@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\UserUpdateType;
 use App\Repository\UserRepository;
 use App\Security\Authenticator;
 use App\Security\EmailVerifier;
@@ -27,6 +28,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
@@ -40,17 +42,11 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
-
-
     public function __construct(EmailVerifier $emailVerifier)
     {
         $this->emailVerifier = $emailVerifier;
 
     }
-
-//    public function route(){
-//        $this->register($request, $userPasswordHasher, $userAuthenticator, $authenticator, $entityManager);
-//    }
 
     /**
      *@Route ("/funcionario/cadastrar", name="cadastroFuncionario", methods={"POST|GET"}, defaults={"title": "Cadastrar Funcionário"})
@@ -223,18 +219,13 @@ class RegistrationController extends AbstractController
      */
     public function perfilUser(): Response
     {
-
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-
 
         return $this->render('view/Cadastros/Funcionario/funcionarioPerfil.html.twig', [
             'registrationForm' =>$user
         ]);
-
-
-
-
     }
+
 
 }

@@ -89,7 +89,10 @@
                                         <p class="mb-0">Senha</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <button class="btn btn-success">Mudar Senha</button>
+{#                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#senhaModal">#}
+{#                                            Mudar Senha#}
+{#                                        </button>#}
+                                        <a class="btn btn-success" href="{{ path('app_forgot_password_request') }}">Mudar Senha</a>
                                     </div>
                                 </div>
                             </div>
@@ -165,12 +168,37 @@
                     </div>
                 </div>
             </div>
+
+        <!-- Modal -->
+{#        <div class="modal fade" id="senhaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">#}
+{#            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">#}
+{#                <div class="modal-content">#}
+{#                    <div class="modal-header">#}
+{#                        <h5 class="modal-title" id="exampleModalLongTitle">{{ title }}</h5>#}
+{#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                            <span aria-hidden="true">&times;</span>#}
+{#                        </button>#}
+{#                    </div>#}
+{#                    <div class="modal-body">#}
+{#                        <div class="col-lg-3">#}
+
+{#                        </div>#}
+{#                        <div class="col-lg-3">#}
+        {#                              TESTE#}
+{#                        </div>#}
+
+{#                    </div>#}
+{#                    <div class="modal-footer">#}
+{#                        <button type="button" class="btn btn-secondary" data-dismiss="modal" formnovalidate>Close</button>#}
+{#                        <button type="button" class="btn btn-primary">Save changes</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
     </section>
 
     <script>
-        $(document).ready(() => {
-            $('#escondeSenha').hide();
-        });
 
         function validaSenhaSave() {
             let newPass = document.getElementById("newpass").value;
@@ -192,31 +220,27 @@
 
             $.ajax({
                 type: "POST",
-                url: '/meuPerfil/validaSenha',
+                url: '/funcionario_perfil/mudar_senha',
                 data: body,
                 dataType: 'JSON',
                 success: (response) => {
                     console.log('SUCCESS: ',response);
                     if (response.resp === 'error') {
-                        alertmsg(response.message, 'alert-danger');
+                        alert(response.message, 'alert-danger');
                     } else {
-                        alertmsg(response.message, 'alert-success');
+                        alert(response.message, 'alert-success');
                         location.reload();
                     }
                 },
                 error: (xhr) => {
                     console.log('ERROR: ',xhr);
                     console.log(body);
-                    alertmsg(xhr.message,'alert-danger');
+                    alert(xhr.message,'alert-danger');
                     return false;
                 }
             });
         }
 
-        function escondeDivSenha()
-        {
-            $('#escondeSenha').show();
-        }
     </script>
 
 {% endblock %}
