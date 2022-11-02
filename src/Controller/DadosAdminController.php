@@ -43,16 +43,22 @@ class DadosAdminController extends AbstractController
 
         $response = $projeto->findAllProjetos();
 
-        if(!$response) return new NotFoundHttpException();
-
-        return $this->json([
-            'success' => true,
-            'response' => $response
-        ]);
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => $response
+            ]);
+        } else {
+            return $this->json([
+                'success' => false,
+                'message' => 'Não há dados a serem mostrados no momento',
+                'response' => false
+            ]);
+        }
     }
 
     /**
-     * @Route("/tratamentodados/funcionarios", methods={"POST"})
+     * @Route("/tratamentodados/chartgeral", methods={"POST"})
      * @param EntityManagerInterface $em
      * @param Request $request
      * @param ManagerRegistry $registry
@@ -61,16 +67,22 @@ class DadosAdminController extends AbstractController
      * @throws Exception
      */
     public function funcionarios(EntityManagerInterface $em, Request $request, ManagerRegistry $registry,
-                            FuncionarioRepository $funcionario): JsonResponse|NotFoundHttpException
+                            ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
-        $response = $funcionario->findALlFuncionarios();
+        $response = $projeto->findAllChart();
 
-        if(!$response) return new NotFoundHttpException();
-
-        return $this->json([
-            'success' => true,
-            'response' => $response
-        ]);
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => $response,
+                'count' => count($response)
+            ]);
+        } else {
+            return $this->json([
+                'success' => false,
+                'message' => 'Houve um erro ao carregar os dados'
+            ]);
+        }
     }
 
 }
