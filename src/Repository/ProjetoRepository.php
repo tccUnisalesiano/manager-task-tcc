@@ -56,10 +56,7 @@ class ProjetoRepository extends ServiceEntityRepository
             ->where('t.id = :id')
             ->setParameter('id', $end)
         ;
-//        select p.id, p.nome, t.id, t.nome, u.id, u.nome
-//        from projeto p
-//        join tarefa t on p.id = t.id_projeto_id
-//        join user u on t.id_user_id = u.id
+        
         return $qb->getQuery()->getResult();
 
     }
