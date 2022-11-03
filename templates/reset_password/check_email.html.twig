@@ -1,11 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Link para criar nova senha enviado{% endblock %}
+{% block title %}Restaurar Senha{% endblock %}
 
 {% block body %}
-    <p>
-        Confira no E-mail informado o link para criar sua nova senha
-        O link inspira em {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
-    </p>
-    <p> Se você não recebeu, por favor, confira o Spam ou <a href="{{ path('app_forgot_password_request') }}">Tente Novamente</a>.</p>
+
+    <div class="container py-lg-4">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-12">
+                    <div class="card mb-12">
+                        <div class="card-body">
+                            <div class="container h-100">
+                                <div class="row h-100 justify-content-center align-items-center">
+                                    <div class="col-10 col-md-8 col-lg-6">
+                                        <h4 class="text-center">Restaurar Senha</h4>
+                                        <p class="description">
+                                            Confira no E-mail informado o seu link para criar sua nova senha.
+                                            <br>
+                                            O link inspira em {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+                                        </p>
+                                        <p class="description">
+                                            Se você não recebeu, por favor, confira o Spam ou <a href="{{ path('app_forgot_password_request') }}">Tente Novamente</a>.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

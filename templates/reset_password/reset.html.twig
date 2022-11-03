@@ -1,12 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Crie sua nova Senha{% endblock %}
+{% block title %}Gerar Senha{% endblock %}
 
 {% block body %}
-    <h1>Crie sua nova senha</h1>
-
-    {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Criar nova Senha</button>
-    {{ form_end(resetForm) }}
+    <div class="container py-lg-4">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-12">
+                    <div class="card mb-12">
+                        <div class="card-body">
+                            {{ form_start(resetForm) }}
+                            <div class="container h-100">
+                                <div class="row h-100 justify-content-center align-items-center">
+                                    <div class="col-10 col-md-8 col-lg-6">
+                                        <h4 class="text-center">Gerar Senha</h4>
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                {{ form_row(resetForm.plainPassword, {'attr': {'class': 'camposInput'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <button class="btn btn-primary">Gerar Senha</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form_end(resetForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+
+
+

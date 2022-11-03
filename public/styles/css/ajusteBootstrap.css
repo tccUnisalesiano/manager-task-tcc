@@ -27,7 +27,7 @@
 
 /*/Inputs/*/
 .camposInput{
-    border-color: var(--primary-color) !important;
+    border-color: gray !important;
 }
 /*/campos de pesquisa coom nome camposInput/*/
 /*/quando ativados ou com foco seus detalhes são roxos/*/
@@ -50,7 +50,7 @@ input[name="email"]:active, input[name="email"]:focus{
 
 
 .dataTables_filter label input{
-    border-color: var(--primary-color) !important;
+    border-color: gray !important;
     border-radius: 5px
 }
 
