@@ -39,6 +39,24 @@ class TarefaRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findTarefaUser(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select t.nome, t.porcentagem 
+            from tarefa t 
+            join `user` u
+            on t.id_user_id = u.id 
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Tarefa[] Returns an array of Tarefa objects
 //     */
@@ -63,4 +81,6 @@ class TarefaRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
 }

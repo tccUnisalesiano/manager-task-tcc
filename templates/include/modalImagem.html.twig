@@ -1,0 +1,57 @@
+<div class="modal fade" id="imagemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-3">
+
+                </div>
+                <div class="col-lg-3">
+
+{#                    <div class="text-center">#}
+{#                        <img src="{{ app.user.imageName is null ? asset('styles/img/no-image.png') : asset('perfil/' ~ app.user.imageName) }}" alt="avatar"#}
+{#                             class="rounded-circle img-fluid" style="width: 150px;">#}
+{#                    </div>#}
+{#                    {{ form_start(changeImg) }}#}
+
+{#                    <div class="col-lg-4">#}
+{#                        {{ form_row(changeImg.imageFile, {'attr': {'class': 'camposInput'}}) }}#}
+{#                    </div>#}
+
+{#                    {{ form_end(changeImg) }}#}
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" formnovalidate>Cancelar</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: '/dashboard/session',
+            dataType: 'JSON',
+            success: function (response) {
+                response.forEach((resp) => {
+                    console.log(resp.id);
+                    $('#getIdSession').val(resp.id);
+                });
+            }
+        });
+
+    })
+</script>

@@ -147,4 +147,30 @@ class DashboardController extends AbstractController
             ]);
         }
     }
+
+    /**
+     * @Route("/dashboard/userTarefa")
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param ClienteRepository $cliente
+     * @return JsonResponse|NotFoundHttpException
+     */
+    public function userTarefa(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, TarefaRepository $tarefa): JsonResponse|NotFoundHttpException
+    {
+
+        $response = $tarefa->findTarefaUser();
+
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => count($response)
+            ]);
+        } else {
+            return $this->json([
+                'success' => true,
+                'response' => '0'
+            ]);
+        }
+    }
 }

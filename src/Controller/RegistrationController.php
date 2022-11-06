@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangeImageType;
 use App\Form\RegistrationFormType;
 use App\Form\UserUpdateType;
 use App\Repository\UserRepository;
@@ -42,9 +43,10 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(EmailVerifier $emailVerifier, Security $security)
     {
         $this->emailVerifier = $emailVerifier;
+        $this->security = $security;
 
     }
 
@@ -224,6 +226,27 @@ class RegistrationController extends AbstractController
 
         return $this->render('view/Cadastros/Funcionario/funcionarioPerfil.html.twig', [
             'registrationForm' =>$user
+        ]);
+    }
+
+    /**
+     * @Route("/perfil/imagem", name="trocarImagem")
+     */
+    public function trocaImagem(Request $request, UserPasswordHasherInterface $passwordHasher, string $token = null): Response
+    {
+
+
+
+
+
+
+//        $form = $this->createForm(ChangeImageType::class);
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $form = $this->security->getUser();
+
+        return $this->render('include/modalImagem.html.twig', [
+            'changeImg' =>$form
         ]);
     }
 
