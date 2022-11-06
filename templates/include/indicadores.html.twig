@@ -71,13 +71,32 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="getIdSession">
+<input type="hidden" id="getIdSession" name="idUserSession">
 
 <script>
     $(document).ready(function () {
+        //get ID
+        $.ajax({
+            type: 'POST',
+            url: '/dashboard/session',
+            dataType: 'JSON',
+            success: function (response) {
+                response.forEach((resp) => {
+                    console.log(resp.id);
+                    $('#getIdSession').val(resp.id);
+                    atualizaIndicadores(resp.id);
+                });
+            }
+        });
+    });
+
+    function atualizaIndicadores(id) {
+       // let id = $('#getIdSession').val();
+       console.log('ID: ',id);
         $.ajax({
             type: 'POST',
             url: '/dashboard/projetos',
+            data: {id: id},
             dataType: 'JSON',
             success: function (response) {
                 console.log(response.response);
@@ -87,8 +106,9 @@
 
         $.ajax({
             type: 'POST',
-            url: '/dashboard/projetosAberto',
+            url: `/dashboard/projetosAberto`,
             dataType: 'JSON',
+            data: {id: id},
             success: function (response) {
                 console.log(response.response);
                 $('#projetoAbertoCount').text(response.response);
@@ -98,6 +118,7 @@
         $.ajax({
             type: 'POST',
             url: '/dashboard/tarefas',
+            data: {id: id},
             dataType: 'JSON',
             success: function (response) {
                 console.log(response.response);
@@ -108,24 +129,13 @@
         $.ajax({
             type: 'POST',
             url: '/dashboard/clientes',
+            data: {id: id},
             dataType: 'JSON',
             success: function (response) {
                 console.log(response.response);
                 $('#clientesCount').text(response.response);
             }
         });
-
-        $.ajax({
-            type: 'POST',
-            url: '/dashboard/session',
-            dataType: 'JSON',
-            success: function (response) {
-                response.forEach((resp) => {
-                    console.log(resp.id);
-                    $('#getIdSession').val(resp.id);
-                });
-            }
-        });
-    })
+    }
 </script>
 

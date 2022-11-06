@@ -33,8 +33,8 @@
                                         <th>Ações</th>
                                     </tr>
                                     </thead>
+                                    <tbody>
                                     {% for cliente in cliente %}
-                                        <tbody>
                                         <tr onclick="window.location='{{ path('detalheCliente', {id: cliente.id}) }}';">
                                             <td>{{ cliente.id }}</td>
                                             <td>{{ cliente.nomeCliente }}</td>
@@ -51,8 +51,8 @@
                                                             class="fa-solid fa-trash delete"></i></a>
                                             </td>
                                         </tr>
-                                        </tbody>
                                     {% endfor %}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
