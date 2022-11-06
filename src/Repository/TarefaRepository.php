@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Tarefa;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,19 +40,20 @@ class TarefaRepository extends ServiceEntityRepository
         }
     }
 
-
-    public function findTarefaUser(): array
+    /**
+     * @throws Exception
+     */
+    public function findAllTarefas($id): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = '
-            select t.nome, t.porcentagem 
-            from tarefa t 
-            join `user` u
-            on t.id_user_id = u.id 
-            ';
+        $sql = 'select u.*, t.*
+                from user u
+                join tarefa t on u.id = t.id_user_id
+                where u.id = :id';
 
         $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
         $resultSet = $stmt->executeQuery();
 
         return $resultSet->fetchAllAssociative();
@@ -81,6 +83,4 @@ class TarefaRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-
-
 }

@@ -31,8 +31,8 @@
                                         <th>Ações</th>
                                     </tr>
                                     </thead>
+                                    <tbody>
                                     {% for projeto in projeto %}
-                                        <tbody>
                                         <tr onclick="window.location='{{ path('detalheProjeto', {id: projeto.id}) }}';">
                                             <td>{{ projeto.Id }}</td>
                                             <td>{{ projeto.nome }}</td>
@@ -46,10 +46,9 @@
                                                    href="{{ path('deleteProjeto', {id: projeto.id}) }}" title="Excluir"><i
                                                             class="fa-solid fa-trash delete"></i></a>
                                             </td>
-
                                         </tr>
-                                        </tbody>
                                     {% endfor %}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

@@ -43,24 +43,6 @@ class ProjetoRepository extends ServiceEntityRepository
         }
     }
 
-    public function  findProjetoTarefaUser()
-    {
-        //pega a url atual
-        $url = $_SERVER["REQUEST_URI"];
-        //pega a última parte que é o id
-        $end = basename(parse_url($url, PHP_URL_PATH));
-
-        $qb = $this->createQueryBuilder('p');
-        $qb ->select(select: 'p.nome, t.nome, u.nome')
-            ->join('App\Entity\Tarefa', 't', 'WITH', 'p.id = t.id')
-            ->where('t.id = :id')
-            ->setParameter('id', $end)
-        ;
-        
-        return $qb->getQuery()->getResult();
-
-    }
-
     /**
      * @throws Exception
      */
@@ -80,36 +62,22 @@ class ProjetoRepository extends ServiceEntityRepository
 
         return $resultSet->fetchAllAssociative();
     }
-//
-//    /**
-//     * @throws Exception
-//     */
-//    public function updateUser($id, $password): array
-//    {
-//        $conn = $this->getEntityManager()->getConnection();
-//
-//        return $this->createQueryBuilder('user u')
-//            ->update('u')
-//            ->set('u.password =', $password)
-//            ->where('u.id =', $id)
-//            ->getQuery()
-//            ->getResult();
-//    }
 
     /**
      * @throws Exception
      */
-    public function findALlProjetos(): array
+    public function findALlProjetos($id): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = '
-            SELECT * FROM projeto p
-            WHERE 1 = 1
-            ORDER BY p.id ASC
-            ';
+        $sql = 'select p.*, u.*
+                from user u
+                join tarefa t on u.id = t.id_user_id
+                join projeto p on p.id = t.id_projeto_id
+                where u.id = :id ';
 
         $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
         $resultSet = $stmt->executeQuery();
 
         return $resultSet->fetchAllAssociative();
@@ -118,16 +86,20 @@ class ProjetoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function findALlProjetosAberto(): array
+    public function findALlProjetosAberto($id): array
     {
+        $aberta = 'aberta';
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = '
-            SELECT * FROM projeto p
-            WHERE p.situacao = "Aberta"
-            ';
+        $sql = 'select p.*, u.*
+                from user u
+                join tarefa t on u.id = t.id_user_id
+                join projeto p on p.id = t.id_projeto_id
+                where u.id = :id and p.situacao = :aberta';
 
         $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':aberta', $aberta);
         $resultSet = $stmt->executeQuery();
 
         return $resultSet->fetchAllAssociative();

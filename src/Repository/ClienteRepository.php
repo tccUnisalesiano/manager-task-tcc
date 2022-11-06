@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Cliente;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -34,6 +35,27 @@ class ClienteRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function findAllClientes($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'select t.nome, u.nome, c.nome_cliente
+                from user u
+                join tarefa t on u.id = t.id_user_id
+                join projeto p on t.id_projeto_id = p.id
+                join cliente c on c.id = p.cliente_id_id
+                where u.id = :id ';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
     }
 
 }

@@ -39,8 +39,8 @@ class DashboardController extends AbstractController
      */
     public function projetos(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
-
-        $response = $projeto->findAllProjetos();
+        $id = $request->request->get('id');
+        $response = $projeto->findAllProjetos($id);
 
         if (!empty($response)) {
             return $this->json([
@@ -80,8 +80,8 @@ class DashboardController extends AbstractController
      */
     public function projetosAberto(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
-
-        $response = $projeto->findAllProjetosAberto();
+        $id = $request->request->get('id');
+        $response = $projeto->findAllProjetosAberto($id);
 
         if (!empty($response)) {
             return $this->json([
@@ -106,8 +106,8 @@ class DashboardController extends AbstractController
      */
     public function tarefas(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, TarefaRepository $tarefa): JsonResponse|NotFoundHttpException
     {
-
-        $response = $tarefa->findAll();
+        $id = $request->request->get('id');
+        $response = $tarefa->findAllTarefas($id);
 
         if (!empty($response)) {
             return $this->json([
@@ -132,8 +132,8 @@ class DashboardController extends AbstractController
      */
     public function clientes(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ClienteRepository $cliente): JsonResponse|NotFoundHttpException
     {
-
-        $response = $cliente->findAll();
+        $id = $request->request->get('id');
+        $response = $cliente->findAllClientes($id);
 
         if (!empty($response)) {
             return $this->json([

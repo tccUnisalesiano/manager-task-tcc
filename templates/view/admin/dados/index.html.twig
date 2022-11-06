@@ -46,66 +46,83 @@
 
     <script>
         $(document).ready(function () {
+                //get ID
+                $.ajax({
+                    type: 'POST',
+                    url: '/dashboard/session',
+                    dataType: 'JSON',
+                    success: function (response) {
+                        response.forEach((resp) => {
+                            console.log(resp.id);
+                            $('#getIdSession').val(resp.id);
+                            getProjetosByid(resp.id);
+                        });
+                    }
+                });
+        });
+
+        function getProjetosByid(id) {
             $.ajax({
                 type: 'POST',
                 url: 'tratamentodados/projetos',
                 dataType: 'JSON',
+                data: {id: id},
                 success: function (response) {
                     $('.filtroProj').remove();
                     response.response.forEach((resp) => {
                         $("#tblprojetos").append
                         (`<tr class="filtroProj">
-                        <td> ${resp.id} </td>
-                        <td> ${resp.nome} </td>
-                        <td> ${resp.situacao} </td>
-                    </tr>`);
+                            <td> ${resp.id} </td>
+                            <td> ${resp.nome} </td>
+                            <td> ${resp.situacao} </td>
+                        </tr>`);
                     });
                 }, error: function (resp) {
                     console.log(resp);
                 }
             })
-        });
-
-        $(document).ready(function () {
-            let count = [];
-
-            $.ajax({
-                type: 'POST',
-                url: 'tratamentodados/chartgeral',
-                dataType: 'JSON',
-                success: function (response) {
-                    console.log(response.count);
-                    response.response.forEach((resp) => {
-                    let html = `<input type="hidden" value="${resp.nome}" id="pegaNome${resp.nome}">`;
-                    });
-
-                }, complete: function (resp) {
-                    console.log(resp);
-                }
-            })
-        });
-q
-        function chartProjeto(ref) {
-            const data = {
-                labels: [
-                    resp.nome
-                ],
-                datasets: [{
-                    label: 'My First Dataset',
-                    data: [300, 50, 100],
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                    ],
-                    hoverOffset: 4
-                }]
-            };
-            new Chart(document.getElementById('myChart'), {
-                type: 'pie',
-                data: data
-            });
         }
+
+//         $(document).ready(function () {
+//             let count = [];
+//
+//             $.ajax({
+//                 type: 'POST',
+//                 url: 'tratamentodados/chartgeral',
+//                 dataType: 'JSON',
+//                 success: function (response) {
+//                     console.log(response.count);
+//                     response.response.forEach((resp) => {
+//                     let html = `<input type="hidden" value="${resp.nome}" id="pegaNome${resp.nome}">`;
+//                     });
+//
+//                 }, complete: function (resp) {
+//                     console.log(resp);
+//                 }
+//             })
+//         });
+// q
+//         function chartProjeto(ref) {
+//             const data = {
+//                 labels: [
+//                     resp.nome
+//                 ],
+//                 datasets: [{
+//                     label: 'My First Dataset',
+//                     data: [300, 50, 100],
+//                     backgroundColor: [
+//                         'rgb(255, 99, 132)',
+//                         'rgb(54, 162, 235)',
+//                         'rgb(255, 205, 86)'
+//                     ],
+//                     hoverOffset: 4
+//                 }]
+//             };
+//             new Chart(document.getElementById('myChart'), {
+//                 type: 'pie',
+//                 data: data
+//             });
+//         }
     </script>
 {% endblock %}
 
