@@ -30,8 +30,8 @@
                                     <th>Ações</th>
                                 </tr>
                                 </thead>
+                                <tbody>
                                 {% for tarefa in tarefa %}
-                                    <tbody>
                                     <tr onclick="window.location='{{ path('detalheTarefa', {id: tarefa.id}) }}';">
                                         <td>{{ tarefa.id }}</td>
                                         <td>{{ tarefa.idProjeto.nome }}</td>
@@ -48,8 +48,8 @@
                                                         class="fa-solid fa-trash delete"></i></a>
                                         </td>
                                     </tr>
-                                    </tbody>
                                 {% endfor %}
+                                </tbody>
                             </table>
                         </div>
                     </div>

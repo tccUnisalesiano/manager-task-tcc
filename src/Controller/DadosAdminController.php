@@ -40,8 +40,8 @@ class DadosAdminController extends AbstractController
      */
     public function projetos(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
-
-        $response = $projeto->findAllProjetos();
+        $id = $request->request->get('id');
+        $response = $projeto->findAllProjetos($id);
 
         if (!empty($response)) {
             return $this->json([
