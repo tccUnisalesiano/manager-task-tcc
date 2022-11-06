@@ -32,6 +32,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -213,40 +214,29 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('funcionario');
     }
 
-
     /**
      * @Route("/funcionario_perfil", name="perfilUser")
-     *
-     * @return Response
+     * @throws Exception
      */
-    public function perfilUser(): Response
+    public function perfilUser(Request $request, EntityManagerInterface $em, UserRepository $userRepository, AuthenticationUtils $authenticationUtils): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
+        $id = $this->security->getUser();
+//        $response = $authenticationUtils->getLastUsername();    //email user
+
+//        $id = $userRepository->findUserByName($response);
+        $user = $userRepository->find($id);
+
+        $form = $this->createForm(ChangeImageType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em->persist((object)$user);
+            $em->flush();
+        }
 
         return $this->render('view/Cadastros/Funcionario/funcionarioPerfil.html.twig', [
-            'registrationForm' =>$user
-        ]);
-    }
-
-    /**
-     * @Route("/perfil/imagem", name="trocarImagem")
-     */
-    public function trocaImagem(Request $request, UserPasswordHasherInterface $passwordHasher, string $token = null): Response
-    {
-
-
-
-
-
-
-//        $form = $this->createForm(ChangeImageType::class);
-
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $form = $this->security->getUser();
-
-        return $this->render('include/modalImagem.html.twig', [
-            'changeImg' =>$form
+            'changeImg' => $form->createView()
         ]);
     }
 

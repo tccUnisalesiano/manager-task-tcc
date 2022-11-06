@@ -67,10 +67,7 @@ class RegistrationFormType extends AbstractType
                     ],
             ])
 
-            ->add('imageFile', VichImageType::class, [
-                'required' => false,
-                'label' => 'Imagem: ',
-            ]);
+            ;
 
         $builder->get('roles')
             ->addModelTransformer(new CallbackTransformer(

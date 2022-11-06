@@ -17,13 +17,15 @@
 {#                        <img src="{{ app.user.imageName is null ? asset('styles/img/no-image.png') : asset('perfil/' ~ app.user.imageName) }}" alt="avatar"#}
 {#                             class="rounded-circle img-fluid" style="width: 150px;">#}
 {#                    </div>#}
-{#                    {{ form_start(changeImg) }}#}
+                    {{ form_start(changeImg) }}
 
-{#                    <div class="col-lg-4">#}
+                    <div class="col-lg-4">
 {#                        {{ form_row(changeImg.imageFile, {'attr': {'class': 'camposInput'}}) }}#}
-{#                    </div>#}
+{#                        {{ vich_uploader_asset(changeImg, 'imageFile', 'App\\Entity\\User') }}#}
+                        {{ form_row(changeImg.nome) }}
+                    </div>
 
-{#                    {{ form_end(changeImg) }}#}
+                    {{ form_end(changeImg) }}
 
 
 
@@ -43,12 +45,12 @@
 
         $.ajax({
             type: 'POST',
-            url: '/dashboard/session',
+            url: '/perfil/imagem',
             dataType: 'JSON',
             success: function (response) {
                 response.forEach((resp) => {
                     console.log(resp.id);
-                    $('#getIdSession').val(resp.id);
+                    $('#perfilUser').val(resp.id);
                 });
             }
         });
