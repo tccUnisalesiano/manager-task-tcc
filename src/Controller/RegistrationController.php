@@ -240,5 +240,28 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/funcionario_perfil/tarefas", name="findtarefa")
+     * @throws Exception
+     */
+    public function tarefasById(Request $request, EntityManagerInterface $em, UserRepository $userRepository): JsonResponse
+    {
+        $id = $request->request->get('id');
+        $response  = $userRepository->findAllProjectsByUserId($id);
+
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => $response
+            ]);
+        } else {
+            return $this->json([
+                'success' => true,
+                'response' => '0'
+
+            ]);
+        }
+    }
+
 
 }

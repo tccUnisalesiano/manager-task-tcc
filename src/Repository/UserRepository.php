@@ -75,6 +75,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $resultSet->fetchAllAssociative();
     }
 
+    /**
+     * @throws Exception
+     */
+    public function findAllProjectsByUserId($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'select t.nome, t.porcentagem, p.nome as nomeProjeto
+                from user u
+                join tarefa t on u.id = t.id_user_id
+                join projeto p on p.id = t.id_projeto_id
+                where u.id = :id';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @throws Exception
 //     */
