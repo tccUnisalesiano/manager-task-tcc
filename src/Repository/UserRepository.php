@@ -74,21 +74,4 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         return $resultSet->fetchAllAssociative();
     }
-
-//    /**
-//     * @throws Exception
-//     */
-//    public function updateSenha($id, $password): array
-//    {
-//        $conn = $this->getEntityManager()->getConnection();
-//
-//        return $this->createQueryBuilder('User u')
-//            ->update('u')
-//            ->set('u.password =', $password)
-//            ->where('u.id =', $id)
-//            ->getQuery()
-//            ->getResult();
-//    }
-
-
 }

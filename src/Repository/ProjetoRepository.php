@@ -46,18 +46,16 @@ class ProjetoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function findAllChart(): array
+    public function findAllChart($id): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = '
-                SELECT p.nome, t.nome, u.nome
+        $sql = 'SELECT p.*
                 FROM projeto p
-                JOIN tarefa t ON p.id = t.id_projeto_id
-                JOIN user u ON t.id_user_id = u.id
-            ';
+                WHERE 1 = 1 ';
 
         $stmt = $conn->prepare($sql);
+//        $stmt->bindValue(':id', $id);
         $resultSet = $stmt->executeQuery();
 
         return $resultSet->fetchAllAssociative();

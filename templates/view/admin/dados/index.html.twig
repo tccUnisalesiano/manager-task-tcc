@@ -11,7 +11,7 @@
                             <h4>Projetos</h4>
                         </div>
                         <div class="card-body">
-                            <table class="table table-hover table-striped table-dataTables">
+                            <table class="table table-hover table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -32,7 +32,7 @@
                             <h4>Geral</h4>
                         </div>
                         <div class="card-body">
-                            <canvas id="myChart"></canvas>
+                            <canvas id="graphPieDadosAdmin" width="800" height="450"></canvas>
                         </div>
                     </div>
                 </div>
@@ -46,19 +46,20 @@
 
     <script>
         $(document).ready(function () {
-                //get ID
-                $.ajax({
-                    type: 'POST',
-                    url: '/dashboard/session',
-                    dataType: 'JSON',
-                    success: function (response) {
-                        response.forEach((resp) => {
-                            console.log(resp.id);
-                            $('#getIdSession').val(resp.id);
-                            getProjetosByid(resp.id);
-                        });
-                    }
-                });
+            //get ID
+            $.ajax({
+                type: 'POST',
+                url: '/dashboard/session',
+                dataType: 'JSON',
+                success: function (response) {
+                    response.forEach((resp) => {
+                        console.log(resp.id);
+                        $('#getIdSession').val(resp.id);
+                        getProjetosByid(resp.id);
+                        getChartsPie(resp.id);
+                    });
+                }
+            });
         });
 
         function getProjetosByid(id) {
@@ -83,46 +84,42 @@
             })
         }
 
-//         $(document).ready(function () {
-//             let count = [];
-//
-//             $.ajax({
-//                 type: 'POST',
-//                 url: 'tratamentodados/chartgeral',
-//                 dataType: 'JSON',
-//                 success: function (response) {
-//                     console.log(response.count);
-//                     response.response.forEach((resp) => {
-//                     let html = `<input type="hidden" value="${resp.nome}" id="pegaNome${resp.nome}">`;
-//                     });
-//
-//                 }, complete: function (resp) {
-//                     console.log(resp);
-//                 }
-//             })
-//         });
-// q
-//         function chartProjeto(ref) {
-//             const data = {
-//                 labels: [
-//                     resp.nome
-//                 ],
-//                 datasets: [{
-//                     label: 'My First Dataset',
-//                     data: [300, 50, 100],
-//                     backgroundColor: [
-//                         'rgb(255, 99, 132)',
-//                         'rgb(54, 162, 235)',
-//                         'rgb(255, 205, 86)'
-//                     ],
-//                     hoverOffset: 4
-//                 }]
-//             };
-//             new Chart(document.getElementById('myChart'), {
-//                 type: 'pie',
-//                 data: data
-//             });
-//         }
+        function getChartsPie(id) {
+            $.ajax({
+                type: 'POST',
+                url: 'tratamentodados/chartgeral',
+                dataType: 'JSON',
+                data: {id: id},
+                success: function (response) {
+                    console.log('GETCHART: ', response.tarefas);
+                    chartProjeto(response.count, response.tarefas, response.clientes);
+                }, complete: function (resp) {
+                    console.log(resp);
+                }
+            })
+        }
+
+        function chartProjeto(count, tarefas, clientes) {
+            const data = {
+                labels: [
+                    'Projetos', 'Tarefas', 'Clientes'
+                ],
+                datasets: [{
+                    label: 'Teste',
+                    data: [count, tarefas, clientes],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+            new Chart(document.getElementById('graphPieDadosAdmin'), {
+                type: 'pie',
+                data: data
+            });
+        }
     </script>
 {% endblock %}
 

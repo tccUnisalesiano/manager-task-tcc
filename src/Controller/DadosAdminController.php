@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Projeto;
+use App\Entity\Tarefa;
+use App\Repository\ClienteRepository;
 use App\Repository\DadosAdminRepository;
 use App\Repository\FuncionarioRepository;
 use App\Repository\ProjetoRepository;
+use App\Repository\TarefaRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -66,16 +69,23 @@ class DadosAdminController extends AbstractController
      * @return JsonResponse|NotFoundHttpException
      * @throws Exception
      */
-    public function funcionarios(EntityManagerInterface $em, Request $request, ManagerRegistry $registry,
-                            ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
+    public function chartPie(EntityManagerInterface $em, Request $request, ManagerRegistry $registry,
+                            ProjetoRepository $projeto,
+                            TarefaRepository $tarefa,
+                            ClienteRepository $cliente): JsonResponse|NotFoundHttpException
     {
-        $response = $projeto->findAllChart();
+        $id = $request->request->get('id');
+        $response = $projeto->findAllChart($id);
+        $countTarefa = $tarefa->findAll();
+        $countCliente = $cliente->findAllClientes($id);
 
         if (!empty($response)) {
             return $this->json([
                 'success' => true,
                 'response' => $response,
-                'count' => count($response)
+                'count' => count($response),
+                'tarefas' => count($countTarefa),
+                'clientes' => count($countCliente)
             ]);
         } else {
             return $this->json([
