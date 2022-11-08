@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangeImageType;
 use App\Form\RegistrationFormType;
 use App\Form\UserUpdateType;
 use App\Repository\UserRepository;
@@ -31,6 +32,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -42,9 +44,10 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(EmailVerifier $emailVerifier, Security $security)
     {
         $this->emailVerifier = $emailVerifier;
+        $this->security = $security;
 
     }
 
@@ -211,20 +214,53 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('funcionario');
     }
 
-
     /**
      * @Route("/funcionario_perfil", name="perfilUser")
-     *
-     * @return Response
+     * @throws Exception
      */
-    public function perfilUser(): Response
+    public function perfilUser(Request $request, EntityManagerInterface $em, UserRepository $userRepository, AuthenticationUtils $authenticationUtils): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
+        $id = $this->security->getUser();
+//        $response = $authenticationUtils->getLastUsername();    //email user
+
+//        $id = $userRepository->findUserByName($response);
+        $user = $userRepository->find($id);
+
+        $form = $this->createForm(ChangeImageType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em->persist((object)$user);
+            $em->flush();
+        }
 
         return $this->render('view/Cadastros/Funcionario/funcionarioPerfil.html.twig', [
-            'registrationForm' =>$user
+            'changeImg' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/funcionario_perfil/tarefas", name="findtarefa")
+     * @throws Exception
+     */
+    public function tarefasById(Request $request, EntityManagerInterface $em, UserRepository $userRepository): JsonResponse
+    {
+        $id = $request->request->get('id');
+        $response  = $userRepository->findAllProjectsByUserId($id);
+
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => $response
+            ]);
+        } else {
+            return $this->json([
+                'success' => true,
+                'response' => '0'
+
+            ]);
+        }
     }
 
 

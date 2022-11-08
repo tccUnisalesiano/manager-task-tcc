@@ -329,13 +329,13 @@ body.dark .sidebar header .toggle{
         right: -2rem;
     }
     .sidebar.close header .toggle{
-        right: -5.5rem;
+        right: -1rem;
     }
     .sidebar{
         width: calc(100% - 150px);
     }
     .sidebar.close{
-        width: 0;
+        width: 5rem;
     }
     .sidebar.close ~.home{
         opacity: 1;
@@ -360,7 +360,6 @@ body.dark .sidebar header .toggle{
     }
     .sidebar.close .nav-links li:hover, .sidebar.close .nav-links li i
     {
-
         pointer-events: none;
     }
 
