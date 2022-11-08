@@ -74,8 +74,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         return $resultSet->fetchAllAssociative();
     }
-<<<<<<< HEAD
-=======
 
     /**
      * @throws Exception
@@ -113,5 +111,4 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //    }
 
 
->>>>>>> 8fb12e15b657c18456544fb260c2bbd84ede03b3
 }
