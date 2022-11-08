@@ -24,13 +24,11 @@
                     </div>
                     <div class="card mb-4 mb-lg-0">
                         <div class="card-body">
-                            <p class="mb-4"><span class="text-primary me-1">Tarefas</span></p>
-
-                            <p id="tarefaUser" class="mb-1" style="font-size: .77rem;"></p>
-                            <div class="progress rounded" style="height: 5px;">
-                                <div id="barraPorcentagem" class="progress-bar" role="progressbar"
-                                     aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
-
+                            <p class="mb-4">
+                                <span class="text-primary me-1">Tarefas</span>
+                            </p>
+                            <div id="tarefasProfile">
+                                {# append jquery #}
                             </div>
                         </div>
                     </div>
@@ -109,14 +107,10 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
-
     </section>
 
     <script>
         $(document).ready(function () {
-            //get ID
             $.ajax({
                 type: 'POST',
                 url: '/dashboard/session',
@@ -138,10 +132,13 @@
                 dataType: 'JSON',
                 data: {id: id},
                 success: function (response) {
-
                     response.response.forEach((resp) => {
-                        $('#tarefaUser').text(resp.nome);
-                        $('#barraPorcentagem').css('width', resp.porcentagem + '%');
+                        $('#tarefasProfile').append(`<p id="tarefaUser${resp.id}" class="mb-1" style="font-size: .77rem;">${resp.nome}</p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div id="barraPorcentagem${resp.id}" class="progress-bar" role="progressbar"
+                                                 aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: ${resp.porcentagem}%">
+                                        </div>
+                                    </div>`);
                     })
                 }, error: function (resp) {
                     console.log(resp);

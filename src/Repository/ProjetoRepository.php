@@ -46,7 +46,7 @@ class ProjetoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function findAllChart($id): array
+    public function findAllChart(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -84,19 +84,18 @@ class ProjetoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function findALlProjetosAberto($id): array
+    public function findALlProjetosAberto(): array
     {
         $aberta = 'aberta';
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'select p.*, u.*
+        $sql = 'select u.*
                 from user u
                 join tarefa t on u.id = t.id_user_id
                 join projeto p on p.id = t.id_projeto_id
-                where u.id = :id and p.situacao = :aberta';
+                where p.situacao = :aberta';
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':id', $id);
         $stmt->bindValue(':aberta', $aberta);
         $resultSet = $stmt->executeQuery();
 

@@ -35,12 +35,10 @@ class DashboardController extends AbstractController
      * @param ManagerRegistry $registry
      * @param ProjetoRepository $projeto
      * @return JsonResponse|NotFoundHttpException
-     * @throws Exception
      */
     public function projetos(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
-        $id = $request->request->get('id');
-        $response = $projeto->findAllProjetos($id);
+        $response = $projeto->findAll();
 
         if (!empty($response)) {
             return $this->json([
@@ -49,8 +47,9 @@ class DashboardController extends AbstractController
             ]);
         } else {
             return $this->json([
-                'success' => true,
-                'response' => '0'
+                'success' => false,
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
             ]);
         }
 
@@ -80,8 +79,7 @@ class DashboardController extends AbstractController
      */
     public function projetosAberto(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
-        $id = $request->request->get('id');
-        $response = $projeto->findAllProjetosAberto($id);
+        $response = $projeto->findAllProjetosAberto();
 
         if (!empty($response)) {
             return $this->json([
@@ -90,8 +88,9 @@ class DashboardController extends AbstractController
             ]);
         } else {
             return $this->json([
-                'success' => true,
-                'response' => '0'
+                'success' => false,
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
             ]);
         }
     }
@@ -106,8 +105,7 @@ class DashboardController extends AbstractController
      */
     public function tarefas(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, TarefaRepository $tarefa): JsonResponse|NotFoundHttpException
     {
-        $id = $request->request->get('id');
-        $response = $tarefa->findAllTarefas($id);
+        $response = $tarefa->findAll();
 
         if (!empty($response)) {
             return $this->json([
@@ -117,7 +115,8 @@ class DashboardController extends AbstractController
         } else {
             return $this->json([
                 'success' => true,
-                'response' => '0'
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
             ]);
         }
     }
@@ -143,7 +142,8 @@ class DashboardController extends AbstractController
         } else {
             return $this->json([
                 'success' => true,
-                'response' => '0'
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
             ]);
         }
     }
@@ -153,13 +153,14 @@ class DashboardController extends AbstractController
      * @param EntityManagerInterface $em
      * @param Request $request
      * @param ManagerRegistry $registry
-     * @param ClienteRepository $cliente
+     * @param TarefaRepository $tarefa
      * @return JsonResponse|NotFoundHttpException
+     * @throws Exception
      */
     public function userTarefa(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, TarefaRepository $tarefa): JsonResponse|NotFoundHttpException
     {
-
-        $response = $tarefa->findTarefaUser();
+        $id = $request->request->get('id');
+        $response = $tarefa->findAllTarefas($id);
 
         if (!empty($response)) {
             return $this->json([
@@ -169,7 +170,8 @@ class DashboardController extends AbstractController
         } else {
             return $this->json([
                 'success' => true,
-                'response' => '0'
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
             ]);
         }
     }

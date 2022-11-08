@@ -82,7 +82,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'select t.nome, t.porcentagem, p.nome as nomeProjeto
+        $sql = 'select t.id, t.nome, t.porcentagem, p.nome as nomeProjeto
                 from user u
                 join tarefa t on u.id = t.id_user_id
                 join projeto p on p.id = t.id_projeto_id
