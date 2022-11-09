@@ -58,4 +58,21 @@ class ClienteRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+    /**
+     * @throws Exception
+     */
+    public function findAllClientesChart(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'select *
+                from cliente c
+                where 1 = 1 ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
+
 }

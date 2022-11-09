@@ -6,6 +6,7 @@ use App\Repository\ClienteRepository;
 use App\Repository\ProjetoRepository;
 use App\Repository\TarefaRepository;
 use App\Repository\UserRepository;
+use App\Repository\ValorfuncionarioRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,7 +39,8 @@ class DashboardController extends AbstractController
      */
     public function projetos(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
-        $response = $projeto->findAll();
+        $id = $request->request->get('id');
+        $response = $projeto->findALlProjetos($id);
 
         if (!empty($response)) {
             return $this->json([
@@ -79,7 +81,8 @@ class DashboardController extends AbstractController
      */
     public function projetosAberto(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
-        $response = $projeto->findAllProjetosAberto();
+        $id = $request->request->get('id');
+        $response = $projeto->findAllProjetosAberto($id);
 
         if (!empty($response)) {
             return $this->json([

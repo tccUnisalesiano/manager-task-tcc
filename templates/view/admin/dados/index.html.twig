@@ -36,6 +36,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Valor Projeto</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="graphValorProjeto" width="800" height="450"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
@@ -56,7 +66,7 @@
                         console.log(resp.id);
                         $('#getIdSession').val(resp.id);
                         getProjetosByid(resp.id);
-                        getChartsPie(resp.id);
+                        getChartsGeral(resp.id);
                     });
                 }
             });
@@ -71,6 +81,7 @@
                 success: function (response) {
                     $('.filtroProj').remove();
                     response.response.forEach((resp) => {
+                        getChartValor(resp.id);
                         $("#tblprojetos").append
                         (`<tr class="filtroProj">
                             <td> ${resp.id} </td>
@@ -84,7 +95,7 @@
             })
         }
 
-        function getChartsPie(id) {
+        function getChartsGeral(id) {
             $.ajax({
                 type: 'POST',
                 url: 'tratamentodados/chartgeral',
@@ -117,6 +128,43 @@
             };
             new Chart(document.getElementById('graphPieDadosAdmin'), {
                 type: 'pie',
+                data: data
+            });
+        }
+
+        function getChartValor(id) {
+            $.ajax({
+                type: 'POST',
+                url: 'tratamentodados/chartValorProjeto',
+                dataType: 'JSON',
+                data: {id: id},
+                success: function (response) {
+                    console.log('GETCHARTVALOR: ', response);
+                    chartProjeto(response.count, response.tarefas, response.clientes);
+                }, complete: function (resp) {
+                    console.log(resp);
+                }
+            })
+        }
+
+        function chartValorProjeto(count, tarefas, clientes) {
+            const data = {
+                labels: [
+                    'Projetos', 'Tarefas', 'Clientes'
+                ],
+                datasets: [{
+                    label: 'Teste',
+                    data: [count, tarefas, clientes],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+            new Chart(document.getElementById('graphValorProjeto'), {
+                type: 'doughnut',
                 data: data
             });
         }

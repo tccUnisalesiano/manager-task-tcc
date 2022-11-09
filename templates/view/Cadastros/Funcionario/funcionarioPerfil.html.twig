@@ -133,7 +133,7 @@
                 data: {id: id},
                 success: function (response) {
                     response.response.forEach((resp) => {
-                        $('#tarefasProfile').append(`<p id="tarefaUser${resp.id}" class="mb-1" style="font-size: .77rem;">${resp.nome}</p>
+                        $('#tarefasProfile').append(`<p id="tarefaUser${resp.id}" class="mb-1" style="font-size: .77rem; margin-top: .7rem;">${resp.nome}</p>
                                     <div class="progress rounded" style="height: 5px;">
                                         <div id="barraPorcentagem${resp.id}" class="progress-bar" role="progressbar"
                                                  aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: ${resp.porcentagem}%">

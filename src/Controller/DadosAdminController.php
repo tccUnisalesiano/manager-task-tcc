@@ -9,6 +9,7 @@ use App\Repository\DadosAdminRepository;
 use App\Repository\FuncionarioRepository;
 use App\Repository\ProjetoRepository;
 use App\Repository\TarefaRepository;
+use App\Repository\ValorfuncionarioRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,8 +44,7 @@ class DadosAdminController extends AbstractController
      */
     public function projetos(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
-        $id = $request->request->get('id');
-        $response = $projeto->findAllProjetos($id);
+        $response = $projeto->findAllChart();
 
         if (!empty($response)) {
             return $this->json([
@@ -74,10 +74,9 @@ class DadosAdminController extends AbstractController
                             TarefaRepository $tarefa,
                             ClienteRepository $cliente): JsonResponse|NotFoundHttpException
     {
-        $id = $request->request->get('id');
-        $response = $projeto->findAllChart($id);
+        $response = $projeto->findAllChart();
         $countTarefa = $tarefa->findAll();
-        $countCliente = $cliente->findAllClientes($id);
+        $countCliente = $cliente->findAllClientesChart();
 
         if (!empty($response)) {
             return $this->json([
@@ -86,6 +85,43 @@ class DadosAdminController extends AbstractController
                 'count' => count($response),
                 'tarefas' => count($countTarefa),
                 'clientes' => count($countCliente)
+            ]);
+        } else {
+            return $this->json([
+                'success' => false,
+                'message' => 'Houve um erro ao carregar os dados'
+            ]);
+        }
+    }
+
+    /**
+     * @Route("/tratamentodados/chartValorProjeto", methods={"POST"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param ProjetoRepository $projeto
+     * @return JsonResponse|NotFoundHttpException
+     * @throws Exception
+     */
+    public function chartValorProjeto(EntityManagerInterface $em, Request $request, ManagerRegistry $registry,
+                                      ProjetoRepository $projeto,
+                                      TarefaRepository $tarefa,
+                                      ValorfuncionarioRepository $valor): JsonResponse|NotFoundHttpException
+    {
+        $id = $request->request->get('id');
+
+        $response = $projeto->findAllChart();
+        $countTarefa = $tarefa->findAll();
+        $soma = $valor->findValorProjeto($id);
+        var_dump($soma);
+
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => $response,
+                'count' => count($response),
+                'tarefas' => count($countTarefa),
+                'soma' => $soma
             ]);
         } else {
             return $this->json([

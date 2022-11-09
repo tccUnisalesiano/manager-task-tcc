@@ -55,7 +55,6 @@ class ProjetoRepository extends ServiceEntityRepository
                 WHERE 1 = 1 ';
 
         $stmt = $conn->prepare($sql);
-//        $stmt->bindValue(':id', $id);
         $resultSet = $stmt->executeQuery();
 
         return $resultSet->fetchAllAssociative();
@@ -68,10 +67,10 @@ class ProjetoRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'select p.*, u.*
-                from user u
-                join tarefa t on u.id = t.id_user_id
-                join projeto p on p.id = t.id_projeto_id
+        $sql = 'select p.*
+                from projeto p
+                join tarefa t on p.id = t.id_projeto_id
+                join user u on t.id_user_id = u.id
                 where u.id = :id ';
 
         $stmt = $conn->prepare($sql);
@@ -84,19 +83,20 @@ class ProjetoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function findALlProjetosAberto(): array
+    public function findALlProjetosAberto($id): array
     {
         $aberta = 'aberta';
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'select u.*
-                from user u
-                join tarefa t on u.id = t.id_user_id
-                join projeto p on p.id = t.id_projeto_id
-                where p.situacao = :aberta';
+        $sql = 'select p.*
+                from projeto p
+                join tarefa t on p.id = t.id_projeto_id
+                join user u on t.id_user_id = u.id
+                where u.id = :id and p.situacao = :aberta';
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':aberta', $aberta);
+        $stmt->bindValue(':id', $id);
         $resultSet = $stmt->executeQuery();
 
         return $resultSet->fetchAllAssociative();
