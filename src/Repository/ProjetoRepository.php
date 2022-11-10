@@ -70,7 +70,7 @@ class ProjetoRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'select p.*, u.*
+        $sql = 'select p.*
                 from user u
                 join tarefa t on u.id = t.id_user_id
                 join projeto p on p.id = t.id_projeto_id
