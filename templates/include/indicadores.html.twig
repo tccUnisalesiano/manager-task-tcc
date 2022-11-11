@@ -44,10 +44,12 @@
                             <div class="rotate">
                                 <i class="fa fa-list fa-4x"></i>
                             </div>
-                            <h6 class="text-uppercase">Tarefas</h6>
+                            <h6 class="text-uppercase">Todas Tarefas</h6>
                             <h1 id="tarefasCount" class="display-4"></h1>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-5 col-sm-6 py-2">
                     <div class="card text-white bg-warning h-100" style="background-color: #ff9900!important;">
                         <div class="card-body">
                             <div class="rotate">
@@ -62,15 +64,13 @@
         </div>
     </div>
 </div>
-<div class="col-lg-12 mt-3">
+<div class="col-lg-3 mt-3">
     <div class="card">
         <div class="card-header">
-            <h5>Atribuídos a mim</h5>
+            <h4>Visão geral</h4>
         </div>
         <div class="card-body">
-            <div class="col-lg-4 col-sm-6 py-2">
-                <canvas id="graph" width="800" height="450"></canvas>
-            </div>
+            <canvas id="graphGeral" width="300" height="150"></canvas>
         </div>
     </div>
 </div>
@@ -86,6 +86,7 @@
                 response.forEach((resp) => {
                     $('#getIdSession').val(resp.id);
                     atualizaIndicadores(resp.id);
+                    getChartGeral(resp.id);
                 });
             }
         });
@@ -124,49 +125,67 @@
 
         $.ajax({
             type: 'POST',
-            url: '/dashboard/clientes',
+            url: '/dashboard/userTarefa',
             data: {id: id},
             dataType: 'JSON',
             success: function (response) {
                 $('#tarefaUser').text(response.response);
             }
         });
-    }
 
-    function getChartProjetoGasto(id) {
         $.ajax({
             type: 'POST',
-            url: 'dashboard/valorProjeto',
+            url: '/dashboard/situacaoTarefa',
+            data: {id: id},
+            dataType: 'JSON',
+            success: function (response) {
+                console.log(response);
+                // $('#tarefaUser').text(response.response);
+            }
+        });
+    }
+
+    function getChartGeral(id) {
+        $.ajax({
+            type: 'POST',
+            url: 'dashboard/projetosAbertoGeral',
             dataType: 'JSON',
             data: {id: id},
             success: function (response) {
-                console.log('GETCHART: ', response.tarefas);
-                chartProjeto(response.count, response.tarefas, response.clientes);
+                console.log('GETCHART: ', response);
+                chartGeral(response.count, response.tarefas, response.meusProjetos, response.minhasTarefas);
             }, complete: function (resp) {
                 console.log(resp);
             }
         })
     }
 
-    function chartProjeto(count, tarefas, clientes) {
+    function chartGeral(count, tarefas, meusProjetos, minhasTarefas) {
         const data = {
             labels: [
-                'Projetos', 'Tarefas', 'Clientes'
+                'Projetos','Meus Projetos','Tarefas', 'Minhas Tarefas'
             ],
             datasets: [{
-                label: 'Teste',
-                data: [count, tarefas, clientes],
+                label: 'Visão Geral',
+                data: [count, meusProjetos, tarefas, minhasTarefas],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)'
+                    'rgb(255, 205, 86)',
+                    'rgb(155, 205, 80)'
                 ],
                 hoverOffset: 4
             }]
         };
-        new Chart(document.getElementById('graphPieDadosAdmin'), {
-            type: 'pie',
-            data: data
+        new Chart(document.getElementById('graphGeral'), {
+            type: 'doughnut',
+            data: data,
+            options: {
+                title: {
+                    display: true,
+                    text: 'Visão Geral'
+                }
+            }
         });
     }
 </script>

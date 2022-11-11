@@ -152,6 +152,46 @@ class DashboardController extends AbstractController
     }
 
     /**
+     * @Route("/dashboard/projetosAbertoGeral", methods={"POST"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param ProjetoRepository $projeto
+     * @return JsonResponse|NotFoundHttpException
+     * @throws Exception
+     */
+    public function chartGeral(EntityManagerInterface $em, Request $request, ManagerRegistry $registry,
+                               ProjetoRepository $projeto,
+                               TarefaRepository $tarefa,
+                               ClienteRepository $cliente): JsonResponse|NotFoundHttpException
+    {
+        $id = $request->request->get('id');
+
+        $response = $projeto->findAllChart();
+        $countTarefa = $tarefa->findAll();
+        $countCliente = $cliente->findAllClientesChart();
+        $minhasTarefas = $tarefa->findAllTarefas($id);
+        $meusProjetos = $projeto->findALlProjetosAberto($id);
+
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => $response,
+                'count' => count($response),
+                'tarefas' => count($countTarefa),
+                'clientes' => count($countCliente),
+                'minhasTarefas' => count($minhasTarefas),
+                'meusProjetos' => count($meusProjetos)
+            ]);
+        } else {
+            return $this->json([
+                'success' => false,
+                'message' => 'Houve um erro ao carregar os dados'
+            ]);
+        }
+    }
+
+    /**
      * @Route("/dashboard/userTarefa")
      * @param EntityManagerInterface $em
      * @param Request $request
@@ -178,4 +218,36 @@ class DashboardController extends AbstractController
             ]);
         }
     }
+
+    /**
+     * @Route("/dashboard/situacaoTarefa", methods={"POST"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param TarefaRepository $tarefa
+     * @return JsonResponse|NotFoundHttpException
+     */
+    public function situacaoTarefas(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, TarefaRepository $tarefa): JsonResponse|NotFoundHttpException
+    {
+
+        $response = $tarefa->findSituacaoTarefas();
+
+        print_r($response);
+        die();
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => count($response)
+            ]);
+        } else {
+            return $this->json([
+                'success' => true,
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
+            ]);
+        }
+    }
+
+
+
 }

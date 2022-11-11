@@ -113,7 +113,11 @@ class DadosAdminController extends AbstractController
         $response = $projeto->findAllChart();
         $countTarefa = $tarefa->findAll();
         $soma = $valor->findValorProjeto($id);
-        var_dump($soma);
+
+        foreach ($soma as $item) {
+            var_dump($item->countTarefas);
+        }
+        die();
 
         if (!empty($response)) {
             return $this->json([
