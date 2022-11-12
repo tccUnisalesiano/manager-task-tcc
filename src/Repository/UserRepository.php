@@ -78,11 +78,63 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @throws Exception
      */
+    public function findInativos(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT u.id
+                FROM user u
+                WHERE u.is_ativo = 0';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function findAtivos(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT u.id
+                FROM user u
+                WHERE u.is_ativo = 1';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getIdSessionIndex($email): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT u.roles, u.id
+                FROM user u
+                WHERE u.email = :email';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':email', $email);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
     public function findAllProjectsByUserId($id): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'select t.nome, t.porcentagem, p.nome as nomeProjeto
+        $sql = 'select t.id, t.nome, t.porcentagem, p.nome as nomeProjeto
                 from user u
                 join tarefa t on u.id = t.id_user_id
                 join projeto p on p.id = t.id_projeto_id

@@ -6,6 +6,7 @@ use App\Repository\ClienteRepository;
 use App\Repository\ProjetoRepository;
 use App\Repository\TarefaRepository;
 use App\Repository\UserRepository;
+use App\Repository\ValorfuncionarioRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -35,12 +36,11 @@ class DashboardController extends AbstractController
      * @param ManagerRegistry $registry
      * @param ProjetoRepository $projeto
      * @return JsonResponse|NotFoundHttpException
-     * @throws Exception
      */
     public function projetos(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
     {
         $id = $request->request->get('id');
-        $response = $projeto->findAllProjetos($id);
+        $response = $projeto->findALlProjetos($id);
 
         if (!empty($response)) {
             return $this->json([
@@ -49,8 +49,9 @@ class DashboardController extends AbstractController
             ]);
         } else {
             return $this->json([
-                'success' => true,
-                'response' => '0'
+                'success' => false,
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
             ]);
         }
 
@@ -90,8 +91,9 @@ class DashboardController extends AbstractController
             ]);
         } else {
             return $this->json([
-                'success' => true,
-                'response' => '0'
+                'success' => false,
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
             ]);
         }
     }
@@ -106,8 +108,7 @@ class DashboardController extends AbstractController
      */
     public function tarefas(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, TarefaRepository $tarefa): JsonResponse|NotFoundHttpException
     {
-        $id = $request->request->get('id');
-        $response = $tarefa->findAllTarefas($id);
+        $response = $tarefa->findAll();
 
         if (!empty($response)) {
             return $this->json([
@@ -117,7 +118,8 @@ class DashboardController extends AbstractController
         } else {
             return $this->json([
                 'success' => true,
-                'response' => '0'
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
             ]);
         }
     }
@@ -143,7 +145,48 @@ class DashboardController extends AbstractController
         } else {
             return $this->json([
                 'success' => true,
-                'response' => '0'
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
+            ]);
+        }
+    }
+
+    /**
+     * @Route("/dashboard/projetosAbertoGeral", methods={"POST"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param ProjetoRepository $projeto
+     * @return JsonResponse|NotFoundHttpException
+     * @throws Exception
+     */
+    public function chartGeral(EntityManagerInterface $em, Request $request, ManagerRegistry $registry,
+                               ProjetoRepository $projeto,
+                               TarefaRepository $tarefa,
+                               ClienteRepository $cliente): JsonResponse|NotFoundHttpException
+    {
+        $id = $request->request->get('id');
+
+        $response = $projeto->findAllChart();
+        $countTarefa = $tarefa->findAll();
+        $countCliente = $cliente->findAllClientesChart();
+        $minhasTarefas = $tarefa->findAllTarefas($id);
+        $meusProjetos = $projeto->findALlProjetosAberto($id);
+
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => $response,
+                'count' => count($response),
+                'tarefas' => count($countTarefa),
+                'clientes' => count($countCliente),
+                'minhasTarefas' => count($minhasTarefas),
+                'meusProjetos' => count($meusProjetos)
+            ]);
+        } else {
+            return $this->json([
+                'success' => false,
+                'message' => 'Houve um erro ao carregar os dados'
             ]);
         }
     }
@@ -153,13 +196,14 @@ class DashboardController extends AbstractController
      * @param EntityManagerInterface $em
      * @param Request $request
      * @param ManagerRegistry $registry
-     * @param ClienteRepository $cliente
+     * @param TarefaRepository $tarefa
      * @return JsonResponse|NotFoundHttpException
+     * @throws Exception
      */
     public function userTarefa(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, TarefaRepository $tarefa): JsonResponse|NotFoundHttpException
     {
-
-        $response = $tarefa->findTarefaUser();
+        $id = $request->request->get('id');
+        $response = $tarefa->findAllTarefas($id);
 
         if (!empty($response)) {
             return $this->json([
@@ -169,8 +213,41 @@ class DashboardController extends AbstractController
         } else {
             return $this->json([
                 'success' => true,
-                'response' => '0'
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
             ]);
         }
     }
+
+    /**
+     * @Route("/dashboard/situacaoTarefa", methods={"POST"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param TarefaRepository $tarefa
+     * @return JsonResponse|NotFoundHttpException
+     */
+    public function situacaoTarefas(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, TarefaRepository $tarefa): JsonResponse|NotFoundHttpException
+    {
+
+        $response = $tarefa->findSituacaoTarefas();
+
+        print_r($response);
+        die();
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => count($response)
+            ]);
+        } else {
+            return $this->json([
+                'success' => true,
+                'response' => '0',
+                'message' => 'Houve um erro ao carregar os dados'
+            ]);
+        }
+    }
+
+
+
 }

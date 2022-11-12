@@ -6,12 +6,14 @@ use App\Entity\Tarefa;
 use App\Form\TarefaType;
 use App\Helper\TarefaFactory;
 use App\Repository\TarefaRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Classe responsável por gerenciar os metodos de Tarefa
@@ -66,13 +68,20 @@ class TarefaController extends AbstractController
      * @param ManagerRegistry $doctrine
      * @return Response
      */
-    public function buscarTodos(ManagerRegistry $doctrine): Response
+    public function buscarTodos(ManagerRegistry $doctrine, AuthenticationUtils $authenticationUtils, UserRepository $user): Response
     {
+        $response = $authenticationUtils->getLastUsername();    //email user
+        $session = $user->getIdSessionIndex($response);
+
         $return = $doctrine->getRepository(Tarefa::class);
         $tarefaList = $return->findAll();
+//        var_dump($tarefaList);
+//        die();
 
         return $this->render('view/Cadastros/Tarefa/index.html.twig', [
-            'tarefa' => $tarefaList
+            'tarefa' => $tarefaList,
+            'sessionRole' => json_decode( $session['roles']),
+            'sessionID' => $session['id']
         ]);
     }
 

@@ -42,9 +42,11 @@
                                                 <a class="btn btn-primary"
                                                    href="{{ path('editarProjeto', {id: projeto.id}) }}"
                                                    title="Editar"><i class="fa-solid fa-pen edit"></i></a>
+                                                {% if  'ROLE_ADMIN' in app.user.roles %}
                                                 <a class="btn btn-danger"
                                                    href="{{ path('deleteProjeto', {id: projeto.id}) }}" title="Excluir"><i
                                                             class="fa-solid fa-trash delete"></i></a>
+                                                {% endif %}
                                             </td>
                                         </tr>
                                     {% endfor %}

@@ -11,7 +11,7 @@
                             <div class="rotate">
                                 <i class="fa-solid fa-paper-plane fa-4x"></i>
                             </div>
-                            <h6 class="text-uppercase">Projetos</h6>
+                            <h6 class="text-uppercase">Todos Projetos</h6>
                             <h1 id="projetoCount" class="display-4"></h1>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                             <div class="rotate">
                                 <i class="fa fa-list-check fa-4x"></i>
                             </div>
-                            <h6 class="text-uppercase">Projetos em Aberto</h6>
+                            <h6 class="text-uppercase">Meus Projetos em Aberto</h6>
                             <h1 id="projetoAbertoCount" class="display-4"></h1>
                         </div>
                     </div>
@@ -37,37 +37,40 @@
             <h5>Tarefas</h5>
         </div>
         <div class="card-body">
-            <div class="col-lg-5 col-sm-6 py-2">
-                <div class="card text-white bg-info h-100">
-                    <div class="card-body bg-info">
-                        <div class="rotate">
-                            <i class="fa fa-list fa-4x"></i>
+            <div class="form-inline">
+                <div class="col-lg-5 col-sm-6 py-2">
+                    <div class="card text-white bg-info h-100">
+                        <div class="card-body bg-info">
+                            <div class="rotate">
+                                <i class="fa fa-list fa-4x"></i>
+                            </div>
+                            <h6 class="text-uppercase">Todas Tarefas</h6>
+                            <h1 id="tarefasCount" class="display-4"></h1>
                         </div>
-                        <h6 class="text-uppercase">Tarefas</h6>
-                        <h1 id="tarefasCount" class="display-4"></h1>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-sm-6 py-2">
+                    <div class="card text-white bg-warning h-100" style="background-color: #ff9900!important;">
+                        <div class="card-body">
+                            <div class="rotate">
+                                <i class="fa-solid fa-users fa-4x"></i>
+                            </div>
+                            <h6 class="text-uppercase">Minhas Tarefas</h6>
+                            <h1 id="tarefaUser" class="display-4"></h1>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="col-lg-12 mt-3">
+<div class="col-lg-3 mt-3">
     <div class="card">
         <div class="card-header">
-            <h5>Clientes</h5>
+            <h4>Visão geral</h4>
         </div>
         <div class="card-body">
-            <div class="col-lg-4 col-sm-6 py-2">
-                <div class="card text-white bg-warning h-100" style="background-color: #ff9900!important;">
-                    <div class="card-body">
-                        <div class="rotate">
-                            <i class="fa-solid fa-users fa-4x"></i>
-                        </div>
-                        <h6 class="text-uppercase">Ativos</h6>
-                        <h1 id="clientesCount" class="display-4"></h1>
-                    </div>
-                </div>
-            </div>
+            <canvas id="graphGeral" width="300" height="150"></canvas>
         </div>
     </div>
 </div>
@@ -75,31 +78,27 @@
 
 <script>
     $(document).ready(function () {
-        //get ID
         $.ajax({
             type: 'POST',
             url: '/dashboard/session',
             dataType: 'JSON',
             success: function (response) {
                 response.forEach((resp) => {
-                    console.log(resp.id);
                     $('#getIdSession').val(resp.id);
                     atualizaIndicadores(resp.id);
+                    getChartGeral(resp.id);
                 });
             }
         });
     });
 
     function atualizaIndicadores(id) {
-       // let id = $('#getIdSession').val();
-       console.log('ID: ',id);
         $.ajax({
             type: 'POST',
             url: '/dashboard/projetos',
             data: {id: id},
             dataType: 'JSON',
             success: function (response) {
-                console.log(response.response);
                 $('#projetoCount').text(response.response);
             }
         });
@@ -110,7 +109,6 @@
             dataType: 'JSON',
             data: {id: id},
             success: function (response) {
-                console.log(response.response);
                 $('#projetoAbertoCount').text(response.response);
             }
         });
@@ -121,21 +119,77 @@
             data: {id: id},
             dataType: 'JSON',
             success: function (response) {
-                console.log(response.response);
                 $('#tarefasCount').text(response.response);
             }
         });
 
         $.ajax({
             type: 'POST',
-            url: '/dashboard/clientes',
+            url: '/dashboard/userTarefa',
             data: {id: id},
             dataType: 'JSON',
             success: function (response) {
-                console.log(response.response);
-                $('#clientesCount').text(response.response);
+                $('#tarefaUser').text(response.response);
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/dashboard/situacaoTarefa',
+            data: {id: id},
+            dataType: 'JSON',
+            success: function (response) {
+                console.log(response);
+                // $('#tarefaUser').text(response.response);
+            }
+        });
+    }
+
+    function getChartGeral(id) {
+        $.ajax({
+            type: 'POST',
+            url: 'dashboard/projetosAbertoGeral',
+            dataType: 'JSON',
+            data: {id: id},
+            success: function (response) {
+                console.log('GETCHART: ', response);
+                chartGeral(response.count, response.tarefas, response.meusProjetos, response.minhasTarefas);
+            }, complete: function (resp) {
+                console.log(resp);
+            }
+        })
+    }
+
+    function chartGeral(count, tarefas, meusProjetos, minhasTarefas) {
+        const data = {
+            labels: [
+                'Projetos','Meus Projetos','Tarefas', 'Minhas Tarefas'
+            ],
+            datasets: [{
+                label: 'Visão Geral',
+                data: [count, meusProjetos, tarefas, minhasTarefas],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(155, 205, 80)'
+                ],
+                hoverOffset: 4
+            }]
+        };
+        new Chart(document.getElementById('graphGeral'), {
+            type: 'doughnut',
+            data: data,
+            options: {
+                title: {
+                    display: true,
+                    text: 'Visão Geral'
+                }
             }
         });
     }
 </script>
+
+
+
 

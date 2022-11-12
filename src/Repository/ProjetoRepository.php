@@ -50,12 +50,9 @@ class ProjetoRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = '
-                SELECT p.nome, t.nome, u.nome
+        $sql = 'SELECT p.*
                 FROM projeto p
-                JOIN tarefa t ON p.id = t.id_projeto_id
-                JOIN user u ON t.id_user_id = u.id
-            ';
+                WHERE 1 = 1 ';
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
@@ -66,18 +63,16 @@ class ProjetoRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
-    public function findALlProjetos($id): array
+    public function findALlProjetos(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = 'select p.*
-                from user u
-                join tarefa t on u.id = t.id_user_id
-                join projeto p on p.id = t.id_projeto_id
-                where u.id = :id ';
+                from projeto p
+                ';
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':id', $id);
+//        $stmt->bindValue(':id', $id);
         $resultSet = $stmt->executeQuery();
 
         return $resultSet->fetchAllAssociative();
@@ -91,19 +86,18 @@ class ProjetoRepository extends ServiceEntityRepository
         $aberta = 'aberta';
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'select p.*, u.*
-                from user u
-                join tarefa t on u.id = t.id_user_id
-                join projeto p on p.id = t.id_projeto_id
+        $sql = 'select p.*
+                from projeto p
+                join tarefa t on p.id = t.id_projeto_id
+                join user u on t.id_user_id = u.id
                 where u.id = :id and p.situacao = :aberta';
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':id', $id);
         $stmt->bindValue(':aberta', $aberta);
+        $stmt->bindValue(':id', $id);
         $resultSet = $stmt->executeQuery();
 
         return $resultSet->fetchAllAssociative();
     }
-
 
 }
