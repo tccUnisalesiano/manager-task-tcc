@@ -5,7 +5,7 @@
         {% include 'include/navbar_top.html.twig' %}
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
                             <h4>Projetos</h4>
@@ -17,6 +17,7 @@
                                     <th>#</th>
                                     <th>Projeto</th>
                                     <th>Situação</th>
+                                    <th>Descrição</th>
                                 </tr>
                                 </thead>
                                 <tbody id="tblprojetos">
@@ -26,23 +27,33 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-3 mt-3">
                     <div class="card">
                         <div class="card-header">
                             <h4>Geral</h4>
                         </div>
                         <div class="card-body">
-                            <canvas id="graphPieDadosAdmin" width="800" height="450"></canvas>
+                            <canvas id="graphPieDadosAdmin" width="300" height="150"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6 mt-3">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Valor Projeto</h4>
+                            <h4>Custo de Projeto</h4>
                         </div>
                         <div class="card-body">
-                            <canvas id="graphValorProjeto" width="800" height="450"></canvas>
+                            <canvas id="bar-chart" width="800" height="367"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Colaboradores</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="graphUsers" width="300" height="150"></canvas>
                         </div>
                     </div>
                 </div>
@@ -67,6 +78,8 @@
                         $('#getIdSession').val(resp.id);
                         getProjetosByid(resp.id);
                         getChartsGeral(resp.id);
+                        getChartUsers();
+                        getValorProduto();
                     });
                 }
             });
@@ -81,12 +94,12 @@
                 success: function (response) {
                     $('.filtroProj').remove();
                     response.response.forEach((resp) => {
-                        getChartValor(resp.id);
                         $("#tblprojetos").append
                         (`<tr class="filtroProj">
                             <td> ${resp.id} </td>
                             <td> ${resp.nome} </td>
                             <td> ${resp.situacao} </td>
+                            <td> ${resp.descricao} </td>
                         </tr>`);
                     });
                 }, error: function (resp) {
@@ -119,53 +132,76 @@
                     label: 'Teste',
                     data: [count, tarefas, clientes],
                     backgroundColor: [
-                        'rgb(255, 99, 132)',
+                        'rgb(46,217,78)',
                         'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
+                        'rgb(238,39,67)'
                     ],
                     hoverOffset: 4
                 }]
             };
             new Chart(document.getElementById('graphPieDadosAdmin'), {
-                type: 'pie',
+                type: 'doughnut',
                 data: data
             });
         }
 
-        function getChartValor(id) {
+        function getChartUsers() {
             $.ajax({
                 type: 'POST',
-                url: 'tratamentodados/chartValorProjeto',
+                url: 'tratamentodados/colaboradores',
                 dataType: 'JSON',
-                data: {id: id},
                 success: function (response) {
-                    console.log('GETCHARTVALOR: ', response);
-                    chartProjeto(response.count, response.tarefas, response.clientes);
+                    console.log('GETCHARTUSER: ', response);
+                    chartUsers(response.allUsers, response.allInativos, response.allAtivos);
                 }, complete: function (resp) {
                     console.log(resp);
                 }
             })
         }
 
-        function chartValorProjeto(count, tarefas, clientes) {
+        function chartUsers(all, inativos, ativos) {
             const data = {
                 labels: [
-                    'Projetos', 'Tarefas', 'Clientes'
+                    'Todos', 'Inativos', 'Ativos'
                 ],
                 datasets: [{
                     label: 'Teste',
-                    data: [count, tarefas, clientes],
+                    data: [all, inativos, ativos],
                     backgroundColor: [
-                        'rgb(255, 99, 132)',
+                        'rgb(46,217,78)',
                         'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
+                        'rgb(238,39,67)'
                     ],
                     hoverOffset: 4
                 }]
             };
-            new Chart(document.getElementById('graphValorProjeto'), {
+            new Chart(document.getElementById('graphUsers'), {
                 type: 'doughnut',
                 data: data
+            });
+        }
+
+        function getValorProduto(id) {
+
+            new Chart(document.getElementById("bar-chart"), {
+                type: 'bar',
+                data: {
+                    labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+                    datasets: [
+                        {
+                            label: "R$",
+                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                            data: [2478,5267,734,784,433]
+                        }
+                    ]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Predicted world population (millions) in 2050'
+                    }
+                }
             });
         }
     </script>

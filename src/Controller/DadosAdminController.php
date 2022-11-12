@@ -9,6 +9,7 @@ use App\Repository\DadosAdminRepository;
 use App\Repository\FuncionarioRepository;
 use App\Repository\ProjetoRepository;
 use App\Repository\TarefaRepository;
+use App\Repository\UserRepository;
 use App\Repository\ValorfuncionarioRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManager;
@@ -85,6 +86,36 @@ class DadosAdminController extends AbstractController
                 'count' => count($response),
                 'tarefas' => count($countTarefa),
                 'clientes' => count($countCliente)
+            ]);
+        } else {
+            return $this->json([
+                'success' => false,
+                'message' => 'Houve um erro ao carregar os dados'
+            ]);
+        }
+    }
+
+    /**
+     * @Route("/tratamentodados/colaboradores", methods={"POST"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param UserRepository $user
+     * @return JsonResponse|NotFoundHttpException
+     * @throws Exception
+     */
+    public function chartUsers(EntityManagerInterface $em, Request $request, ManagerRegistry $registry,UserRepository $user): JsonResponse|NotFoundHttpException
+    {
+        $allUsers = $user->findAll();
+        $allInativos = $user->findInativos();
+        $allAtivos = $user->findAtivos();
+
+        if (!empty($allUsers)) {
+            return $this->json([
+                'success' => true,
+                'allUsers' => count($allUsers),
+                'allInativos' => count($allInativos),
+                'allAtivos' => count($allAtivos)
             ]);
         } else {
             return $this->json([
