@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group" style="float: right; margin-right: 26px">
-                                {% if  'ROLE_ADMIN' in app.user.rolesor app.user.id == tarefa.idUser.id %}
+                                {% if  'ROLE_ADMIN' in app.user.roles or app.user.id == tarefa.idUser.id %}
                                 <a class="btn btn-primary" href="{{ path('editarTarefa', {id: tarefa.id}) }}">Editar Tarefa</a>
                                 {% endif %}
                             </div>
