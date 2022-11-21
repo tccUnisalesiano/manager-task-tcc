@@ -88,6 +88,10 @@
       <path value="$PROJECT_DIR$/vendor/symfony/apache-pack" />
       <path value="$PROJECT_DIR$/vendor/symfonycasts/reset-password-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/serializer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts 2" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts 2" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts 2" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts 2" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

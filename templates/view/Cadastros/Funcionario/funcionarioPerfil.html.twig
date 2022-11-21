@@ -137,12 +137,25 @@
                                     <div class="progress rounded" style="height: 5px;">
                                         <div id="barraPorcentagem${resp.id}" class="progress-bar" role="progressbar"
                                                  aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: ${resp.porcentagem}%; background-color: #9212CE;">
+                                            <button id="refTarefa${resp.id}" onclick="redirectTarefa(${resp.id})"></button>
                                         </div>
                                     </div>`);
                     })
                 }, error: function (resp) {
                     console.log(resp);
                 }
+            })
+        }
+
+        function redirectTarefa(id) {
+            $.ajax({
+                url: 'tarefa/',id,
+                type: 'GET',
+                success: function (response) {
+                    console.log("LETS GO", response);
+                    window.location = '/tarefa/'+id;
+                }
+
             })
         }
     </script>

@@ -53,7 +53,7 @@ class RegistrationFormType extends AbstractType
                 ['label' => "Status Funcionário: ",
                     'choices' =>[
                         'Ativo' => True,
-                        'Desativo' => False,
+                        'Inativo' => False,
                     ],
                 ])
             ->add('roles', ChoiceType::class, [
