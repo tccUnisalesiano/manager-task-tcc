@@ -83,14 +83,15 @@ class ProjetoRepository extends ServiceEntityRepository
      */
     public function findALlProjetosAberto($id): array
     {
-        $aberta = 'aberta';
+        $aberta = 'Aberta';
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = 'select p.*
                 from projeto p
                 join tarefa t on p.id = t.id_projeto_id
                 join user u on t.id_user_id = u.id
-                where u.id = :id and p.situacao = :aberta';
+                where u.id = :id and p.situacao = :aberta
+                group by p.id';
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':aberta', $aberta);
