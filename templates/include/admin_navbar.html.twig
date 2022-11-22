@@ -2,18 +2,17 @@
 {% block body %}
     <div class="sidebar close" style="opacity: inherit !important;">
         <header>
-
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <div class="image-text">
-                <span class="image">
-                    <img src="{{ app.user.imageName is null ? asset('styles/img/no-image.png') : asset('perfil/' ~ app.user.imageName) }}" >
-                </span>
-                <div class="text logo-text" style="padding-right: 10px;">
-                    <a href="{{ path('perfilUser')  }}">
-                        <span class="name">{{ app.user.nome }}</span>
-                    </a>
-                </div>
-            </div>
+                <a href="{{ path('perfilUser')  }}">
+                    <div class="image-text">
+                        <span class="image">
+                            <img src="{{ app.user.imageName is null ? asset('styles/img/no-image.png') : asset('perfil/' ~ app.user.imageName) }}" >
+                        </span>
+                        <div class="text logo-text" style="padding-right: 10px;">
+                                <span class="name">{{ app.user.nome }}</span>
+                        </div>
+                    </div>
+                </a>
             {% endif %}
             <i class="fa-solid fa-angle-right toggle"></i>
         </header>
