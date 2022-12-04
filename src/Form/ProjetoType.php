@@ -42,10 +42,7 @@ class ProjetoType extends AbstractType
             ])
 
             ->add('tempoGastoTotal', NumberType::class, [
-                'label' => "Tempo Gasto: ",
-                'required' => false,
-                'disabled' => true
-                ])
+                'row_attr' => ['label' => "Tempo Gasto: ", 'required' => false, 'id' => "totalTempoGasto"], ])
 
             ->add('cliente_id', EntityType::class, [
                 'class' => Cliente::class,

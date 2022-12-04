@@ -51,6 +51,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" value="{{ idProjeto }}" id="idProjetoForm">
 
 
                     <div class="col-lg-12" style="margin-top: 15px !important;">
@@ -66,6 +67,34 @@
             </div>
         </div>
     </section>
+
+    <script>
+        $(document).ready( function(){
+            $('#projeto_tempoGastoTotal').attr('readonly', true);
+            let idProjeto = $('#idProjetoForm').val();
+
+            $.ajax({
+                type: 'POST',
+                url: 'buscarCountTempoGasto/tempoGastoProjeto',
+                dataType: 'JSON',
+                data: {
+                    id: idProjeto
+                },
+                success: function (response) {
+                    console.log('RESPONSE PROJETO COUNT: ',response.response[0]);
+                    if(response.response[0].tempoGasto) {
+                        $('#projeto_tempoGastoTotal').val(response.response[0].tempoGasto);
+                    } else {
+                        $('#projeto_tempoGastoTotal').val(0);
+                    }
+
+                },
+                complete: function (resp) {
+                    console.log(resp);
+                }
+            })
+        })
+    </script>
 {% endblock %}
 
 

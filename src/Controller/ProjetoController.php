@@ -102,7 +102,7 @@ class ProjetoController extends AbstractController
         }
 
         return $this->renderForm('view/Cadastros/Projeto/form/form.html.twig', [
-            'projeto' => $form, 'title' => $title
+            'projeto' => $form, 'title' => $title, 'idProjeto' => $id
         ]);
 
     }
@@ -139,5 +139,33 @@ class ProjetoController extends AbstractController
         return $this->render('view/Cadastros/Projeto/detalhes/projetoDetalhes.html.twig', [
             'projeto' => $projeto
         ]);
+    }
+
+    /**
+     * @Route("/projeto/editar/buscarCountTempoGasto/tempoGastoProjeto", methods={"POST"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param ProjetoRepository $projeto
+     * @return JsonResponse|NotFoundHttpException
+     * @throws Exception
+     */
+    public function tempoGastoProjeto(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
+    {
+        $id = $request->get('id');
+        $response = $projeto->countTempoGastoProjeto($id);
+
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => $response
+            ]);
+        } else {
+            return $this->json([
+                'success' => false,
+                'message' => 'Não há dados a serem mostrados no momento',
+                'response' => false
+            ]);
+        }
     }
 }
