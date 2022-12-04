@@ -32,8 +32,8 @@ class Cliente implements \JsonSerializable
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     public ?string $emailCliente;
 
-    #[ORM\Column(type: 'integer', length: 14, nullable: true)]
-    public ?int $celularCliente;
+    #[ORM\Column(type: 'string', length: 15, nullable: true)]
+    public ?string $celularCliente;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     public ?string $cpf_cnpj;
@@ -118,13 +118,13 @@ class Cliente implements \JsonSerializable
     /**
      * @return int|null
      */
-    public function getCelularCliente(): ?int
+    public function getCelularCliente(): ?string
     {
         return $this->celularCliente;
     }
 
 
-    public function setCelularCliente(int $celularCliente): void
+    public function setCelularCliente(string $celularCliente): void
     {
         $this->celularCliente = $celularCliente;
     }
@@ -144,7 +144,7 @@ class Cliente implements \JsonSerializable
         $this->cpf_cnpj = $cpf_cnpj;
     }
 
-    #[ArrayShape(["Id" => "int", "nomeCliente" => "string", "tipoCliente" => "string", "emailCliente" => "string", "celularCliente" => "int", "cpf_cnpj" => "string"])]
+    #[ArrayShape(["Id" => "int", "nomeCliente" => "string", "tipoCliente" => "string", "emailCliente" => "string", "celularCliente" => "string", "cpf_cnpj" => "string"])]
     public function jsonSerialize(): array
     {
         return [

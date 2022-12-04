@@ -4,16 +4,16 @@
         <header>
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <div class="image-text">
+                <a href="{{ path('perfilUser') }}">
+                    <div class="image-text">
                 <span class="image">
-                    <img src="{{ app.user.imageName is null ? asset('styles/img/no-image.png') : asset('perfil/' ~ app.user.imageName) }}" >
+                   <img src="{{ app.user.imageName is null ? asset('styles/img/no-image.png') : asset('perfil/' ~ app.user.imageName) }}">
                 </span>
-                <div class="text logo-text" style="padding-right: 10px;">
-                    <a href="{{ path('perfilUser')  }}">
-                        <span class="name">{{ app.user.nome }}</span>
-                    </a>
-                </div>
-            </div>
+                        <div class="text logo-text" style="padding-right: 10px;">
+                            <span class="name">{{ app.user.nome }}</span>
+                        </div>
+                    </div>
+                </a>
             {% endif %}
             <i class="fa-solid fa-angle-right toggle"></i>
         </header>
@@ -29,20 +29,20 @@
             </li>
 
             {% if 'ROLE_ADMIN' in app.user.roles %}
-            <li>
-                <div class="iocn-link">
-                    <a href="#">
-                        <i class="fa-solid fa-gears"></i>
-                        <span class="link_name">Administrador</span>
-                    </a>
-                    <i class="fa-solid fa-angle-down arrow"></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Administrador</a></li>
-                    <li><a href="{{ path('app_dados') }}">Tratamento de Dados</a></li>
-                    <li><a href="{{ path('funcionario') }}">Funcionário</a></li>
-                </ul>
-            </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class="fa-solid fa-gears"></i>
+                            <span class="link_name">Administrador</span>
+                        </a>
+                        <i class="fa-solid fa-angle-down arrow"></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Administrador</a></li>
+                        <li><a href="{{ path('app_dados') }}">Tratamento de Dados</a></li>
+                        <li><a href="{{ path('funcionario') }}">Funcionário</a></li>
+                    </ul>
+                </li>
             {% endif %}
 
             <li>
@@ -70,10 +70,10 @@
             </li>
             <li>
                 <a href="{{ path('app_logout') }}">
-                <div class="footer_sidebar">
+                    <div class="footer_sidebar">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span class="text">Sair</span>
-                </div>
+                    </div>
                 </a>
             </li>
         </ul>
@@ -82,7 +82,7 @@
     <script>
         let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e)=>{
+            arrow[i].addEventListener("click", (e) => {
                 let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
                 arrowParent.classList.toggle("showMenu");
             });
@@ -94,7 +94,7 @@
             modeSwitch = body.querySelector(".toggle-switch"),
             modeText = body.querySelector(".mode-text");
 
-        toggle.addEventListener("click" , () =>{
+        toggle.addEventListener("click", () => {
             sidebar.classList.toggle("close");
         })
 

@@ -42,11 +42,11 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RegistrationController extends AbstractController
 {
-    private EmailVerifier $emailVerifier;
+//    private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier, Security $security)
+    public function __construct(Security $security)
     {
-        $this->emailVerifier = $emailVerifier;
+//        $this->emailVerifier = $emailVerifier;
         $this->security = $security;
 
     }
@@ -77,27 +77,24 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+            return $this->redirectToRoute('funcionario');
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('dev.guilhermecorreia@hotmail.com', 'Mail Bot'))
-                    ->to($user->getEmail())
-                    ->subject('Por favor, confirme seu e-mail')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
+//            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+//                (new TemplatedEmail())
+//                    ->from(new Address('dev.guilhermecorreia@hotmail.com', 'Mail Bot'))
+//                    ->to($user->getEmail())
+//                    ->subject('Por favor, confirme seu e-mail')
+//                    ->htmlTemplate('registration/confirmation_email.html.twig')
+//            );
             // do anything else you need here, like send an email
 
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
+//            return $userAuthenticator->authenticateUser(
+//                $user,
+//                $authenticator,
+//                $request
+//            );
         }
-
-//        return $this->render('registration/register.html.twig', [
-//            'registrationForm' => $form->createView(),
-//        ]);
 
         return $this ->renderForm('view/Cadastros/Funcionario/Form/form.html.twig', [
             'registrationForm' => $form,
@@ -105,25 +102,25 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+//    #[Route('/verify/email', name: 'app_verify_email')]
+//    public function verifyUserEmail(Request $request): Response
+//    {
+//        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+//
+//        // validate email confirmation link, sets User::isVerified=true and persists
+//        try {
+//            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+//        } catch (VerifyEmailExceptionInterface $exception) {
+//            $this->addFlash('verify_email_error', $exception->getReason());
+//
+//            return $this->redirectToRoute('app_cadastrarUser');
+//        }
+//
 
-        // validate email confirmation link, sets User::isVerified=true and persists
-        try {
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
-        } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $exception->getReason());
-
-            return $this->redirectToRoute('app_cadastrarUser');
-        }
-
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Seu e-mail foi verificado!');
-
-        return $this->redirectToRoute('app_cadastrarUser');
-    }
+//        $this->addFlash('success', 'Seu e-mail foi verificado!');
+//
+//        return $this->redirectToRoute('app_cadastrarUser');
+//    }
 
     /**
      * @Route("/funcionario/{id}", name="detalheFuncionario")

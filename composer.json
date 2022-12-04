@@ -93,6 +93,12 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.43"
+        "dama/doctrine-test-bundle": "^7.1",
+        "dbrekelmans/bdi": "^1.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "symfony/maker-bundle": "^1.43",
+        "symfony/panther": "^2.0",
+        "symfony/phpunit-bridge": "^6.0",
+        "symfony/test-pack": "^1.0"
     }
 }

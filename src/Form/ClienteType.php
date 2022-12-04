@@ -21,11 +21,11 @@ class ClienteType extends AbstractType
             ->add('nomeCliente', TextType::class,
                 ['label' => "Nome Completo: "])
             ->add('cpf_cnpj', TextType::class,
-                ['label' => "CPF/CNPJ "])
+                ['row_attr' => ['label' => "CPF/CNPJ ", 'id' => "cpfcnpj"], ])
             ->add('emailCliente', EmailType::class,
-                ['label' => "E-mail: "])
-            ->add('celularCliente', NumberType::class,
-                ['label' => "Nº Celular: "])
+                ['row_attr' => ['label' => "E-mail: ", 'id' => "mailCliente"], ])
+            ->add('celularCliente', TextType::class,
+                [ 'row_attr' => ['label' => "Nº Celular: ", 'id' => "celular" ], ])
             ->add('tipoCliente', ChoiceType::class,
                 ['label' => "Tipo Cliente: ",
                     'choices' => [

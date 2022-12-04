@@ -101,4 +101,41 @@ class ProjetoRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+    /**
+     * @throws Exception
+     */
+    public function findValorTarefas() {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'select p.id, p.nome, count(t.id) as QntTarefas,  
+                    sum(t.tempo_gasto * v.valor_hora) as valorProjeto
+                from projeto p
+                join tarefa t on p.id = t.id_projeto_id
+                join user u on t.id_user_id = u.id
+                join valorfuncionario v on u.id = v.id_user_id
+                group by p.id ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function countTempoGastoProjeto($id) {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'select p.id, sum(t.tempo_gasto) as tempoGasto
+                from tarefa t
+                join projeto p on p.id = t.id_projeto_id 
+                where p.id = :id';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
 }

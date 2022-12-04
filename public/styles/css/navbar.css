@@ -80,6 +80,7 @@ header .image-text .name {
 .sidebar header .logo-text a:hover{
     color: var(--primary-color);
     font-weight: normal;
+    text-decoration: none;
 }
 
 

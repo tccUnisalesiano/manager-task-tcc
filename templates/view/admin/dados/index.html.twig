@@ -59,6 +59,8 @@
                 </div>
             </div>
 
+            <div class="d-none" id="vlrProj"></div>
+
 
         </div>
     </section>
@@ -79,7 +81,7 @@
                         getProjetosByid(resp.id);
                         getChartsGeral(resp.id);
                         getChartUsers();
-                        getValorProduto();
+                        getChartValorProjeto();
                     });
                 }
             });
@@ -181,25 +183,42 @@
             });
         }
 
-        function getValorProduto(id) {
+        function getChartValorProjeto() {
+            $.ajax({
+                type: 'POST',
+                url: 'tratamentodados/chartValorProjeto',
+                dataType: 'JSON',
+                success: function (response) {
+                    console.log('RESPONSE PROJETO: ',response);
+                    getValorProjeto(response);
+                },
+                complete: function (resp) {
+                    console.log(resp);
+                }
+            })
+        }
 
-            new Chart(document.getElementById("bar-chart"), {
+        function getValorProjeto(response) {
+            let graphBar = document.getElementById("bar-chart");
+
+            new Chart(graphBar, {
                 type: 'bar',
                 data: {
-                    labels: ["Projeto 1", "Projeto 2", "Projeto 3", "Projeto 4", "Projeto 5"],
+                    labels: response.valor.label,
                     datasets: [
                         {
-                            label: "Custo Projetos",
-                            backgroundColor: ["#3e95cd", "#2ed94e","#3cba9f","#ee2743","#c45850"],
-                            data: [2478,5267,734,784,433]
+                            label: "Custo Total",
+                            backgroundColor: response.valor.color,
+                            data: response.valor.value
                         }
                     ]
                 },
                 options: {
-                    legend: { display: false },
+                    legend: {
+                        display: false
+                    },
                     title: {
                         display: true,
-                        text: 'Predicted world population (millions) in 2050'
                     }
                 }
             });

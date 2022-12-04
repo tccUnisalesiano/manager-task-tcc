@@ -135,33 +135,60 @@ class DadosAdminController extends AbstractController
      * @throws Exception
      */
     public function chartValorProjeto(EntityManagerInterface $em, Request $request, ManagerRegistry $registry,
-                                      ProjetoRepository $projeto,
-                                      TarefaRepository $tarefa,
-                                      ValorfuncionarioRepository $valor): JsonResponse|NotFoundHttpException
+                                      ProjetoRepository $projeto ): JsonResponse|NotFoundHttpException
     {
-        $id = $request->request->get('id');
+        $response = $projeto->findValorTarefas();
 
-        $response = $projeto->findAllChart();
-        $countTarefa = $tarefa->findAll();
-        $soma = $valor->findValorProjeto($id);
+        $dados = [
+            'label' => [],
+            'color' => [],
+            'value' => []
+        ];
 
-        foreach ($soma as $item) {
-            var_dump($item->countTarefas);
+        foreach ($response as $dado) {
+            $dados['label'][] = trim($dado['nome']);
+            $dados['value'][] = $dado['valorProjeto'];
+            $dados['color'][] = '#'.dechex(rand(0x00000, 0xFFFFFF));
         }
-        die();
 
         if (!empty($response)) {
             return $this->json([
                 'success' => true,
-                'response' => $response,
-                'count' => count($response),
-                'tarefas' => count($countTarefa),
-                'soma' => $soma
+                'valor' => $dados,
             ]);
         } else {
             return $this->json([
                 'success' => false,
                 'message' => 'Houve um erro ao carregar os dados'
+            ]);
+        }
+    }
+
+
+    /**
+     * @Route("/projeto/buscarCountTempoGasto/tempoGastoProjeto", methods={"POST"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param ManagerRegistry $registry
+     * @param ProjetoRepository $projeto
+     * @return JsonResponse|NotFoundHttpException
+     * @throws Exception
+     */
+    public function tempoGastoProjeto(EntityManagerInterface $em, Request $request, ManagerRegistry $registry, ProjetoRepository $projeto): JsonResponse|NotFoundHttpException
+    {
+        $id = $request->get('id');
+        $response = $projeto->countTempoGastoProjeto($id);
+
+        if (!empty($response)) {
+            return $this->json([
+                'success' => true,
+                'response' => $response
+            ]);
+        } else {
+            return $this->json([
+                'success' => false,
+                'message' => 'Não há dados a serem mostrados no momento',
+                'response' => false
             ]);
         }
     }
