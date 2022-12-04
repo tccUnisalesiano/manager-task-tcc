@@ -133,8 +133,9 @@
                 data: {id: id},
                 success: function (response) {
                     response.response.forEach((resp) => {
-                        $('#tarefasProfile').append(`<p id="tarefaUser${resp.id}" class="mb-1" style="font-size: 1rem; margin-top: .7rem;">
-                            <a href="#" onclick="redirectTarefa(${resp.id})">${resp.nome}</a></p>
+                        $('#tarefasProfile').append(`<p id="tarefaUser${resp.id}" class="mb-1" style="font-size: 1rem; margin-top: .7rem; ">
+                            <a href="#" id="directTarefa${resp.id}" style="color: black"
+                            onclick="redirectTarefa(${resp.id})">${resp.nome} - ${resp.porcentagem}%</a></p>
                                     <div class="progress rounded" style="height: 5px;">
                                         <div id="barraPorcentagem${resp.id}" class="progress-bar" role="progressbar"
                                                  aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: ${resp.porcentagem}%; background-color: #9212CE;">
