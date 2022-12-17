@@ -51,7 +51,9 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" value="{{ idProjeto }}" id="idProjetoForm">
+                    {% if idProjeto is defined %}
+                        <input type="hidden" value="{{ idProjeto }}" id="idProjetoForm">
+                    {% endif %}
 
 
                     <div class="col-lg-12" style="margin-top: 15px !important;">
